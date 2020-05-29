@@ -17,7 +17,7 @@ class MyFragStateAdapter(fragmentActivity: FragmentActivity) :
         return when (position){
             0 -> SolutionFragment()
             1 -> MainFragment()
-            2 -> SolutionFragment() // 감쓰 화면으로 수정
+            2 -> EmoTrashFragment()
             else -> MainFragment()
         }
     }
