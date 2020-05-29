@@ -13,6 +13,20 @@
 >     감정 탭(두 번재 탭)에 해당하는 Fragment.   
 >     가로로 swipe하면 화면이 전환되며 순서대로 현재 기분, 감정 기록 달력, 감정 통계 화면이 나타난다.   
 > * **EmotionFragment**   
->     감정 탭의 첫번째 페이지. 현재 기분이 표시된다.   
-> * **EmotionFragment**   
->     감정 탭의 첫번째 페이지. 현재 기분이 표시된다.   
+>     감정 탭의 첫 번째 페이지. 현재 기분이 표시된다.   
+> * **CalendarFragment**   
+>     감정 탭의 두 번째 페이지. 감정 달력이 표시된다.   
+> * **StatisticsFragment**   
+>     감정 탭의 두 번째 페이지. 감정 통계가 표시된다.   
+> * **MyAdapter**   
+>     솔루션 탭의 recyclerview를 연결하는 어댑터      
+> * **MyStateAdapter**   
+>     액티비티에서 viewPager와 각 fragment들(solution, main, 감쓰(만들 예정))을 연결하는 어댑터   
+> * **MyStateAdapter2**   
+>     MainFragment에서 viewPager와 각 fragment들(emotion, calendar, statistics)을 연결하는 어댑터   
+   
+### 주요 레이아웃 ID/변수명 설명
+> * **contents**   
+>     activity_main.xml의 viewPager2의 id   
+> * **contents2**   
+>     fragment_main.xml의 viewPager2의 id   
