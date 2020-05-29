@@ -17,7 +17,14 @@
 > * **CalendarFragment**   
 >     감정 탭의 두 번째 페이지. 감정 달력이 표시된다.   
 > * **StatisticsFragment**   
->     감정 탭의 두 번째 페이지. 감정 통계가 표시된다.   
+>     감정 탭의 두 번째 페이지. 감정 통계가 표시된다.
+> * **EmoTrashFragment**
+>     감정 쓰레기통 탭(세 번째 탭)에 해당하는 Fragment. EmoTrashEditFragment와
+>     EmoTrashDeletedFragment로 가는 버튼이 있다.
+> * **EmoTrashEditFragment**
+>     감정 쓰레기통 작성/수정을 하는 Fragment.
+> * **EmoTrashDeletedFragment**
+>     감정 쓰레기통 삭제된 목록을 보여주는 Fragment. recyclrView를 가지고 있다.
 > * **MyAdapter**   
 >     솔루션 탭의 recyclerview를 연결하는 어댑터      
 > * **MyStateAdapter**   
