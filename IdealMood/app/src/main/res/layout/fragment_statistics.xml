@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StatisticsFragment">
+    tools:context=".StatisticsFragment"
+    android:layout_marginTop="40dp"
+    android:layout_marginHorizontal="15dp"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="감정 통계입니다." />
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-</FrameLayout>
+    </com.github.mikephil.charting.charts.LineChart>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="5dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="-분석 결과-"
+                    android:textSize="20sp"
+                    android:gravity="center_vertical"/>
+
+                <TextView
+                    android:id="@+id/emotionAnalysis"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="분석 결과 내용입니다.\n..\n..\n.."/>
+
+            </LinearLayout>
+
+
+        </ScrollView>
+    </LinearLayout>
+
+</LinearLayout>
