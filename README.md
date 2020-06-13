@@ -1,7 +1,8 @@
-# 2020 KLab Project Idea!(team 6) : [Ideal Mood]
+# 2020 KLab Project Idea!(team 6) : [IdealMood]
 ### 프로젝트 주제 설명
-> 어쩌구   
-> 저쩌구   
+> 감정 절제 도움 앱
+> 일상 속에서 스트레스를 받을 때 이를 감지하여 알려주고 솔루션 제공
+>     - 감정 상태 확인, 감정 달력, 감정 분석, 감정 솔루션, 감정 쓰레기통 서비스 
    
 ### 주요 클래스명 설명
 > * **MainActivity**   
