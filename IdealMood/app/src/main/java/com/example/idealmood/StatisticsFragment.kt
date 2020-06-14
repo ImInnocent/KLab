@@ -22,12 +22,8 @@ import kotlinx.android.synthetic.main.fragment_statistics.*
 
 class StatisticsFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         val dataObjects:Array<Float> = Array(5, {i -> i.toFloat()})
         var lists:MutableList<Entry> = ArrayList<Entry>();
         for( i in dataObjects){
@@ -43,23 +39,21 @@ class StatisticsFragment : Fragment() {
         dataSet.color = Color.BLUE
         //dataSet.setValueTextColor();
 
-        if(dataSet == null){
-            System.out.println("dataSet은 NULL이래")
-        }else {
-            System.out.println("dataSet NULL 아니래")
-        }
 
         var lineData:LineData = LineData(dataSet)
-        
-        if(lineData ==null) {
-            System.out.println("lineData는 NULL이래")
-        }else{
-            System.out.println("lineData NULL아니래")
-        }
 
         //lineData에 값이 없다고 나오는데?? -> logcat찍어보니까 또  NULL은 아니라고 나오는데 머야
-        lineChart?.data = lineData
-        lineChart?.invalidate()
+        lineChart.data = lineData
+        lineChart.invalidate()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+
+
 
         return inflater.inflate(R.layout.fragment_statistics, container, false)
     }
