@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_settings.*
 
+// 조혜진 이 구현한 setting 액티비티인데 일단은 안쓰고 냅두게 되었다.
+// 하지만 애니메이션 효과 등은 충분히 쓸모가 있으므로 나중에 화면전환하는 일이 있으면 써먹기로 하자.^^....
+
 class SettingsActivity : AppCompatActivity() {
 
     var onStartCount = false

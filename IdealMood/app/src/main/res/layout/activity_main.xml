@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<androidx.drawerlayout.widget.DrawerLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="end">
 
-<!--<androidx.drawerlayout.widget.DrawerLayout-->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--xmlns:tools="http://schemas.android.com/tools"-->
-<!--android:id="@+id/drawerLayout"-->
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        android:orientation="vertical">
+
+        <!-- 툴바
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+            -->
 
         <!-- tap을 구성하는 내용 -->
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/contents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="20">
-
-        </androidx.viewpager2.widget.ViewPager2>
+            android:layout_weight="20" />
 
         <!-- 하단 탭 -->
         <com.google.android.material.tabs.TabLayout
@@ -35,16 +40,19 @@
             android:layout_height="wrap_content" >
         </com.google.android.material.tabs.TabLayout>
 
+    </LinearLayout>
+
 
     <!--navigation drawer-->
-    <!--<com.google.android.material.navigation.NavigationView-->
-    <!--    android:id="@+id/navView"-->
-    <!--    android:layout_width="wrap_content"-->
-    <!--    android:layout_height="match_parent"-->
-    <!--    android:fitsSystemWindows="true"-->
-    <!--    android:layout_gravity="end"-->
-    <!--    app:headerLayout="@layout/nav_header"-->
-    <!--    app:menu="@menu/drawer"/> -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="end"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/drawer"/>
 
-<!-- </androidx.drawerlayout.widget.DrawerLayout> -->
-</LinearLayout>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
