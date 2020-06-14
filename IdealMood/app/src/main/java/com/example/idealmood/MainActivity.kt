@@ -1,9 +1,10 @@
 package com.example.idealmood
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import androidx.viewpager2.widget.ViewPager2
+import android.view.MenuItem
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -14,21 +15,43 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         init()
     }
 
+    override fun onStart() {
+        super.onStart()
+        // slide animation 추가
+        this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right)
+    }
+
     private fun init() {
+        // 툴바 달고 아이콘 추가하기
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_favorite_white_28dp)
+
         // 탭 달기
         contents.adapter = MyFragStateAdapter(this)
         TabLayoutMediator(tabLayout, contents){ tab, position ->
             tab.text = textArray[position]
         }.attach()
-
         contents.isUserInputEnabled = false // 스트롤해서 탭 넘기는 기능 삭제
+        contents.currentItem = 1
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        getMenuInflater().inflate(R.menu.actionbar_actions, menu)
+        menuInflater.inflate(R.menu.actionbar_actions, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item!!.itemId) {
+            R.id.action_drawer -> {
+                val i = Intent(this, SettingsActivity::class.java)
+                startActivity(i)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

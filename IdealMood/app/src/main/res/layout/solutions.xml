@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:padding="20dp"
+    android:background="#E6F7FF"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
     <!-- 솔루션 리사이클러 뷰 개별 항목 -->
     <TextView
-        android:id="@+id/solutionBtn"
+        android:id="@+id/solutionText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:text="솔루션 1"
         android:textAlignment="center"
-        android:layout_margin="20dp"
-        android:padding="10dp"/>
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/solutionImg"
+        android:layout_width="match_parent"
+        android:layout_height="190dp" />
 
 </LinearLayout>

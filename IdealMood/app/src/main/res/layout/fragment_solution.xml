@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/solutionList"
+    android:name="com.example.idealmood.SolutionFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".SolutionFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="솔루션 목록 페이지입니다." />
-
-    <!-- 솔루션 목록들을 담을 리사이클러 뷰 -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/solutionList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-</LinearLayout>
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    app:layoutManager="LinearLayoutManager"
+    tools:context=".SolutionFragment" />
