@@ -5,8 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="bottom"
-    android:layout_marginTop="75dp"
-    android:paddingLeft="10dp">
+    android:paddingTop="90dp"
+    android:paddingLeft="10dp"
+    android:background="@drawable/textline">
 
     <ImageView
         android:id="@+id/userImageView"
