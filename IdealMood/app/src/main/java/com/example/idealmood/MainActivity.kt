@@ -31,9 +31,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun init() {
         // 툴바 달고 아이콘 추가하기
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_favorite_white_28dp)
+        //setSupportActionBar(toolbar)
+        //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        //supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_favorite_white_28dp)
 
         // 탭 달기
         contents.adapter = MyFragStateAdapter(this)
@@ -53,10 +53,10 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item!!.itemId) {
             R.id.action_drawer -> {
-                val i = Intent(this, SettingsActivity::class.java)
-                startActivity(i)
+                //val i = Intent(this, SettingsActivity::class.java)
+                //startActivity(i)
                 //drawer 펼치는 action
-                //drawerLayout.openDrawer(GravityCompat.END)
+                drawerLayout.openDrawer(GravityCompat.END)
             }
         }
         return super.onOptionsItemSelected(item)
