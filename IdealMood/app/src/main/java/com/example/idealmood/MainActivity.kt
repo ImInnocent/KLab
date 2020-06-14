@@ -2,6 +2,7 @@ package com.example.idealmood
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,5 +25,10 @@ class MainActivity : AppCompatActivity() {
         }.attach()
 
         contents.isUserInputEnabled = false // 스트롤해서 탭 넘기는 기능 삭제
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        getMenuInflater().inflate(R.menu.actionbar_actions, menu)
+        return true
     }
 }
