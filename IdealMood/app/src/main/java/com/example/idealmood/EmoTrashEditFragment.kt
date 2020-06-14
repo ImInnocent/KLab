@@ -68,11 +68,11 @@ class EmoTrashEditFragment : AppCompatDialogFragment() {
             )
         )
         output.println("null")
-        output.close()
-
-
         //감정 쓰레기통 화면 refresh기능 추가 필요
 
+        output.close()
+        activity?.recreate()
+        this.dialog?.cancel()
 
     }
 
