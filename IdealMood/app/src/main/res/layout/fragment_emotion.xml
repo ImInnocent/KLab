@@ -7,11 +7,13 @@
     tools:context=".EmotionFragment">
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/onoffSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
+        android:switchMinWidth="40dp"
+        android:checked="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,8 +32,8 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:text="오늘은 어제보다 편안한 하루네요~"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -47,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emotionImg">
+        app:layout_constraintTop_toBottomOf="@id/textView6">
 
         <TableRow
             android:layout_width="match_parent"
