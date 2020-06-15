@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +24,17 @@ class CalendarFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         adapter = CalendarAdapter(this)
+        adapter.itemClickListener = object: CalendarAdapter.OnItemClickListener{
+
+            override fun OnItemClick(
+                holder: CalendarAdapter.CalViewHolder,
+                view: View,
+                position: Int
+            ) {
+                Toast.makeText(context, position.toString() + "캘린더 인터페이스 추가 예정", Toast.LENGTH_SHORT).show()
+            }
+
+        }
 
         rcyCalendarView.layoutManager = GridLayoutManager(activity, BaseCalendar.DAYS_OF_WEEK)
         rcyCalendarView.adapter = adapter
