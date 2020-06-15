@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     android:layout_margin="5dp"
-    android:background="#F3CFCF"
+    android:background="#BCE6E3"
     android:orientation="horizontal">
 
     <TextView
@@ -11,8 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:textSize="20sp"
-        android:text="temp" />
+        android:text="temp"
+        android:textSize="20sp" />
 
     <View
         android:layout_width="0dp"
