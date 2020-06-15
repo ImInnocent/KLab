@@ -1,10 +1,12 @@
 package com.example.idealmood
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_solution.*
@@ -15,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_solution.*
 class SolutionFragment : Fragment() {
 
     val solutionArr = arrayOf<String>("명상", "심호흡")  // data 추가 예정
+    val solList = arrayOf<AppCompatActivity>(MeditationSolution(), DeepBreathSolution())
     lateinit var madapter: MyAdapter
 
     override fun onCreateView(
@@ -36,6 +39,17 @@ class SolutionFragment : Fragment() {
     }
 
     private fun init() {
+        madapter.itemClickListener = object :MyAdapter.OnItemClickListener {
+            override fun OnItemClick(
+                holder: MyAdapter.MyViewHolder,
+                view: View,
+                data: String,
+                position: Int
+            ) {
+                val i = Intent(requireContext(), solList[position]::class.java)
+                startActivity(i)
+            }
 
+        }
     }
 }
