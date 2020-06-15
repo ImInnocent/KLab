@@ -26,14 +26,15 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         // slide animation 추가
-        this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right)
+        //this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right)
     }
 
     private fun init() {
         // 툴바 달고 아이콘 추가하기
         //setSupportActionBar(toolbar)
-        //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        //supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_favorite_white_28dp)
+        // 툴바 아닌 앱 바 상태여도 아이콘 달림. 주석처리ㄴㄴ
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_favorite_white_28dp)
 
         // 탭 달기
         contents.adapter = MyFragStateAdapter(this)
