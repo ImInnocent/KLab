@@ -34,85 +34,93 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginVertical="50dp"
+        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="40dp"
         >
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/prevMonthBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="◀" />
                 <TextView
+                    android:id="@+id/currMonth"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text=" ◀  2020년 6월  ▶ "/>
+                    android:text=" 2020 6 "
+                    android:textSize="20dp"/>
+                <Button
+                    android:id="@+id/nextMonthBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="▶"/>
 
             </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="#eaeae9">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="46dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="일"
                 android:textSize="9sp"/>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="46dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="월"
                 android:textSize="9sp"/>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="46dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="화"
                 android:textSize="9sp"/>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="46dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="수"
                 android:textSize="9sp"/>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="46dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="목"
                 android:textSize="9sp"/>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="46dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="금"
                 android:textSize="9sp"/>
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="46dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="center"
                 android:text="토"
                 android:textSize="9sp"/>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcyCalendarView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
