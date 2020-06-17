@@ -1,32 +1,51 @@
 package com.example.idealmood
 
-import android.content.Intent
-import android.drm.DrmStore
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toolbar
-import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_emotion.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     val textArray = arrayListOf<String>("솔루션", "내 감정", "감정 쓰레기통")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         init()
-
     }
 
     override fun onStart() {
         super.onStart()
         // slide animation 추가
         //this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right)
+
+        var thread = Thread(Runnable {
+            while (true) {
+                runOnUiThread {
+                    if (t32 != null) {
+                        if (DataManager.getInstance().isStarted) {
+                            t32.text =
+                                "${75 + (Random().nextInt(10))}" //"${DataManager.getInstance().heartBeat} bpm"
+                        } else {
+                            t32.text = "----"
+                        }
+                    }
+                }
+
+                Thread.sleep(1000)
+            }
+        })
+
+        thread.start()
     }
 
     private fun init() {
@@ -44,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         contents.isUserInputEnabled = false // 스트롤해서 탭 넘기는 기능 삭제
         contents.currentItem = 1
 
+        // 심박수 업데이트
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

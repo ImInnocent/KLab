@@ -26,8 +26,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.content_device_scan.*
 import org.jetbrains.anko.toast
 
-private const val SCAN_PERIOD: Long = 10000
-
 /**
  * Activity for scanning and displaying available BLE devices.
  */
@@ -47,6 +45,7 @@ class DeviceScanActivity: AppCompatActivity() {
 
     private var mScanning: Boolean = false
     private var arrayDevices = ArrayList<BluetoothDevice>()
+    private var tempDevices = ArrayList<String>()
     private val handler = Handler()
     private lateinit var recyclerViewAdapter: RvAdapter
 
@@ -107,11 +106,29 @@ class DeviceScanActivity: AppCompatActivity() {
                     searchButton.text = "Search"
                 }, SCAN_PERIOD)
 
+                // delete
+                handler.postDelayed({
+                    tempDevices.add("5D:A3:CE:86:61:D3")
+                    recyclerViewAdapter.notifyDataSetChanged()
+                }, 300)
+
+                // delete
+                handler.postDelayed({
+                    tempDevices.add("KocoaFab_BLE")
+                    recyclerViewAdapter.notifyDataSetChanged()
+                }, 1000)
+
+                // delete
+                handler.postDelayed({
+                    tempDevices.add("17:15:19:A2:DE:53")
+                    recyclerViewAdapter.notifyDataSetChanged()
+                }, 2000)
+
                 // start scanning and if found, postDelayed called
                 mScanning = true
 
-                arrayDevices.clear()
-                arrayDevices.addAll(BluetoothAdapter.getDefaultAdapter().bondedDevices)
+                tempDevices.clear()
+//                arrayDevices.addAll(BluetoothAdapter.getDefaultAdapter().bondedDevices)
 
                 bluetoothAdapter?.bluetoothLeScanner?.startScan(scanCallback)
 
@@ -129,12 +146,17 @@ class DeviceScanActivity: AppCompatActivity() {
     }
 
     private fun selectDevice(address: String) {
-        val intent = Intent(this, DeviceControlActivity::class.java)
-        intent.putExtra("address", address)
+        // need fix
+        DataManager.getInstance().isStarted = true
+        DataManager.getInstance().heartBeat = 100
+        finish()
 
-        if (mScanning) scanLeDevice(false)
-
-        startActivity(intent)
+//        val intent = Intent(this, DeviceControlActivity::class.java)
+//        intent.putExtra("address", address)
+//
+//        if (mScanning) scanLeDevice(false)
+//
+//        startActivity(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -150,9 +172,13 @@ class DeviceScanActivity: AppCompatActivity() {
             }
         }
 
-        recyclerViewAdapter = RvAdapter(this@DeviceScanActivity, arrayDevices) {
-            toast(it.address)
-            selectDevice(it.address)
+//        recyclerViewAdapter = RvAdapter(this@DeviceScanActivity, arrayDevices) {
+//            toast(it.address)
+//            selectDevice(it.address)
+//        }
+        recyclerViewAdapter = RvAdapter(this@DeviceScanActivity, tempDevices) {
+            toast(it)
+            selectDevice(it)
         }
 
         val deviceList: RecyclerView = findViewById(R.id.deviceList)
