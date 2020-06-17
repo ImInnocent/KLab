@@ -1,6 +1,7 @@
 package com.example.idealmood
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
@@ -49,6 +50,13 @@ class EmotionFragment : Fragment() {
                 onoffSwitch.isChecked = !onoffSwitch.isChecked
             }
             onoffFlag = true*/
+        }
+
+        blueConnectBtn.setOnClickListener {
+            activity?.let{
+                val intent = Intent (it, DeviceScanActivity::class.java)
+                it.startActivity(intent)
+            }
         }
     }
 

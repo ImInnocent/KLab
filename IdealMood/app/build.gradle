@@ -42,4 +42,5 @@ dependencies {
     implementation 'me.relex:circleindicator:2.1.4'
     implementation 'com.mysugr.MPAndroidChart:MPAndroidChart:3.1.0-mysugr-1'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'org.jetbrains.anko:anko-common:0.8.3'
 }
