@@ -6,10 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_emo_trash.*
 import kotlinx.android.synthetic.main.fragment_emo_trash.view.*
+import kotlinx.android.synthetic.main.fragment_emo_trash_edit.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -20,9 +26,12 @@ class EmoTrashFragment : Fragment() {
     var array = ArrayList<emoTrashData>()
     lateinit var adapter:emoTrashAdapter
 
+
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        init()
 
         //putData()
         //임시 Data -> filescan으로 수정 예정
@@ -55,11 +64,41 @@ class EmoTrashFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_emo_trash, container, false)
 
 
+
         return view
     }
 
+    private fun init() {
+
+        val main_activity  = activity as MainActivity
 
 
-    private fun putData() {
+
+        addBtn.setOnClickListener {
+
+            Toast.makeText(context,"감정 일기 추가", Toast.LENGTH_SHORT).show()
+            //if(!EmoTrashEditFragment().isAdded)
+            EmoTrashEditFragment().show( fragmentManager!!, "dialog")
+
+
+
+        }
+
+        deleteBtn.setOnClickListener {
+
+
+            Toast.makeText(context, "감정 쓰레기통 삭제 화면", Toast.LENGTH_SHORT).show()
+        }
     }
+
+
+     fun putData() {
+    }
+
+    public fun addArray(title:String){
+        val sdf = SimpleDateFormat("yyyy MM", Locale.KOREAN)
+        EmoTrashFragment().array.add(emoTrashData(title,sdf.format(
+            Calendar.getInstance().time), "null" ))
+    }
+
 }

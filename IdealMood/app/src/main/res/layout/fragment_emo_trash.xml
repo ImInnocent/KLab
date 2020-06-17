@@ -30,7 +30,7 @@
                 android:layout_weight="1"/>
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/addBtn"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"

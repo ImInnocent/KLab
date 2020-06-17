@@ -9,12 +9,18 @@ import android.view.MenuItem
 import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     val textArray = arrayListOf<String>("솔루션", "내 감정", "감정 쓰레기통")
+
+
+    var fragTransaction:FragmentTransaction = supportFragmentManager.beginTransaction()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -44,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         contents.isUserInputEnabled = false // 스트롤해서 탭 넘기는 기능 삭제
         contents.currentItem = 1
 
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -62,4 +69,11 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    public fun changeFragment(f: Fragment, cleanStack:Boolean = false){
+        //프래그먼트  화면 전환 -> 감정 쓰레기통에서 쓰일 예정
+
+
+    }
+
 }

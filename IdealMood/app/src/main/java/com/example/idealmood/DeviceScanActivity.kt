@@ -55,7 +55,7 @@ class DeviceScanActivity: AppCompatActivity() {
         // 검색 실패
         override fun onScanFailed(errorCode: Int) {
             super.onScanFailed(errorCode)
-            toast("BLE SCAN Failed: $errorCode")
+            toast( "BLE SCAN Failed: $errorCode")
         }
 
         // 검색 결과
