@@ -89,10 +89,6 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    public fun changeFragment(f: Fragment, cleanStack:Boolean = false){
-        //프래그먼트  화면 전환 -> 감정 쓰레기통에서 쓰일 예정
 
-
-    }
 
 }

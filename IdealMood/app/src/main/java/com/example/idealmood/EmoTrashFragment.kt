@@ -1,5 +1,6 @@
 package com.example.idealmood
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_emo_trash.*
 import kotlinx.android.synthetic.main.fragment_emo_trash.view.*
 import kotlinx.android.synthetic.main.fragment_emo_trash_edit.*
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -36,9 +38,7 @@ class EmoTrashFragment : Fragment() {
         //putData()
         //임시 Data -> filescan으로 수정 예정
         //emoTrashData title -> emoTrashData contents 의 short ver 분리되어있다고 생각했는데 이것도 수정 필요.
-        array.add(emoTrashData("너무 억울하다..", "20.1.3", "내용1"))
-        array.add(emoTrashData("화가 난다", "20.3.7", "내용2"))
-        array.add(emoTrashData("이해가 안된다", "20.5.17", "내용3"))
+        putData()
 
         emoTrashRecyclerView?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         adapter = emoTrashAdapter(array)
@@ -93,12 +93,31 @@ class EmoTrashFragment : Fragment() {
 
 
      fun putData() {
+        val file = File(context!!.filesDir, "trashData.txt")
+        if(file.exists()){
+            val scan = Scanner(context?.openFileInput("trashData.txt"))
+            readFileScan(scan)
+
+        }else{
+            context!!.openFileOutput("trashData.txt", Context.MODE_APPEND)
+            val scan = Scanner(context?.openFileInput("trashData.txt"))
+            readFileScan(scan)
+        }
+
+
     }
 
-    public fun addArray(title:String){
-        val sdf = SimpleDateFormat("yyyy MM", Locale.KOREAN)
-        EmoTrashFragment().array.add(emoTrashData(title,sdf.format(
-            Calendar.getInstance().time), "null" ))
+    fun readFileScan(scan : Scanner) {
+        while(scan.hasNextLine()){
+
+            val title:String = scan.nextLine()
+            val date:String = scan.nextLine()
+            val content:String = scan.nextLine()
+            array.add(emoTrashData(title, date, content))
+
+        }
+        scan.close()
     }
+
 
 }

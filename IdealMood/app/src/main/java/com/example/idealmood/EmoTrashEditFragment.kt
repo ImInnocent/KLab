@@ -1,8 +1,10 @@
 package com.example.idealmood
 
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +13,10 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_emo_trash_edit.*
+import java.io.FileOutputStream
+import java.io.PrintStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -40,8 +45,8 @@ class EmoTrashEditFragment : AppCompatDialogFragment() {
             .setView(myView)
             .setNegativeButton("CANCEL", DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
             .setPositiveButton("SUBMIT", DialogInterface.OnClickListener { dialog, which ->
-                //parentFragment.addArray(emoTrashEdit.text.toString())
-                //fragmentManager.findFragmentByTag("EmoTrashFragment"
+
+                writeFile(emoTrashEdit.text.toString())
             })
             .create()
 
@@ -49,8 +54,18 @@ class EmoTrashEditFragment : AppCompatDialogFragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun writeFile(title:String) {
+        val output = PrintStream(context?.openFileOutput("trashData.txt", Context.MODE_APPEND))
 
+        val sdf = SimpleDateFormat("yy.MM.dd", Locale.KOREAN)
+
+        output.println(title)
+        output.println(sdf.format(
+            Calendar.getInstance().time))
+        output.println("null")
+        output.close()
+        MyFragStateAdapter(activity!!).notifyDataSetChanged()
     }
+
+
 }
