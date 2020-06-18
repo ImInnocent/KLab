@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -38,8 +39,9 @@ class EmoTrashFragment : Fragment() {
         //putData()
         //임시 Data -> filescan으로 수정 예정
         //emoTrashData title -> emoTrashData contents 의 short ver 분리되어있다고 생각했는데 이것도 수정 필요.
-        putData()
 
+
+        putData()
         emoTrashRecyclerView?.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         adapter = emoTrashAdapter(array)
         adapter.itemClickListener = object:emoTrashAdapter.OnItemClickListener{
@@ -76,9 +78,8 @@ class EmoTrashFragment : Fragment() {
 
         addBtn.setOnClickListener {
 
-            Toast.makeText(context,"감정 일기 추가", Toast.LENGTH_SHORT).show()
-            //if(!EmoTrashEditFragment().isAdded)
-            EmoTrashEditFragment().show( fragmentManager!!, "dialog")
+            //Toast.makeText(context,"감정 일기 추가", Toast.LENGTH_SHORT).show()
+            EmoTrashEditFragment().show( fragmentManager!!, "editdialog")
 
 
 
@@ -87,7 +88,8 @@ class EmoTrashFragment : Fragment() {
         deleteBtn.setOnClickListener {
 
 
-            Toast.makeText(context, "감정 쓰레기통 삭제 화면", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, "감정 쓰레기통 삭제 화면", Toast.LENGTH_SHORT).show()
+            EmoTrashDeletedFragment().show(fragmentManager!!, "deletedialog")
         }
     }
 
@@ -118,6 +120,8 @@ class EmoTrashFragment : Fragment() {
         }
         scan.close()
     }
+
+
 
 
 }

@@ -14,6 +14,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_emo_trash_edit.*
 import java.io.FileOutputStream
 import java.io.PrintStream
@@ -60,12 +62,18 @@ class EmoTrashEditFragment : AppCompatDialogFragment() {
         val sdf = SimpleDateFormat("yy.MM.dd", Locale.KOREAN)
 
         output.println(title)
-        output.println(sdf.format(
-            Calendar.getInstance().time))
+        output.println(
+            sdf.format(
+                Calendar.getInstance().time
+            )
+        )
         output.println("null")
         output.close()
-        MyFragStateAdapter(activity!!).notifyDataSetChanged()
-    }
 
+
+        //감정 쓰레기통 화면 refresh기능 추가 필요
+
+
+    }
 
 }
