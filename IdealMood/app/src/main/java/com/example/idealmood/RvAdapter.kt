@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 class RvAdapter(val context: Context,
-                private val list: ArrayList<BluetoothDevice>,
-                private val itemClick: (BluetoothDevice) -> Unit)
+                private val list: ArrayList<String>,
+                private val itemClick: (String) -> Unit)
     : RecyclerView.Adapter<RvAdapter.Holder>() {
 
     // 뷰 홀더 생성하는 코드
@@ -32,18 +32,19 @@ class RvAdapter(val context: Context,
     }
 
     // 홀더
-    inner class Holder(itemView: View, itemClick: (BluetoothDevice) -> Unit)
+    inner class Holder(itemView: View, itemClick: (String) -> Unit)
         : RecyclerView.ViewHolder(itemView) {
         // get 텍스트
         val text: TextView = itemView?.findViewById<TextView>(R.id.deviceText)
 
         // 아이템에서 정보를 추출해서 한 줄을 구성하기
-        fun bind (device: BluetoothDevice, context: Context) {
-            if (device.name != null) {
-                text.text = device.name
-            } else {
-                text.text = device.address
-            }
+        fun bind (device: String, context: Context) {
+//            if (device.name != null) {
+//                text.text = device.name
+//            } else {
+//                text.text = device.address
+//            }
+            text.text = device
 
             itemView.setOnClickListener { itemClick(device) }
         }
