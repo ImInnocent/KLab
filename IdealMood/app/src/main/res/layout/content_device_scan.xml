@@ -8,6 +8,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        android:text="@string/device_search_nearby"
+        android:textSize="24sp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/deviceList"
         android:layout_width="match_parent"

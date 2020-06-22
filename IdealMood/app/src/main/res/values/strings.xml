@@ -11,4 +11,27 @@
 
     <string name="device_address">Device Address</string>
     <string name="device_name">Device Name</string>
+
+    <string name="calender_title">Emotion calender of Konkuk Kim</string>
+    <string name="calender_sunday">SUN</string>
+    <string name="calender_monday">MON</string>
+    <string name="calender_tuesday">TUE</string>
+    <string name="calender_wednesday">WED</string>
+    <string name="calender_thursday">THU</string>
+    <string name="calender_friday">FRI</string>
+    <string name="calender_saturday">SAT</string>
+    <string name="device_search_nearby">Scan devices nearby</string>
+
+    <string name="emotion_title_daily_text">Today\'s stress is less than yesterday~</string>
+    <string name="emotion_title_today_angry_count">Today\'s anger count</string>
+    <string name="emotion_title_compare_yesterday">Today compare with yesterday</string>
+    <string name="emotion_title_heart_bpm">Heartbeat</string>
+    <string name="statistics_title">-Analysis Report-</string>
+    <string name="statistics_analysis_report_text">Analysis results.</string>
+    <string name="deep_breath_title">Breath Deep</string>
+    <string name="btn_go_back">← Back</string>
+
+    <string name="emotion_off_measure">Are you sure to stop measure?</string>
+    <string name="emotion_on_measure">Are you sure to restart measure?</string>
+    <string name="emotion_title_heart_bpm_number">%1d rpm</string>
 </resources>

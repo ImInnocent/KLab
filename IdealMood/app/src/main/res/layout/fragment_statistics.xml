@@ -31,20 +31,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginHorizontal="15dp">
+                android:layout_marginHorizontal="15dp"
+                android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="-분석 결과-"
-                    android:textSize="20sp"
-                    android:gravity="center_vertical"/>
+                    android:gravity="center_vertical"
+                    android:text="@string/statistics_title"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/emotionAnalysis"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="분석 결과 내용입니다."/>
+                    android:text="@string/statistics_analysis_report_text" />
 
             </LinearLayout>
 

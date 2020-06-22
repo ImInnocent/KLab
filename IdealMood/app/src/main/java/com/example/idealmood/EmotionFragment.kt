@@ -63,7 +63,7 @@ class EmotionFragment : Fragment() {
     private fun showOn2Off() {
         val builder = AlertDialog.Builder(ContextThemeWrapper(this@EmotionFragment.requireContext(), R.style.Theme_AppCompat_Light_Dialog))
         builder.setTitle("Confirm")
-        builder.setMessage("정말 측정을 그만두시겠어요?")
+        builder.setMessage(getString(R.string.emotion_off_measure))
 
         builder.setPositiveButton("OK") { _, _ ->
             //cancelFlag = false
@@ -80,7 +80,7 @@ class EmotionFragment : Fragment() {
     private fun showOff2On() {
         val builder = AlertDialog.Builder(ContextThemeWrapper(this@EmotionFragment.requireContext(), R.style.Theme_AppCompat_Light_Dialog))
         builder.setTitle("Confirm")
-        builder.setMessage("측정을 다시 시작하시겠어요?")
+        builder.setMessage(getString(R.string.emotion_on_measure))
 
         builder.setPositiveButton("OK") { _, _ ->
             Toast.makeText(this.requireContext(), "(측정 다시 시작)", Toast.LENGTH_SHORT).show()

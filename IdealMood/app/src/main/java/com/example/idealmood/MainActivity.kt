@@ -36,8 +36,9 @@ class MainActivity : AppCompatActivity() {
                 runOnUiThread {
                     if (t32 != null) {
                         if (DataManager.getInstance().isStarted) {
-                            t32.text =
-                                "${75 + (Random().nextInt(10))}" //"${DataManager.getInstance().heartBeat} bpm"
+                            //"${DataManager.getInstance().heartBeat} bpm"
+                            var heartBeat:Int = 75 + (Random().nextInt(10));
+                            t32.text = getString(R.string.emotion_title_heart_bpm_number, heartBeat)
                         } else {
                             t32.text = "----"
                         }

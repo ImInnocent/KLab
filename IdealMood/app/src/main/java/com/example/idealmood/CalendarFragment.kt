@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.util.Util
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -61,7 +62,7 @@ class CalendarFragment : Fragment() {
     }
 
     fun refreshCurrentMonth(calendar: Calendar) {
-        val sdf = SimpleDateFormat("yyyy MM", Locale.KOREAN)
+        val sdf = SimpleDateFormat("yyyy MM", UtilManager.currentLocale())
         currMonth.text = sdf.format(calendar.time)
     }
 

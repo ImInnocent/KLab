@@ -25,9 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"
-            android:textSize="20sp"
-            android:text="김건국님의 감정달력"
-            />
+            android:text="@string/calender_title"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -73,50 +72,50 @@
                 android:layout_width="46dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="일"
-                android:textSize="9sp"/>
+                android:text="@string/calender_sunday"
+                android:textSize="9sp" />
 
             <TextView
                 android:layout_width="46dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="월"
-                android:textSize="9sp"/>
+                android:text="@string/calender_monday"
+                android:textSize="9sp" />
 
             <TextView
                 android:layout_width="46dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="화"
-                android:textSize="9sp"/>
+                android:text="@string/calender_tuesday"
+                android:textSize="9sp" />
 
             <TextView
                 android:layout_width="46dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="수"
-                android:textSize="9sp"/>
+                android:text="@string/calender_wednesday"
+                android:textSize="9sp" />
 
             <TextView
                 android:layout_width="46dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="목"
-                android:textSize="9sp"/>
+                android:text="@string/calender_thursday"
+                android:textSize="9sp" />
 
             <TextView
                 android:layout_width="46dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="금"
-                android:textSize="9sp"/>
+                android:text="@string/calender_friday"
+                android:textSize="9sp" />
 
             <TextView
                 android:layout_width="46dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="토"
-                android:textSize="9sp"/>
+                android:text="@string/calender_saturday"
+                android:textSize="9sp" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
