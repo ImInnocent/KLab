@@ -16,7 +16,10 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    val textArray = arrayListOf<String>("솔루션", "내 감정", "감정 쓰레기통")
+    val textArray = arrayListOf<Int>(
+            R.string.bottom_navi_solution,
+            R.string.bottom_navi_emotion,
+            R.string.bottom_navi_emo_trash)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         // 탭 달기
         contents.adapter = MyFragStateAdapter(this)
         TabLayoutMediator(tabLayout, contents){ tab, position ->
-            tab.text = textArray[position]
+            tab.text = getString(textArray[position])
         }.attach()
         contents.isUserInputEnabled = false // 스트롤해서 탭 넘기는 기능 삭제
         contents.currentItem = 1

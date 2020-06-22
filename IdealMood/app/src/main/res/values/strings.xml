@@ -24,7 +24,9 @@
 
     <string name="emotion_title_daily_text">Today\'s stress is less than yesterday~</string>
     <string name="emotion_title_today_angry_count">Today\'s anger count</string>
+    <string name="emotion_title_today_angry_count_value">0 time(s)</string>
     <string name="emotion_title_compare_yesterday">Today compare with yesterday</string>
+    <string name="emotion_title_compare_yesterday_value">-3 time(s)</string>
     <string name="emotion_title_heart_bpm">Heartbeat</string>
     <string name="statistics_title">-Analysis Report-</string>
     <string name="statistics_analysis_report_text">Analysis results.</string>
@@ -34,4 +36,22 @@
     <string name="emotion_off_measure">Are you sure to stop measure?</string>
     <string name="emotion_on_measure">Are you sure to restart measure?</string>
     <string name="emotion_title_heart_bpm_number">%1d rpm</string>
+
+    <string name="bottom_navi_solution">Solution</string>
+    <string name="bottom_navi_emotion">My Emo</string>
+    <string name="bottom_navi_emo_trash">Emo trash</string>
+
+    <string name="solution_meditation_title">Meditation</string>
+    <string name="solution_deep_breath_title">Deep breath</string>
+
+    <string name="emo_trash_dialog_title">Write that you want to discard emotion</string>
+    <string name="emo_trash_dialog_hint">Insert text...</string>
+    <string name="emo_trash_deleted_title">Delete emo trash list</string>
+    <string name="meditation_title">Solution test Text</string>
+
+    <string name="drawer_list_device_push">Device / App Push</string>
+    <string name="drawer_list_emergency">Emergency Setting</string>
+    <string name="drawer_list_app_theme">App Theme</string>
+    <string name="drawer_list_logout">Logout</string>
+    <string name="temp_user_name">Konkuk Kim</string>
 </resources>

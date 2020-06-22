@@ -16,7 +16,9 @@ import kotlinx.android.synthetic.main.fragment_solution.*
  */
 class SolutionFragment : Fragment() {
 
-    val solutionArr = arrayOf<String>("명상", "심호흡")  // data 추가 예정
+    val solutionArr = arrayOf<Int>(
+            R.string.solution_meditation_title,
+            R.string.solution_deep_breath_title)  // data 추가 예정
     val solList = arrayOf<AppCompatActivity>(MeditationSolution(), DeepBreathSolution())
     lateinit var madapter: MyAdapter
 
@@ -30,12 +32,16 @@ class SolutionFragment : Fragment() {
         if (view is RecyclerView) {
             with(view) {
                 view.layoutManager = LinearLayoutManager(context)
-                madapter = MyAdapter(solutionArr)
+                madapter = MyAdapter(solutionTextIdsToStrings())
                 adapter = madapter
             }
         }
         init()
         return view
+    }
+
+    private fun solutionTextIdsToStrings(): Array<String> {
+        return Array<String>(solutionArr.size) { getString(solutionArr[it]) }
     }
 
     private fun init() {

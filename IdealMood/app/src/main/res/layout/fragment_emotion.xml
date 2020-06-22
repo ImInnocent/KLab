@@ -85,7 +85,7 @@
                 android:layout_margin="3dp"
                 android:background="@drawable/edge2"
                 android:padding="7dp"
-                android:text="0 회"
+                android:text="@string/emotion_title_today_angry_count_value"
                 android:textAlignment="center"
                 android:textSize="16sp" />
         </TableRow>
@@ -114,7 +114,7 @@
                 android:layout_margin="3dp"
                 android:background="@drawable/edge2"
                 android:padding="7dp"
-                android:text="-3 회"
+                android:text="@string/emotion_title_compare_yesterday_value"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 

@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="김건국"
+        android:text="@string/temp_user_name"
         android:textSize="25sp"/>
 
     <TextView

@@ -20,10 +20,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
                 android:gravity="center_vertical"
-                android:text="감정 쓰레기통"
-                android:textSize="20sp"
-                android:layout_marginLeft="10dp"/>
+                android:text="@string/bottom_navi_emo_trash"
+                android:textSize="20sp" />
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"

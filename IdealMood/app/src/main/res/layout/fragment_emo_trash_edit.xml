@@ -13,9 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="감정을 직셩하면 감정 쓰레기통으로 보내집니다."
-        android:textSize="15sp"
-        android:gravity="center" />
+        android:gravity="center"
+        android:text="@string/emo_trash_dialog_title"
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,10 +37,10 @@
                 android:id="@+id/emoTrashEdit"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="6"
                 android:layout_margin="30dp"
+                android:layout_weight="6"
                 android:background="@drawable/textline2"
-                android:hint="내용을 입력해 주세요" />
+                android:hint="@string/emo_trash_dialog_hint" />
 
 
 
