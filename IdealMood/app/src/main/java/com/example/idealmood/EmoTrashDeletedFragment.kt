@@ -33,7 +33,8 @@ class EmoTrashDeletedFragment : AppCompatDialogFragment() {
 
 
         emoTrashDelBtn.setOnClickListener {
-            Toast.makeText(context, "뒤로가기 버튼 누른거랑 같은 효과 추가", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, "뒤로가기 버튼 누른거랑 같은 효과 추가", Toast.LENGTH_SHORT).show()
+            this.dialog?.cancel()
         }
 
 

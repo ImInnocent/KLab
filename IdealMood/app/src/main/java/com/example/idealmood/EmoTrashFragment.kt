@@ -81,8 +81,6 @@ class EmoTrashFragment : Fragment() {
             //Toast.makeText(context,"감정 일기 추가", Toast.LENGTH_SHORT).show()
             EmoTrashEditFragment().show( fragmentManager!!, "editdialog")
 
-
-
         }
 
         deleteBtn.setOnClickListener {
