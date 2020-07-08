@@ -32,6 +32,11 @@
 >     액티비티에서 viewPager와 각 fragment들(solution, main, 감쓰(만들 예정))을 연결하는 어댑터   
 > * **MyStateAdapter2**   
 >     MainFragment에서 viewPager와 각 fragment들(emotion, calendar, statistics)을 연결하는 어댑터   
+> * **BaseCalendar**   
+>     감정달력에서 실제 날짜로 달력 구성하는데 필요한 정보 포함.   
+>     CalendarAdapter에서 쓰인다.
+> * **CalendarAdapter**   
+>     CalendarFragment의 달력을 구성하는 GridLayout RecyclerView의 어댑터.   
    
 ### 주요 레이아웃 ID/변수명 설명
 > * **contents**   
