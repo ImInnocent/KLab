@@ -1,14 +1,18 @@
 package com.example.idealmood
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_emotion.*
@@ -71,6 +75,17 @@ class MainActivity : AppCompatActivity() {
         contents.currentItem = 1
 
 
+        //navigationview 아이템 클릭 이벤트
+        (navView as NavigationView).setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.item3-> {
+                    //loadFragment(DrawerThemeSetting())
+                    //DrawerThemeSetting()
+                    return@setNavigationItemSelectedListener true
+                }
+            }
+            false
+        }
 
 
         // 심박수 업데이트
@@ -93,6 +108,34 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun loadFragment(frag: Fragment) {
+        //load fragment
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.contents, frag)
+        //transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    public fun setThemeColor(colorNum:Int){
+        when(colorNum){
+            0->{//colorAccent
+                supportActionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.colorAccent)))
+
+            }
+            1->{//CCoral
+                supportActionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.CCoral)))
+
+            }
+            2->{//CLightSkyblue
+                supportActionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.CLightSkyBlue)))
+
+            }
+            3->{//CGray
+                supportActionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.CGray)))
+
+            }
+        }
+    }
 
 
 }
