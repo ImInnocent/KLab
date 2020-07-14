@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity"
+        android:id="@+id/mainView"
         android:orientation="vertical">
 
         <!-- 툴바
@@ -26,12 +27,17 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
             -->
 
+
+
         <!-- tap을 구성하는 내용 -->
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/contents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="20" />
+
+
+
 
         <!-- 하단 탭 -->
         <com.google.android.material.tabs.TabLayout

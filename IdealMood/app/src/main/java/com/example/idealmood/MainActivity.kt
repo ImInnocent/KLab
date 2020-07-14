@@ -79,8 +79,8 @@ class MainActivity : AppCompatActivity() {
         (navView as NavigationView).setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.item3-> {
-                    //loadFragment(DrawerThemeSetting())
-                    //DrawerThemeSetting()
+                    DrawerThemeSetting().show(supportFragmentManager, "appthemecolor")
+                    drawerLayout.closeDrawer(GravityCompat.END)
                     return@setNavigationItemSelectedListener true
                 }
             }
@@ -108,13 +108,7 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun loadFragment(frag: Fragment) {
-        //load fragment
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.contents, frag)
-        //transaction.addToBackStack(null)
-        transaction.commit()
-    }
+
 
     public fun setThemeColor(colorNum:Int){
         when(colorNum){
