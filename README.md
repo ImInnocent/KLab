@@ -37,7 +37,10 @@
 >     CalendarAdapter에서 쓰인다.
 > * **CalendarAdapter**   
 >     CalendarFragment의 달력을 구성하는 GridLayout RecyclerView의 어댑터.   
-   
+> * **DrawerThemeSetting**   
+>     drawer에서 앱 테마 설정 항목 선택시 나오는 AppCompatDialogFragment이다.   
+>     민트색, 코랄색, 하늘색, 회색 옵션을 가지고 있다.(색 바꾸기 변경 테마)   
+
 ### 주요 레이아웃 ID/변수명 설명
 > * **contents**   
 >     activity_main.xml의 viewPager2의 id   
