@@ -43,6 +43,9 @@
 
     <string name="solution_meditation_title">Meditation</string>
     <string name="solution_deep_breath_title">Deep breath</string>
+    <string name="solution_exercise_title">Exercise</string>
+    <string name="solution_dance_title">K-Pop Dance !</string>
+    <string name="solution_asmr_title">ASMR</string>
 
     <string name="emo_trash_dialog_title">Write that you want to discard emotion</string>
     <string name="emo_trash_dialog_hint">Insert text...</string>

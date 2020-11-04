@@ -1,6 +1,7 @@
 package com.example.idealmood
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,7 +19,10 @@ class SolutionFragment : Fragment() {
 
     val solutionArr = arrayOf<Int>(
             R.string.solution_meditation_title,
-            R.string.solution_deep_breath_title)  // data 추가 예정
+            R.string.solution_deep_breath_title,
+            R.string.solution_exercise_title,
+            R.string.solution_dance_title,
+            R.string.solution_asmr_title)  // data 추가 예정
     val solList = arrayOf<AppCompatActivity>(MeditationSolution(), DeepBreathSolution())
     lateinit var madapter: MyAdapter
 
@@ -52,8 +56,22 @@ class SolutionFragment : Fragment() {
                 data: String,
                 position: Int
             ) {
-                val i = Intent(requireContext(), solList[position]::class.java)
-                startActivity(i)
+                if (position == 2) {    // 하드코딩인가? 그냥 uri를 배열에다 넣고 꺼내쓸까?
+                    val i = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=exercise"))
+                    startActivity(i)
+                }
+                else if (position == 3) {
+                    val i = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=kpop+dance+tutorial"))
+                    startActivity(i)
+                }
+                else if (position == 4) {
+                    val i = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=asmr"))
+                    startActivity(i)
+                }
+                else {
+                    val i = Intent(requireContext(), solList[position]::class.java)
+                    startActivity(i)
+                }
             }
 
         }
