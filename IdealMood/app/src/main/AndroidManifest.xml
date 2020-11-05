@@ -14,10 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".WaveSoundSolution"></activity>
+
         <service
             android:name=".MyMusicService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
         <activity
             android:name=".RainySoundSolution"
             android:label="@string/title_activity_rainy_sound_solution" />
