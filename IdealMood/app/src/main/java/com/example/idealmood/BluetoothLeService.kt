@@ -1,53 +1,53 @@
 package com.example.idealmood
 
-import android.app.Service
-import android.bluetooth.*
-import android.content.Context
-import android.content.Intent
-import android.os.Binder
-import android.os.IBinder
-import org.jetbrains.anko.toast
-import java.util.*
+                    import android.app.Service
+                            import android.bluetooth.*
+                            import android.content.Context
+                            import android.content.Intent
+                            import android.os.Binder
+                            import android.os.IBinder
+                            import org.jetbrains.anko.toast
+                            import java.util.*
 
-class BluetoothLeService: Service() {
+                    class BluetoothLeService: Service() {
 
-    var connectionState = Companion.STATE_DISCONNECTED
-    private var bluetoothGatt: BluetoothGatt? = null
-    private val bluetoothAdapter: BluetoothAdapter by lazy(LazyThreadSafetyMode.NONE) {
-        val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
-        bluetoothManager.adapter
-    }
+                        var connectionState = Companion.STATE_DISCONNECTED
+                        private var bluetoothGatt: BluetoothGatt? = null
+                        private val bluetoothAdapter: BluetoothAdapter by lazy(LazyThreadSafetyMode.NONE) {
+                            val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+                            bluetoothManager.adapter
+                        }
 
-    companion object {
-        const val ACTION_GATT_CONNECTED = "ACTION_GATT_CONNECTED"
-        const val ACTION_GATT_DISCONNECTED = "ACTION_GATT_DISCONNECTED"
-        const val ACTION_GATT_SERVICES_DISCOVERED = "ACTION_GATT_DISCOVERED"
-        const val ACTION_DATA_AVAILABLE = "ACTION_DATA_AVAILABLE"
-        const val EXTRA_DATA = "EXTRA_DATA"
-        val UUID_DATA_NOTIFY: UUID = UUID.fromString("0000fff1-0000-1000-80000-00805f9b34fb")
-        val UUID_DATA_WRITE: UUID = UUID.fromString("0000fff2-0000-1000-80000-00805f9b34fb")
-        val CLIENT_CHARACTERISTIC_CONFIG: UUID
-                = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb")
+                        companion object {
+                            const val ACTION_GATT_CONNECTED = "ACTION_GATT_CONNECTED"
+                            const val ACTION_GATT_DISCONNECTED = "ACTION_GATT_DISCONNECTED"
+                            const val ACTION_GATT_SERVICES_DISCOVERED = "ACTION_GATT_DISCOVERED"
+                            const val ACTION_DATA_AVAILABLE = "ACTION_DATA_AVAILABLE"
+                            const val EXTRA_DATA = "EXTRA_DATA"
+                            val UUID_DATA_NOTIFY: UUID = UUID.fromString("0000fff1-0000-1000-80000-00805f9b34fb")
+                            val UUID_DATA_WRITE: UUID = UUID.fromString("0000fff2-0000-1000-80000-00805f9b34fb")
+                            val CLIENT_CHARACTERISTIC_CONFIG: UUID
+                                    = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb")
 
-        const val STATE_DISCONNECTED = 0
-        const val STATE_CONNECTING = 1
-        const val STATE_CONNECTED = 2
-    }
+                            const val STATE_DISCONNECTED = 0
+                            const val STATE_CONNECTING = 1
+                            const val STATE_CONNECTED = 2
+                        }
 
-    // 블루투스 연결과 관련한 변경이 있을 때 호출됨
-    private val gattCallback = object: BluetoothGattCallback() {
-        // 연결 상태가 바뀌었을 때
-        override fun onConnectionStateChange(gatt: BluetoothGatt?, status: Int, newState: Int) {
-            super.onConnectionStateChange(gatt, status, newState)
+                        // 블루투스 연결과 관련한 변경이 있을 때 호출됨
+                        private val gattCallback = object: BluetoothGattCallback() {
+                            // 연결 상태가 바뀌었을 때
+                            override fun onConnectionStateChange(gatt: BluetoothGatt?, status: Int, newState: Int) {
+                                super.onConnectionStateChange(gatt, status, newState)
 
-            var intentAction = ""
+                                var intentAction = ""
 
-            when (newState) {
-                BluetoothProfile.STATE_CONNECTED -> {
-                    connectionState = STATE_CONNECTED
-                    broadcastUpdate(ACTION_GATT_CONNECTED, null)
-                }
-                BluetoothProfile.STATE_DISCONNECTED -> {
+                                when (newState) {
+                                    BluetoothProfile.STATE_CONNECTED -> {
+                                        connectionState = STATE_CONNECTED
+                                        broadcastUpdate(ACTION_GATT_CONNECTED, null)
+                                    }
+                                    BluetoothProfile.STATE_DISCONNECTED -> {
                     connectionState = Companion.STATE_DISCONNECTED
                     broadcastUpdate(ACTION_GATT_DISCONNECTED, null)
                 }
