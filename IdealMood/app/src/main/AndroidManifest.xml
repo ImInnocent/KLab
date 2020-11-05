@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.idealmood">
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <uses-feature android:name="android.hardware.type.watch" />
-
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -22,18 +18,6 @@
             android:name=".MyMusicService"
             android:enabled="true"
             android:exported="true"></service>
-
-        <uses-library
-            android:name="com.google.android.wearable"
-            android:required="true" />
-        <!--
-               Set to true if your app is Standalone, that is, it does not require the handheld
-               app to run.
-        -->
-        <meta-data
-            android:name="com.google.android.wearable.standalone"
-            android:value="true" />
-
         <activity
             android:name=".RainySoundSolution"
             android:label="@string/title_activity_rainy_sound_solution" />
