@@ -78,8 +78,18 @@ class MainActivity : AppCompatActivity() {
         //navigationview 아이템 클릭 이벤트
         (navView as NavigationView).setNavigationItemSelectedListener {
             when(it.itemId){
+                R.id.item2-> {
+                    DrawerEmergencySetting().show(supportFragmentManager, "emergencyCall")
+                    drawerLayout.closeDrawer(GravityCompat.END)
+                    return@setNavigationItemSelectedListener true
+                }
                 R.id.item3-> {
                     DrawerThemeSetting().show(supportFragmentManager, "appthemecolor")
+                    drawerLayout.closeDrawer(GravityCompat.END)
+                    return@setNavigationItemSelectedListener true
+                }
+                R.id.item4-> {
+                    DrawerSetting().show(supportFragmentManager, "settings")
                     drawerLayout.closeDrawer(GravityCompat.END)
                     return@setNavigationItemSelectedListener true
                 }

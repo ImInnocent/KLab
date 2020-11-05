@@ -58,5 +58,6 @@
     <string name="drawer_list_emergency">응급 상황 시 대처 설정</string>
     <string name="drawer_list_app_theme">앱 테마 설정</string>
     <string name="drawer_list_logout">로그아웃</string>
+    <string name="drawer_list_settings">설정</string>
     <string name="temp_user_name">김건국</string>
 </resources>

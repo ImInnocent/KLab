@@ -18,5 +18,5 @@
     <item
         android:id="@+id/item4"
         android:icon="@drawable/ic_keyboard_arrow_right_black_24dp"
-        android:title="@string/drawer_list_logout"/>
+        android:title="@string/drawer_list_settings" />
 </menu>

@@ -58,6 +58,7 @@
     <string name="drawer_list_emergency">Emergency Setting</string>
     <string name="drawer_list_app_theme">App Theme</string>
     <string name="drawer_list_logout">Logout</string>
+    <string name="drawer_list_settings">Settings</string>
     <string name="temp_user_name">Konkuk Kim</string>
     <string name="title_activity_rainy_sound_solution">RainySoundSolution</string>
     <!--
