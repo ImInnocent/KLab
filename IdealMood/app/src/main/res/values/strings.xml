@@ -46,6 +46,8 @@
     <string name="solution_exercise_title">Exercise</string>
     <string name="solution_dance_title">K-Pop Dance !</string>
     <string name="solution_asmr_title">ASMR</string>
+    <string name="solution_rain_title">Rainy Sound</string>
+    <string name="solution_ocean_title">Wind wave Sound</string>
 
     <string name="emo_trash_dialog_title">Write that you want to discard emotion</string>
     <string name="emo_trash_dialog_hint">Insert text...</string>
@@ -57,4 +59,10 @@
     <string name="drawer_list_app_theme">App Theme</string>
     <string name="drawer_list_logout">Logout</string>
     <string name="temp_user_name">Konkuk Kim</string>
+    <string name="title_activity_rainy_sound_solution">RainySoundSolution</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 </resources>

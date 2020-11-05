@@ -22,8 +22,11 @@ class SolutionFragment : Fragment() {
             R.string.solution_deep_breath_title,
             R.string.solution_exercise_title,
             R.string.solution_dance_title,
-            R.string.solution_asmr_title)  // data 추가 예정
-    val solList = arrayOf<AppCompatActivity>(MeditationSolution(), DeepBreathSolution())
+            R.string.solution_asmr_title,
+            R.string.solution_rain_title,
+            R.string.solution_ocean_title)  // data 추가 예정
+    val solList = arrayOf<AppCompatActivity>(MeditationSolution(), DeepBreathSolution(), AppCompatActivity(),
+                                            AppCompatActivity(), AppCompatActivity())
     lateinit var madapter: MyAdapter
 
     override fun onCreateView(

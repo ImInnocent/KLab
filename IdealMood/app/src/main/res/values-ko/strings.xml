@@ -46,6 +46,8 @@
     <string name="solution_exercise_title">운동</string>
     <string name="solution_dance_title">아이돌 댄스 !</string>
     <string name="solution_asmr_title">ASMR</string>
+    <string name="solution_rain_title">빗소리 듣기</string>
+    <string name="solution_ocean_title">파도 소리 듣기</string>
 
     <string name="emo_trash_dialog_title">감정을 직셩하면 감정 쓰레기통으로 보내집니다.</string>
     <string name="emo_trash_dialog_hint">내용을 입력해 주세요</string>
