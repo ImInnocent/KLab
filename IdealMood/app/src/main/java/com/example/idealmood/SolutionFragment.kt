@@ -24,9 +24,12 @@ class SolutionFragment : Fragment() {
             R.string.solution_dance_title,
             R.string.solution_asmr_title,
             R.string.solution_rain_title,
-            R.string.solution_ocean_title)  // data 추가 예정
+            R.string.solution_ocean_title,
+            R.string.solution_firewall_title,
+            R.string.solution_classic_title)  // data 추가 예정
     val solList = arrayOf<AppCompatActivity>(MeditationSolution(), DeepBreathSolution(), AppCompatActivity(),
-                                            AppCompatActivity(), AppCompatActivity(), RainySoundSolution(), WaveSoundSolution())
+                                            AppCompatActivity(), AppCompatActivity(), RainySoundSolution(), WaveSoundSolution(),
+                                            FirewallSoundSolution(), AppCompatActivity())
     lateinit var madapter: MyAdapter
 
     override fun onCreateView(
@@ -71,7 +74,7 @@ class SolutionFragment : Fragment() {
                     val i = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=asmr"))
                     startActivity(i)
                 }
-                else if (position == 7) {
+                else if (position == 8) {
                     var i = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=classical+music"))
                     startActivity(i)
                 }

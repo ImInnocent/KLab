@@ -16,7 +16,8 @@ import kotlin.properties.Delegates
 
 class MyMusicService : Service() {
     var myPlayer :MediaPlayer? = null
-    val screenList = arrayOf<AppCompatActivity>(RainySoundSolution(), WaveSoundSolution())
+    val screenList = arrayOf<AppCompatActivity>(RainySoundSolution(), WaveSoundSolution(),
+                                                                        FirewallSoundSolution())
     //var mActivityMessenger :Messenger ?= null
 
     /*companion object {
@@ -66,6 +67,7 @@ class MyMusicService : Service() {
         var music = when (playIdx){
             0 -> R.raw.rainysound
             1 -> R.raw.oceanwavesound
+            2 -> R.raw.firewoodsound
             else -> null
         }
 

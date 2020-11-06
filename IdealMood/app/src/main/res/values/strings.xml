@@ -48,6 +48,8 @@
     <string name="solution_asmr_title">ASMR</string>
     <string name="solution_rain_title">Rainy Sound</string>
     <string name="solution_ocean_title">Wind wave Sound</string>
+    <string name="solution_firewall_title">Firwall Sound</string>
+    <string name="solution_classic_title">Listen to Classical Music</string>
 
     <string name="emo_trash_dialog_title">Write that you want to discard emotion</string>
     <string name="emo_trash_dialog_hint">Insert text...</string>

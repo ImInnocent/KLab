@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FirewallSoundSolution">
+
+    <ImageView
+        android:id="@+id/fireImg"
+        android:layout_width="1000dp"
+        android:layout_height="500dp"
+        android:src="@drawable/campfire2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/fire_playBtn"
+        android:layout_width="180dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="15dp"
+        android:background="#BFB7E6"
+        android:text="PLAY/STOP ♬"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fireImg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

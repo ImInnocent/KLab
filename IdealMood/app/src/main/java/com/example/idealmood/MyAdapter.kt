@@ -18,7 +18,7 @@ class MyAdapter(val items: Array<String>)
     var itemClickListener: OnItemClickListener ?= null
     val imgArr = arrayOf<Int>(R.drawable.meditation, R.drawable.deepbreath, R.drawable.exercise,
                                             R.drawable.kpopdance, R.drawable.asmr, R.drawable.rain,
-                                            R.drawable.ocean) // data 추가 예정
+                                            R.drawable.ocean, R.drawable.campfire, R.drawable.classicalmusic) // data 추가 예정
 
     inner class MyViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
         var solutionTxt: TextView = itemView.findViewById(R.id.solutionText)    // 솔루션 하나하나 버튼
