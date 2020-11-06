@@ -45,7 +45,6 @@ class DeviceScanActivity: AppCompatActivity() {
 
     private var mScanning: Boolean = false
     private var arrayDevices = ArrayList<BluetoothDevice>()
-    private var tempDevices = ArrayList<String>()
     private val handler = Handler()
     private lateinit var recyclerViewAdapter: RvAdapter
 
@@ -61,7 +60,11 @@ class DeviceScanActivity: AppCompatActivity() {
         override fun onScanResult(callbackType: Int, result: ScanResult?) {
             super.onScanResult(callbackType, result)
             result?.let {
+                if (it.device.name != null) {
+                    toast(it.device.name)
+                }
                 if (!arrayDevices.contains(it.device)) {
+
                     arrayDevices.add(it.device)
                     recyclerViewAdapter.notifyDataSetChanged()
                 }
@@ -89,6 +92,7 @@ class DeviceScanActivity: AppCompatActivity() {
         }
     }
 
+    // 스캔 버튼을 눌렀을 때 호출되는 것
     private fun scanLeDevice(enable: Boolean) {
         when(enable) {
             true -> {
@@ -106,29 +110,11 @@ class DeviceScanActivity: AppCompatActivity() {
                     searchButton.text = "Search"
                 }, SCAN_PERIOD)
 
-                // delete
-                handler.postDelayed({
-                    tempDevices.add("5D:A3:CE:86:61:D3")
-                    recyclerViewAdapter.notifyDataSetChanged()
-                }, 300)
-
-                // delete
-                handler.postDelayed({
-                    tempDevices.add("KocoaFab_BLE")
-                    recyclerViewAdapter.notifyDataSetChanged()
-                }, 1000)
-
-                // delete
-                handler.postDelayed({
-                    tempDevices.add("17:15:19:A2:DE:53")
-                    recyclerViewAdapter.notifyDataSetChanged()
-                }, 2000)
-
                 // start scanning and if found, postDelayed called
                 mScanning = true
 
-                tempDevices.clear()
-//                arrayDevices.addAll(BluetoothAdapter.getDefaultAdapter().bondedDevices)
+                arrayDevices.clear()
+                arrayDevices.addAll(BluetoothAdapter.getDefaultAdapter().bondedDevices)
 
                 bluetoothAdapter?.bluetoothLeScanner?.startScan(scanCallback)
 
@@ -147,16 +133,16 @@ class DeviceScanActivity: AppCompatActivity() {
 
     private fun selectDevice(address: String) {
         // need fix
-        DataManager.getInstance().isStarted = true
-        DataManager.getInstance().heartBeat = 100
-        finish()
+//        DataManager.getInstance().isStarted = true
+//        DataManager.getInstance().heartBeat = 100
+//        finish()
 
-//        val intent = Intent(this, DeviceControlActivity::class.java)
-//        intent.putExtra("address", address)
-//
-//        if (mScanning) scanLeDevice(false)
-//
-//        startActivity(intent)
+        val intent = Intent(this, DeviceControlActivity::class.java)
+        intent.putExtra("address", address)
+
+        if (mScanning) scanLeDevice(false)
+
+        startActivity(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -172,13 +158,9 @@ class DeviceScanActivity: AppCompatActivity() {
             }
         }
 
-//        recyclerViewAdapter = RvAdapter(this@DeviceScanActivity, arrayDevices) {
-//            toast(it.address)
-//            selectDevice(it.address)
-//        }
-        recyclerViewAdapter = RvAdapter(this@DeviceScanActivity, tempDevices) {
-            toast(it)
-            selectDevice(it)
+        recyclerViewAdapter = RvAdapter(this@DeviceScanActivity, arrayDevices) {
+            toast(it.address)
+            selectDevice(it.address)
         }
 
         val deviceList: RecyclerView = findViewById(R.id.deviceList)

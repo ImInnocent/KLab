@@ -24,10 +24,11 @@ class BluetoothLeService: Service() {
         const val ACTION_GATT_SERVICES_DISCOVERED = "ACTION_GATT_DISCOVERED"
         const val ACTION_DATA_AVAILABLE = "ACTION_DATA_AVAILABLE"
         const val EXTRA_DATA = "EXTRA_DATA"
-        val UUID_DATA_NOTIFY: UUID = UUID.fromString("0000fff1-0000-1000-80000-00805f9b34fb")
-        val UUID_DATA_WRITE: UUID = UUID.fromString("0000fff2-0000-1000-80000-00805f9b34fb")
+
+        val UUID_DATA_NOTIFY: UUID = UUID.fromString("6E400003-B5A3-F393-E0A9-E50E24DCCA9E")
+        val UUID_DATA_WRITE: UUID = UUID.fromString("6E400002-B5A3-F393-E0A9-E50E24DCCA9E")
         val CLIENT_CHARACTERISTIC_CONFIG: UUID
-                = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb")
+                = UUID.fromString("00002902-B5A3-F393-E0A9-E50E24DCCA9E")
 
         const val STATE_DISCONNECTED = 0
         const val STATE_CONNECTING = 1
@@ -157,6 +158,10 @@ class BluetoothLeService: Service() {
     override fun onBind(p0: Intent?): IBinder? = binder
 
     fun connect(address: String): Boolean {
+        val device = bluetoothAdapter.getRemoteDevice(address)
+        bluetoothGatt = device.connectGatt(this, false, gattCallback)
+        connectionState = STATE_CONNECTING
+
         bluetoothGatt?.let {
             if (address == it.device.address) {
                 return if (it.connect()) {
@@ -167,10 +172,6 @@ class BluetoothLeService: Service() {
                 }
             }
         }
-
-        val device = bluetoothAdapter.getRemoteDevice(address)
-        bluetoothGatt = device.connectGatt(this, false, gattCallback)
-        connectionState = STATE_CONNECTING
 
         return true
     }

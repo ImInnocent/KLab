@@ -123,6 +123,12 @@ class DeviceControlActivity: AppCompatActivity() {
 
         updateCallStack("=========== Call Stack ============")
 
+        registerReceiver(gattUpdateReceiver, IntentFilter(BluetoothLeService.ACTION_GATT_CONNECTED).apply {
+            addAction(BluetoothLeService.ACTION_DATA_AVAILABLE)
+            addAction(BluetoothLeService.ACTION_GATT_DISCONNECTED)
+            addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED)
+        })
+
         val gattServiceIntent = Intent(this, BluetoothLeService::class.java)
         bindService(gattServiceIntent, serviceConnection, Context.BIND_AUTO_CREATE)
     }
