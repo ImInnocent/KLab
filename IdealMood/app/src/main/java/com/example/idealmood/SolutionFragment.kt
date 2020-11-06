@@ -71,6 +71,10 @@ class SolutionFragment : Fragment() {
                     val i = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=asmr"))
                     startActivity(i)
                 }
+                else if (position == 7) {
+                    var i = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/results?search_query=classical+music"))
+                    startActivity(i)
+                }
                 else {
                     val i = Intent(requireContext(), solList[position]::class.java)
                     startActivity(i)
