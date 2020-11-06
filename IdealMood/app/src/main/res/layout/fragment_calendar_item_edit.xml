@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".CalendarItemEditFragment"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="오늘의 기분 기록"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:id="@+id/worst"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/one"
+            />
+
+        <Button
+            android:id="@+id/bad"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/two" />
+
+        <Button
+            android:id="@+id/soso"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/three" />
+
+        <Button
+            android:id="@+id/good"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/four" />
+
+        <Button
+            android:id="@+id/best"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/five" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

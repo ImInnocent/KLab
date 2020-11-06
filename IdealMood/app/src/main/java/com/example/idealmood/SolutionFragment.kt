@@ -26,7 +26,7 @@ class SolutionFragment : Fragment() {
             R.string.solution_rain_title,
             R.string.solution_ocean_title)  // data 추가 예정
     val solList = arrayOf<AppCompatActivity>(MeditationSolution(), DeepBreathSolution(), AppCompatActivity(),
-                                            AppCompatActivity(), AppCompatActivity())
+                                            AppCompatActivity(), AppCompatActivity(), RainySoundSolution(), WaveSoundSolution())
     lateinit var madapter: MyAdapter
 
     override fun onCreateView(
