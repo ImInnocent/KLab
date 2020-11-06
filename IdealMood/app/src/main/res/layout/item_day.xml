@@ -26,7 +26,6 @@
             android:id="@+id/daystatus"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/one"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -37,7 +36,6 @@
             android:id="@+id/badge"
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:src="@drawable/one"
             app:layout_constraintStart_toEndOf="@id/daystatus"
             app:layout_constraintTop_toTopOf="parent" />
 
