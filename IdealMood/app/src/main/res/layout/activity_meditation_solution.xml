@@ -6,13 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".MeditationSolution">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="59dp"
-        android:layout_marginTop="89dp"
-        android:text="@string/meditation_title"
+    <ImageView
+        android:id="@+id/mediationImg"
+        android:layout_width="1400dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/meditation2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:shadowColor="#FFFFFF"
+            android:text="@string/meditation_text"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_marginTop="80dp"/>
+
+        <Button
+            android:id="@+id/medi_backBtn"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="170dp"
+            android:layout_marginTop="550dp"
+            android:background="#FFFFFF"
+            android:text="@string/meditation_title"
+            android:textSize="20sp" />
+
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

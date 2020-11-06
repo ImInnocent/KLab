@@ -52,7 +52,8 @@
     <string name="emo_trash_dialog_title">감정을 직셩하면 감정 쓰레기통으로 보내집니다.</string>
     <string name="emo_trash_dialog_hint">내용을 입력해 주세요</string>
     <string name="emo_trash_deleted_title">감정 쓰레기통 삭제 목록</string>
-    <string name="meditation_title">솔루션 화면 예시 타이틀</string>
+    <string name="meditation_title">명상 종료</string>
+    <string name="meditation_text">자세를 바르게 하고, 눈을 감으세요. 생각을 비우세요.</string>
 
     <string name="drawer_list_device_push">디바이스 / 앱 푸시알림</string>
     <string name="drawer_list_emergency">응급 상황 시 대처 설정</string>

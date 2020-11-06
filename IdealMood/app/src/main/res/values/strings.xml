@@ -52,7 +52,8 @@
     <string name="emo_trash_dialog_title">Write that you want to discard emotion</string>
     <string name="emo_trash_dialog_hint">Insert text...</string>
     <string name="emo_trash_deleted_title">Delete emo trash list</string>
-    <string name="meditation_title">Solution test Text</string>
+    <string name="meditation_title">Finish meditation</string>
+    <string name="meditation_text">Straighten your posture, close your eyes. Empty your mind.</string>
 
     <string name="drawer_list_device_push">Device / App Push</string>
     <string name="drawer_list_emergency">Emergency Setting</string>
