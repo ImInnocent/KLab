@@ -54,7 +54,8 @@ class EmotionFragment : Fragment() {
 
         blueConnectBtn.setOnClickListener {
             activity?.let{
-                val intent = Intent (it, DeviceScanActivity::class.java)
+//                val intent = Intent (it, DeviceScanActivity::class.java)
+                val intent = Intent (it, BluetoothConnectActivity::class.java)
                 it.startActivity(intent)
             }
         }
