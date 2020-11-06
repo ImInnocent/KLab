@@ -20,21 +20,20 @@ import java.io.*
 import java.util.*
 
 open class BluetoothConnectActivity : AppCompatActivity() {
-    var mTvBluetoothStatus: TextView? = null
-    var mTvReceiveData: TextView? = null
-    var mTvSendData: TextView? = null
-    var mBtnBluetoothOn: Button? = null
-    var mBtnBluetoothOff: Button? = null
-    var mBtnConnect: Button? = null
-    var mBtnSendData: Button? = null
-    var mBluetoothAdapter: BluetoothAdapter? = null
-    var mPairedDevices: Set<BluetoothDevice>? = null
-    var mListPairedDevices: MutableList<String>? = null
-    var mBluetoothHandler: Handler? = null
-    private var mThreadConnectedBluetooth: ConnectedBluetoothThread? =
-        null
-    var mBluetoothDevice: BluetoothDevice? = null
-    var mBluetoothSocket: BluetoothSocket? = null
+    private var mTvBluetoothStatus: TextView? = null
+    private var mTvReceiveData: TextView? = null
+    private var mTvSendData: TextView? = null
+    private var mBtnBluetoothOn: Button? = null
+    private var mBtnBluetoothOff: Button? = null
+    private var mBtnConnect: Button? = null
+    private var mBtnSendData: Button? = null
+    private var mBluetoothAdapter: BluetoothAdapter? = null
+    private var mPairedDevices: Set<BluetoothDevice>? = null
+    private var mListPairedDevices: MutableList<String>? = null
+    private var mBluetoothHandler: Handler? = null
+    private var mThreadConnectedBluetooth: ConnectedBluetoothThread? = null
+    private var mBluetoothDevice: BluetoothDevice? = null
+    private var mBluetoothSocket: BluetoothSocket? = null
 
     protected override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +65,8 @@ open class BluetoothConnectActivity : AppCompatActivity() {
                     } catch (e: UnsupportedEncodingException) {
                         e.printStackTrace()
                     }
+                    toast(readMessage!!)
+                    DataManager.getInstance().addHeartBeat(readMessage!!.filter { it.isDigit() }.toInt())
                     mTvReceiveData!!.text = readMessage
                 }
             }
@@ -173,13 +174,13 @@ open class BluetoothConnectActivity : AppCompatActivity() {
         private val mmOutStream: OutputStream?
 
         override fun run() {
-            val buffer = ByteArray(1024)
             var bytes: Int
             while (true) {
                 try {
                     bytes = mmInStream!!.available()
                     if (bytes != 0) {
                         SystemClock.sleep(100)
+                        val buffer = ByteArray(1024)
                         bytes = mmInStream.available()
                         bytes = mmInStream.read(buffer, 0, bytes)
                         mBluetoothHandler!!.obtainMessage(
