@@ -7,6 +7,8 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
     companion object {
@@ -14,58 +16,89 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
         val DB_NAME = "idealmood_record.db"
 
         // 심박수 테이블
-        val HB_TABLE_NAME = "heartbeat"
-        val HB_PID = "pid"
-        val HB_PHEARTBEAT = "pheartbeat"
-        val HB_PDATE = "pdate"
+        val HB_TABLE_NAME = "heartbeat" // 테이블명
+        val HB_PID = "pid"  // 고유 id
+        val HB_PHEARTBEAT = "pheartbeat"    // 심박수
+        val HB_PDATE = "pdate"  // 날짜
 
         //캘린더 테이블
+        val CD_TABLE_NAME = "calendar"
+        val CD_PID = "pid"
+        val CD_PEMOTION = "pemotion"    // 기분 상태 (1~5까지 숫자로 받음)
+        val CD_PSTRESS = "pstress"  // 스트레스 지수
+        val CD_PDATE = "pdate"  // 기록 날짜
 
         // 감쓰 테이블
+        val ET_TABLE_NAME = "emotrash"
+        val ET_PID = "pid"
+        val ET_PTEXT = "ptext"  // 감정일기 내용
+        val ET_PDATE = "pdate"  // 기록 날짜
+        val ET_PISDELETE = "pisdelete"  // 감쓰쓰에 들어갔는지 여부
     }
 
     val HBArray = ArrayList<Int>()
+    val CDArray = ArrayList<MyCalendar>()
 
     override fun onCreate(db: SQLiteDatabase?) {
         // 심박수 테이블 생성
-        val create_table = "create table if not exists $HB_TABLE_NAME (" +
+        val create_HB_table = "create table if not exists $HB_TABLE_NAME (" +
                 "$HB_PID integer primary key autoincrement, " +
                 "$HB_PHEARTBEAT integer, " +
                 "$HB_PDATE text)"   // autoincrement : 자동 증가
-        db?.execSQL(create_table)    // db 실행, select 구문 제외 insert, delete 등등 실행 가능
+        db?.execSQL(create_HB_table)    // db 실행, select 구문 제외 insert, delete 등등 실행 가능
 
         // 캘린더 테이블 생성
+        val create_CD_table = "create table if not exists $CD_TABLE_NAME (" +
+                "$CD_PID integer primary key autoincrement, " +
+                "$CD_PEMOTION integer, " +
+                "$CD_PSTRESS integer, " +
+                "$CD_PDATE text)"
+        db?.execSQL(create_CD_table)
 
         // 감쓰 테이블 생성
+        val create_ET_table = "create table if not exists $ET_TABLE_NAME (" +
+                "$ET_PID integer primary key autoincrement, " +
+                "$ET_PTEXT text, " +
+                "$ET_PDATE text, " +
+                "$ET_PISDELETE integer)"
+        db?.execSQL(create_CD_table)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         // 버전 정보가 바뀌었을 때
-        val drop_table = "drop table if exists $HB_TABLE_NAME"
-        db?.execSQL(drop_table) // dp 드랍하고
+        val drop_HB_table = "drop table if exists $HB_TABLE_NAME"
+        db?.execSQL(drop_HB_table) // dp 드랍하고
         onCreate(db)    // 다시 만들기
+
+        val drop_CD_table = "drop table if exists $CD_TABLE_NAME"
+        db?.execSQL(drop_CD_table)
+        onCreate(db)
+
+        val drop_ET_table = "drop table if exists $ET_TABLE_NAME"
+        db?.execSQL(drop_ET_table)
+        onCreate(db)
     }
 
 
     /////// 심박수 테이블 관련 함수 ///////
     fun HB_insertData(heartbeat :Int) :Boolean { // INSERT, 삽입 성공 여부
+        val nowDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"))
         val values = ContentValues()
         values.put(HB_PHEARTBEAT, heartbeat)
+        values.put(HB_PDATE, nowDate)
         val db=this.writableDatabase    // DB table 객체 획득
-        if(db.insert(HB_TABLE_NAME, null, values) > 0) { // insert가 제대로 안 되었을 경우 -1 반환
+        return if(db.insert(HB_TABLE_NAME, null, values) > 0) { // insert가 제대로 안 되었을 경우 -1 반환
             db.close()
-            return true
-        }
-        else {
+            true
+        } else {
             db.close()
-            return false
+            false
         }
     }
 
     // 쓸 일이 있을까? 싶지만 만들어보는 심박수 데이터 삭제 함수 (날짜 기준)
     fun HB_deleteData(pdate :String) :Boolean {
-        val strsql = "select * from $HB_TABLE_NAME where " +
-                "$HB_PDATE = \'$pdate\'"
+        val strsql = "select * from $HB_TABLE_NAME where $HB_PDATE = \'$pdate\'"
         val db = this.writableDatabase
         val cursor = db.rawQuery(strsql, null)
         if(cursor.count != 0) { // 무언가를 가지고 옴
@@ -100,6 +133,62 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
         do {
             HBArray.add(cursor.getInt(1))
             Log.i("심박수 데이터 목록 : ", cursor.getInt(1).toString())
+        } while(cursor.moveToNext())
+    }
+
+
+    ///// 캘린더 테이블 관련 함수 /////
+    fun CD_insertData(calendar: MyCalendar) :Boolean {
+        val values = ContentValues()
+        values.put(CD_PEMOTION, calendar.emotion)
+        values.put(CD_PSTRESS, calendar.stress)
+        values.put(CD_PDATE, calendar.date)
+        val db=this.writableDatabase    // DB table 객체 획득
+        return if(db.insert(CD_TABLE_NAME, null, values) > 0) { // insert가 제대로 안 되었을 경우 -1 반환
+            db.close()
+            true
+        } else {
+            db.close()
+            false
+        }
+    }
+
+    fun CD_deleteData(pdate :String) :Boolean {
+        val strsql = "select * from $CD_TABLE_NAME where $CD_PDATE = \'$pdate\'"
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(strsql, null)
+
+        if(cursor.count != 0) { // 무언가를 가지고 옴
+            db.delete(CD_TABLE_NAME, "$CD_PDATE =? ", arrayOf(pdate)) // or PIR + " = " + pid
+            cursor.close()
+            db.close()
+            return true
+        }
+        else {
+            cursor.close()
+            db.close()
+            return false
+        }
+    }
+
+    fun CD_getAllRecord() {
+        CDArray.clear()
+        val strsql = "select * from $CD_TABLE_NAME"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(strsql, null)
+        if (cursor.count != 0) { // 무언가를 가지고 옴
+            CD_getOneRecord(cursor)
+        }
+        cursor.close()
+        db.close()
+    }
+
+    private fun CD_getOneRecord(cursor :Cursor) {
+        cursor.moveToFirst()
+        do {
+            CDArray.add(MyCalendar(cursor.getInt(1), cursor.getInt(2), cursor.getString(3)))
+            // 실제 캘린더뷰에 갱신
+            Log.i("캘린더 데이터 목록 : ", cursor.getInt(1).toString())
         } while(cursor.moveToNext())
     }
 }
