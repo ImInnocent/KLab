@@ -63,4 +63,9 @@
     <string name="drawer_list_logout">로그아웃</string>
     <string name="drawer_list_settings">설정</string>
     <string name="temp_user_name">김건국</string>
+
+    <string name="emotrash_item_title">감정쓰레기통 아이템 상자</string>
+    <string name="emotrash_item_contentstitle">내용</string>
+    <string name="emotrash_item_datetitle">작성일자</string>
+
 </resources>
