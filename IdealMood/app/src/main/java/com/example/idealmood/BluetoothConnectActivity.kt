@@ -45,6 +45,7 @@ open class BluetoothConnectActivity : AppCompatActivity() {
         mBtnBluetoothOff = findViewById<Button>(R.id.btnBluetoothOff)
         mBtnConnect = findViewById<Button>(R.id.btnConnect)
         mBtnSendData = findViewById<Button>(R.id.btnSendData)
+
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
         mBtnBluetoothOn!!.setOnClickListener { bluetoothOn() }
         mBtnBluetoothOff!!.setOnClickListener { bluetoothOff() }
@@ -55,6 +56,7 @@ open class BluetoothConnectActivity : AppCompatActivity() {
                 mTvSendData!!.text = ""
             }
         }
+
         mBluetoothHandler = @SuppressLint("HandlerLeak")
         object : Handler() {
             override fun handleMessage(msg: Message) {
@@ -65,8 +67,11 @@ open class BluetoothConnectActivity : AppCompatActivity() {
                     } catch (e: UnsupportedEncodingException) {
                         e.printStackTrace()
                     }
-                    toast(readMessage!!)
-                    DataManager.getInstance().addHeartBeat(readMessage!!.filter { it.isDigit() }.toInt())
+
+                    val filteredMsg: String = readMessage!!.filter { it.isDigit() }
+                    toast(readMessage)
+                    if (filteredMsg.isNotEmpty())
+                        DataManager.getInstance().addHeartBeat(filteredMsg.toInt())
                     mTvReceiveData!!.text = readMessage
                 }
             }
@@ -162,6 +167,7 @@ open class BluetoothConnectActivity : AppCompatActivity() {
             mThreadConnectedBluetooth!!.start()
             mBluetoothHandler!!.obtainMessage(BT_CONNECTING_STATUS, 1, -1)
                 .sendToTarget()
+            DataManager.getInstance().isStarted = true
         } catch (e: IOException) {
             Toast.makeText(applicationContext, "블루투스 연결 중 오류가 발생했습니다.", Toast.LENGTH_LONG)
                 .show()
@@ -179,7 +185,7 @@ open class BluetoothConnectActivity : AppCompatActivity() {
                 try {
                     bytes = mmInStream!!.available()
                     if (bytes != 0) {
-                        SystemClock.sleep(100)
+                        SystemClock.sleep(1000)
                         val buffer = ByteArray(1024)
                         bytes = mmInStream.available()
                         bytes = mmInStream.read(buffer, 0, bytes)

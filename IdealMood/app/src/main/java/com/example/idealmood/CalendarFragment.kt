@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,24 +20,20 @@ import java.util.*
 /**
  * A simple [Fragment] subclass.
  */
-class CalendarFragment : Fragment() {
+class CalendarFragment : Fragment() , CalendarItemEditFragment.OnStateSelectedListener{
 
     lateinit var adapter:CalendarAdapter
+
+    var selectedGrid = 0    //선택하면 해당 그리드로 포커스.
+
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
 
-        /*childFragmentManager.setResultListener("requestKey") { key, bundle ->
-            val result = bundle.getInt("bundleKey")
-            when(result){
-                1 -> daystatus.setImageResource(R.drawable.one)
-                2 -> daystatus.setImageResource(R.drawable.two)
-                3 -> daystatus.setImageResource(R.drawable.three)
-                4 -> daystatus.setImageResource(R.drawable.four)
-                5 -> daystatus.setImageResource(R.drawable.five)
-            }
+        /*
+
         }*/
 
         adapter = CalendarAdapter(this)
@@ -47,8 +44,9 @@ class CalendarFragment : Fragment() {
                 view: View,
                 position: Int
             ) {
-                Toast.makeText(activity, position.toString(), Toast.LENGTH_SHORT).show()
-                CalendarItemEditFragment().show(fragmentManager!!, "calendarFragFrag")
+                //Toast.makeText(activity, position.toString(), Toast.LENGTH_SHORT).show()
+                CalendarItemEditFragment().show(childFragmentManager!!, "calendarFragFrag")
+                selectedGrid = position
             }
 
         }
@@ -80,6 +78,23 @@ class CalendarFragment : Fragment() {
     fun refreshCurrentMonth(calendar: Calendar) {
         val sdf = SimpleDateFormat("yyyy MM", UtilManager.currentLocale())
         currMonth.text = sdf.format(calendar.time)
+    }
+
+    override fun OnStateSelectedListener(stat: Int) {
+        //stat값으로 얼굴 모양 바꾸게 하기.(NestedFragment로부터data전송받음)
+        var nowView = rcyCalendarView.layoutManager?.findViewByPosition(selectedGrid);
+        var StatValue = nowView?.findViewById<ImageView>(R.id.daystatus)
+
+        when(stat){
+            
+            //database query추가 지역
+            1 -> {System.out.println("1");  StatValue?.setImageResource(R.drawable.one);}
+            2 -> {System.out.println("2");  StatValue?.setImageResource(R.drawable.two);}
+            3 -> {System.out.println("3");  StatValue?.setImageResource(R.drawable.three);}
+            4 -> {System.out.println("4");  StatValue?.setImageResource(R.drawable.four);}
+            5 -> {System.out.println("5");  StatValue?.setImageResource(R.drawable.five);}
+        }
+
     }
 
 }

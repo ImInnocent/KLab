@@ -24,27 +24,54 @@ class StatisticsFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val dataObjects:Array<Float> = Array(5, {i -> i.toFloat()})
+        val dataObjects:Array<Float> = Array(7, {i -> i.toFloat()})
         var lists:MutableList<Entry> = ArrayList<Entry>();
         for( i in dataObjects){
 
             //dataObject객체를 내 타입(List타입) 객체로 변환
             //list.add(new Entry(data.getValueX(), data.getValueY())
-            lists.add(Entry(i.toFloat(), (Math.random() * 10).toFloat()))
+            lists.add(Entry(i.toFloat(), (Math.random() * 40 + 60).toFloat()))
 
         }
 
-        //add "lists" to dataset
-        var dataSet = LineDataSet(lists, "DataSet 1")
-        dataSet.color = Color.BLUE
-        //dataSet.setValueTextColor();
 
+        val xAxis = lineChart.xAxis //lineChart의 x출
+        xAxis.apply{
+
+            setDrawGridLines(false)
+
+        }
+
+        lineChart.apply {
+            isEnabled = false
+            axisRight.isEnabled = false
+            axisLeft.axisMinimum = 60f
+            axisLeft.axisMaximum = 100f
+
+        }
+
+
+        //add "lists" to dataset
+        var dataSet = LineDataSet(lists, "Stress")
+        //dataSet.setValueTextColor();
+        dataSet.apply {
+            axisDependency = YAxis.AxisDependency.LEFT //y값 데이터 왼쪽
+            color = resources.getColor(R.color.CDarkGreen) //라인 색 지정
+            setCircleColor(resources.getColor(R.color.CDarkGreen))
+            lineWidth = 2f
+            circleRadius = 3f
+            fillAlpha = 0
+            setDrawValues(true) //값 명시.
+        }
 
         var lineData:LineData = LineData(dataSet)
 
-        //lineData에 값이 없다고 나오는데?? -> logcat찍어보니까 또  NULL은 아니라고 나오는데 머야
+
         lineChart.data = lineData
         lineChart.invalidate()
+
+
+        //분석 텍스트박스 : id/emotionAnalysis
     }
 
     override fun onCreateView(
@@ -53,12 +80,27 @@ class StatisticsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-
-
         return inflater.inflate(R.layout.fragment_statistics, container, false)
     }
 
+    //[Data 표시]
+    //1일 단위로 갱신되는 평균 수치를 그래프로 찍도록 함.
+    //한눈에 볼 수 있는 data 갯수는 일당 평균값 일주일치(7개) 정도.
+    //따라서 가로축은 변수 value는 표시되지 않도록 하고 세로축은 60~110 정도 범위로 표시되도록 함.
 
 
+    //[분석 결과 표시]
+    //분석 결과는 연령에 따라 개인화된 추천 정보를 제시한다.
+    //ex) 50대 남성의 경우에는 심박수의 급격한 변화에 따라 질환 주의 멘트를 넣는다.
+    //
+
+
+    //[스트레스 수치 temp]
+    //10초마다 측정된다고 하면 오늘부터 지금까지의 측정횟수 : n회 지금까지의 평균 : m
+    //현재 측정 값 : a    -> 새로운 측정횟수 : n + 1 / 지금까지의 평균 : ((n * m) + a)/(n + 1)로 갱신
+    //데이터베이스에 평균 값, 임계 넘은 횟수 이렇게 하루 2개씩 저장됨
+    //임계넘은 횟수 정의 : 임계 수치(_ex]전체 평균스트레스 수치의 120%로 정한다고 하자.) 를 넘기 시작한 순간부터 임계수치보다 낮아지기까지의 구간을 포함해 1회로 한다.
+    //단 구간의 지속 시간이 너무 짧을 시 포함하지 않는걸로 횟수가 필요이상으로 많이 측정되는 상황을 피한다.
+    
 
 }

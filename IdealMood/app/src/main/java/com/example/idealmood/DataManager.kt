@@ -5,9 +5,12 @@ class DataManager private constructor() {
     var heartBeat: Int = 100
     var heartBeats: MutableList<Int> = mutableListOf<Int>() // 심박수를 10개씩 받아오기
     var records: MutableList<String> = mutableListOf<String>()  // 그 중 6개만 string형태로 조합
+    var lastHeartBeat: Int = 0
 
     public fun addHeartBeat(hb: Int) {
         heartBeats.add(hb)
+        lastHeartBeat = hb
+
         if (heartBeats.size >= MAX_COUNT) {
             var listForRecord = heartBeats.subList(0, DIVISION_COUNT)   // 전체 저장값중 6개만 자르기
             records.add(listForRecord.joinToString())         // 레코드에 저장

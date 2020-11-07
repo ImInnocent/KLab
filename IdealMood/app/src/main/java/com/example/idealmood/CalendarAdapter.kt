@@ -62,6 +62,9 @@ class CalendarAdapter(val frag:CalendarFragment) : RecyclerView.Adapter<Calendar
             holder.item_date.alpha = 1f
         }
         holder.item_date.text = baseCalendar.data[position].toString()
+
+        //여기서 database검사해서 전체 달력에 보여주는 쿼리 작성.
+
     }
 
     fun changeToPrevMonth() {
@@ -75,5 +78,7 @@ class CalendarAdapter(val frag:CalendarFragment) : RecyclerView.Adapter<Calendar
             refreshView(it)
         }
     }
+
+
 
 }
