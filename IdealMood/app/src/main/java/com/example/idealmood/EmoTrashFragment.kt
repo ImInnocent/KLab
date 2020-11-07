@@ -51,7 +51,8 @@ class EmoTrashFragment : Fragment() {
                 data: emoTrashData,
                 position: Int
             ) {
-                Toast.makeText(context, "내용까지 보여주는 팝업 뷰 생성 필요", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(context, "내용까지 보여주는 팝업 뷰 생성 필요", Toast.LENGTH_SHORT).show()
+                EmoTrashItemFragment(array[position]).show(fragmentManager!!, "emotrashitem")
             }
 
         }
