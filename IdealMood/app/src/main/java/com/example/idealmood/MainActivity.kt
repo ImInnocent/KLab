@@ -7,6 +7,7 @@ import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -37,6 +38,10 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         // slide animation 추가
         //this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right)
+
+
+        // 네비게이션 세팅
+        navView.getHeaderView(0).findViewById<TextView>(R.id.navHeaderName).text = UserInfo.name ?: "김건국"
 
         var thread = Thread(Runnable {
             while (true) {

@@ -25,7 +25,13 @@ class DrawerSetting : AppCompatDialogFragment() {
         var builder:AlertDialog.Builder = AlertDialog.Builder(activity!!)
 
         builder.setView(myView)
-        builder.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
+        builder.setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+            run {
+                if (drawerSettingName.text.isNotEmpty())
+                    UserInfo.set(UserInfo.NAME, drawerSettingName.text)
+                dialog.dismiss()
+            }
+        })
 
         return builder.create()
 
