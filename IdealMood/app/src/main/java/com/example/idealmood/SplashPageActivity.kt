@@ -11,8 +11,17 @@ class SplashPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_page)
 
+        // 첫 실행되는 액티비티에 있어야 합니다.
+        // 시작 엑티비티가 바뀌면 이 코드도 옮겨주세요
+        GlobalContext.setContext(this)
+
         Handler().postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
+            val intent: Intent = if (UserInfo.has(UserInfo.NAME_PASSED) && UserInfo.get(UserInfo.NAME_PASSED) == true) {
+                Intent(this,  MainActivity::class.java)
+            } else {
+                Intent(this,  InitNameActivity::class.java)
+            }
+
             startActivity(intent)
         }, 2000)
 
