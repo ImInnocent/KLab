@@ -28,7 +28,7 @@
     <string name="emotion_title_compare_yesterday">전일 대비 분노 횟수</string>
     <string name="emotion_title_compare_yesterday_value">-3 회</string>
     <string name="emotion_title_heart_bpm">심박수</string>
-    <string name="statistics_title">-분석 결과-</string>
+    <string name="statistics_title">[분석 결과]</string>
     <string name="statistics_analysis_report_text">분석 결과 내용입니다.</string>
     <string name="deep_breath_title">천천히 심호흡하세요.</string>
     <string name="btn_go_back">← 뒤로 가기</string>

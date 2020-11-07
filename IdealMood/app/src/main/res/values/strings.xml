@@ -28,7 +28,7 @@
     <string name="emotion_title_compare_yesterday">Today compare with yesterday</string>
     <string name="emotion_title_compare_yesterday_value">-3 time(s)</string>
     <string name="emotion_title_heart_bpm">Heartbeat</string>
-    <string name="statistics_title">-Analysis Report-</string>
+    <string name="statistics_title">[Analysis Report]</string>
     <string name="statistics_analysis_report_text">Analysis results.</string>
     <string name="deep_breath_title">Breath Deep</string>
     <string name="btn_go_back">← Back</string>
