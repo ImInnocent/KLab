@@ -35,7 +35,7 @@
 
     <string name="emotion_off_measure">정말 측정을 그만두시겠어요?</string>
     <string name="emotion_on_measure">측정을 다시 시작하시겠어요?</string>
-    <string name="emotion_title_heart_bpm_number">%1d rpm</string>
+    <string name="emotion_title_heart_bpm_number">%1d bpm</string>
 
     <string name="bottom_navi_solution">솔루션</string>
     <string name="bottom_navi_emotion">내 감정</string>

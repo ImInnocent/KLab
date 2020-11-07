@@ -2,12 +2,14 @@ package com.example.idealmood
 
 class DataManager private constructor() {
     var isStarted: Boolean = false
-    var heartBeat: Int = 100
+    var lastHeartBeat: Int = 0
     var heartBeats: MutableList<Int> = mutableListOf<Int>()
     var records: MutableList<String> = mutableListOf<String>()
 
     public fun addHeartBeat(hb: Int) {
         heartBeats.add(hb)
+        lastHeartBeat = hb
+
         if (heartBeats.size >= MAX_COUNT) {
             var listForRecord = heartBeats.subList(0, DIVISION_COUNT)
             records.add(listForRecord.joinToString())         // 레코드에 저장

@@ -35,7 +35,7 @@
 
     <string name="emotion_off_measure">Are you sure to stop measure?</string>
     <string name="emotion_on_measure">Are you sure to restart measure?</string>
-    <string name="emotion_title_heart_bpm_number">%1d rpm</string>
+    <string name="emotion_title_heart_bpm_number">%1d bpm</string>
 
     <string name="bottom_navi_solution">Solution</string>
     <string name="bottom_navi_emotion">My Emo</string>
