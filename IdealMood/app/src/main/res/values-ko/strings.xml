@@ -6,6 +6,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="init_name_skip">넘어가기</string>
+    <string name="init_name_confirm">확인</string>
+    <string name="init_name_edit_name">이름</string>
+    <string name="init_name_text1">나는</string>
+    <string name="init_name_text2">입니다</string>
+
     <string name="title_activity_device_scan">DeviceScanActivity</string>
     <string name="title_activity_device_control">DeviceControlActivity</string>
 
@@ -21,6 +27,8 @@
     <string name="calender_friday">금</string>
     <string name="calender_saturday">토</string>
     <string name="device_search_nearby">주변 기기 탐색</string>
+
+    <string name="calender_item_title">오늘의 기분 기록</string>
 
     <string name="emotion_title_daily_text">오늘은 어제보다 편안한 하루네요~</string>
     <string name="emotion_title_today_angry_count">금일 분노 횟수</string>
@@ -63,6 +71,13 @@
     <string name="drawer_list_logout">로그아웃</string>
     <string name="drawer_list_settings">설정</string>
     <string name="temp_user_name">김건국</string>
+    <string name="title_activity_rainy_sound_solution">RainySoundSolution</string>
+
+    <string name="theme_setting_title">앱 테마 설정</string>
+    <string name="theme_setting_mint">민트(기본값)</string>
+    <string name="theme_setting_coral">코랄</string>
+    <string name="theme_setting_light_sky_blue">연한 하늘</string>
+    <string name="theme_setting_gray">회색</string>
 
     <string name="emergency_setting_guardian">일정 심박 이상 시 보호자 연락</string>
     <string name="emergency_setting_ambulance">일정 심박 이상 시 구급차 부르기</string>

@@ -6,6 +6,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="init_name_skip">Skip</string>
+    <string name="init_name_confirm">Confirm</string>
+    <string name="init_name_edit_name">Name</string>
+    <string name="init_name_text1">My name is</string>
+    <string name="init_name_text2" />
+
     <string name="title_activity_device_scan">DeviceScanActivity</string>
     <string name="title_activity_device_control">DeviceControlActivity</string>
 
@@ -21,6 +27,8 @@
     <string name="calender_friday">FRI</string>
     <string name="calender_saturday">SAT</string>
     <string name="device_search_nearby">Scan devices nearby</string>
+
+    <string name="calender_item_title">What\'s your emotion today?</string>
 
     <string name="emotion_title_daily_text">Today\'s stress is less than yesterday~</string>
     <string name="emotion_title_today_angry_count">Today\'s anger count</string>
@@ -67,6 +75,11 @@
     <string name="emergency_setting_guardian">If heart rate is abnormal, call to guardian</string>
     <string name="emergency_setting_ambulance">If heart rate is abnormal, call ambulance</string>
 
+    <string name="theme_setting_title">App Theme</string>
+    <string name="theme_setting_mint">Mint(Default)</string>
+    <string name="theme_setting_coral">Coral</string>
+    <string name="theme_setting_light_sky_blue">Light Sky Blue</string>
+    <string name="theme_setting_gray">Gray</string>
 
     <string name="emotrash_item_title">Emotrash Item Box</string>
     <string name="emotrash_item_contentstitle">CONTENTS</string>

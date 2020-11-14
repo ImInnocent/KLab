@@ -18,7 +18,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:layout_marginLeft="15dp"
-            android:text="앱 테마 설정"
+            android:text="@string/theme_setting_title"
             android:textSize="20sp"/>
 
         <Button
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="15dp"
-        android:text="Mint(Default)"
+        android:text="@string/theme_setting_mint"
         android:backgroundTint="@color/colorAccent"/>
 
     <Button
@@ -45,17 +45,15 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="15dp"
-        android:text="Coral"
+        android:text="@string/theme_setting_coral"
         android:backgroundTint="@color/CCoral"/>
-
-
 
     <Button
         android:id="@+id/lightSkyBlueBtn"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="15dp"
-        android:text="LightSkyBlue"
+        android:text="@string/theme_setting_light_sky_blue"
         android:backgroundTint="@color/CLightSkyBlue"/>
 
     <Button
@@ -63,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="15dp"
-        android:text="Gray"
+        android:text="@string/theme_setting_gray"
         android:backgroundTint="@color/CGray"/>
 
 </LinearLayout>
