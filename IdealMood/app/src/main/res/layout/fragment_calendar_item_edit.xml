@@ -12,7 +12,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="오늘의 기분 기록"/>
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:text="@string/calender_item_title"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -23,32 +25,37 @@
             android:id="@+id/worst"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/one"
+            android:background="@drawable/emoji_angry"
+            android:layout_margin="10dp"
             />
 
         <Button
             android:id="@+id/bad"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/two" />
+            android:background="@drawable/emoji_cry"
+            android:layout_margin="10dp" />
 
         <Button
             android:id="@+id/soso"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/three" />
+            android:background="@drawable/emoji_sad"
+            android:layout_margin="10dp" />
 
         <Button
             android:id="@+id/good"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/four" />
+            android:background="@drawable/emoji_good"
+            android:layout_margin="10dp" />
 
         <Button
             android:id="@+id/best"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/five" />
+            android:background="@drawable/emoji_happy"
+            android:layout_margin="10dp" />
 
     </LinearLayout>
 

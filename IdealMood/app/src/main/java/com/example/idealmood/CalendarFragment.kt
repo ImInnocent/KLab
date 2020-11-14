@@ -1,5 +1,6 @@
 package com.example.idealmood
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -26,15 +27,18 @@ class CalendarFragment : Fragment() , CalendarItemEditFragment.OnStateSelectedLi
 
     var selectedGrid = 0    //선택하면 해당 그리드로 포커스.
 
-
+    companion object {
+        val EMOJI:Map<Int, Int> = mapOf(
+            Pair(1, R.drawable.emoji_angry),
+            Pair(2, R.drawable.emoji_cry),
+            Pair(3, R.drawable.emoji_sad),
+            Pair(4, R.drawable.emoji_good),
+            Pair(5, R.drawable.emoji_happy)
+        )
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-
-        /*
-
-        }*/
 
         adapter = CalendarAdapter(this)
         adapter.itemClickListener = object: CalendarAdapter.OnItemClickListener{
@@ -63,8 +67,6 @@ class CalendarFragment : Fragment() , CalendarItemEditFragment.OnStateSelectedLi
         nextMonthBtn.setOnClickListener {
             adapter.changeToNextMonth()
         }
-
-
     }
 
     override fun onCreateView(
@@ -85,16 +87,10 @@ class CalendarFragment : Fragment() , CalendarItemEditFragment.OnStateSelectedLi
         var nowView = rcyCalendarView.layoutManager?.findViewByPosition(selectedGrid);
         var StatValue = nowView?.findViewById<ImageView>(R.id.daystatus)
 
-        when(stat){
-            
-            //database query추가 지역
-            1 -> {System.out.println("1");  StatValue?.setImageResource(R.drawable.one);}
-            2 -> {System.out.println("2");  StatValue?.setImageResource(R.drawable.two);}
-            3 -> {System.out.println("3");  StatValue?.setImageResource(R.drawable.three);}
-            4 -> {System.out.println("4");  StatValue?.setImageResource(R.drawable.four);}
-            5 -> {System.out.println("5");  StatValue?.setImageResource(R.drawable.five);}
-        }
+        // debug
+        println(stat)
 
+        EMOJI[stat]?.let { StatValue?.setImageResource(it) }
     }
 
 }
