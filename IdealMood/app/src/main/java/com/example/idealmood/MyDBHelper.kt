@@ -26,7 +26,7 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
         val CD_PID = "pid"
         val CD_PEMOTION = "pemotion"    // 기분 상태 (1~5까지 숫자로 받음)
         val CD_PSTRESS = "pstress"  // 스트레스 지수
-        val CD_PDATE = "pdate"  // 기록 날짜
+        val CD_PDATE = "pdate"  // 기록 날짜 (yyyy MM (d)d) 형태
 
         // 감쓰 테이블
         val ET_TABLE_NAME = "emotrash"
@@ -90,6 +90,7 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
         values.put(HB_PDATE, nowDate)
         val db=this.writableDatabase    // DB table 객체 획득
         return if(db.insert(HB_TABLE_NAME, null, values) > 0) { // insert가 제대로 안 되었을 경우 -1 반환
+            Log.i("심박 데이터 삽입", heartbeat.toString())
             db.close()
             true
         } else {
@@ -170,6 +171,43 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
             cursor.close()
             db.close()
             return false
+        }
+    }
+
+    fun CD_updateData(pemotion :Int, pdate :String) :Boolean {  // 감정 수정하기
+        val strsql = "select * from $CD_TABLE_NAME where $CD_PDATE = '$pdate'"
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(strsql, null)
+        if(cursor.moveToFirst()) { // 무언가를 가지고 옴
+            val values = ContentValues()
+            values.put(CD_PEMOTION, pemotion)    // 바꾸고자 하는 내용
+            db.update(CD_TABLE_NAME, values, "$CD_PDATE=?", arrayOf(pdate))
+            cursor.close()
+            db.close()
+            return true
+        }
+        else {
+            cursor.close()
+            db.close()
+            return false
+        }
+    }
+
+    fun CD_findOneData(pdate: String) :MyCalendar {
+        val strsql = "select * from $CD_TABLE_NAME where $CD_PDATE = '$pdate'"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(strsql, null)
+        if(cursor.count != 0) { // 무언가를 가지고 옴
+            cursor.moveToFirst()
+            val data = MyCalendar(cursor.getInt(1), cursor.getInt(2), cursor.getString(3))
+            cursor.close()
+            db.close()
+            return data
+        }
+        else {
+            cursor.close()
+            db.close()
+            return MyCalendar(0, 0, "")
         }
     }
 

@@ -24,10 +24,12 @@ import java.util.*
 class CalendarFragment : Fragment() , CalendarItemEditFragment.OnStateSelectedListener{
 
     lateinit var adapter:CalendarAdapter
+    lateinit var myDBHelper :MyDBHelper
 
     var selectedGrid = 0    //선택하면 해당 그리드로 포커스.
+    var myDate = ""   // 선택한 grid의 날짜
 
-    companion object {
+    /*companion object {
         val EMOJI:Map<Int, Int> = mapOf(
             Pair(1, R.drawable.emoji_angry),
             Pair(2, R.drawable.emoji_cry),
@@ -35,22 +37,25 @@ class CalendarFragment : Fragment() , CalendarItemEditFragment.OnStateSelectedLi
             Pair(4, R.drawable.emoji_good),
             Pair(5, R.drawable.emoji_happy)
         )
-    }
+    }*/
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        adapter = CalendarAdapter(this)
+        myDBHelper = MyDBHelper(requireContext())
+        adapter = CalendarAdapter(this, myDBHelper)
         adapter.itemClickListener = object: CalendarAdapter.OnItemClickListener{
 
             override fun OnItemClick(
                 holder: CalendarAdapter.CalViewHolder,
                 view: View,
-                position: Int
+                position: Int,
+                baseCalendar: BaseCalendar
             ) {
                 //Toast.makeText(activity, position.toString(), Toast.LENGTH_SHORT).show()
                 CalendarItemEditFragment().show(childFragmentManager!!, "calendarFragFrag")
                 selectedGrid = position
+                myDate = currMonth.text.toString() + " " + baseCalendar.data[position].toString()
             }
 
         }
@@ -87,10 +92,17 @@ class CalendarFragment : Fragment() , CalendarItemEditFragment.OnStateSelectedLi
         var nowView = rcyCalendarView.layoutManager?.findViewByPosition(selectedGrid);
         var StatValue = nowView?.findViewById<ImageView>(R.id.daystatus)
 
-        // debug
-        println(stat)
+        println(stat)        // debug
+        //EMOJI[stat]?.let { StatValue?.setImageResource(it) }
 
-        EMOJI[stat]?.let { StatValue?.setImageResource(it) }
+        // DB에 삽입
+        if(myDBHelper.CD_findOneData(myDate).emotion == 0) {    // 해당 data가 없으면 insert하기
+            myDBHelper.CD_insertData(MyCalendar(stat, -1, myDate))   // 스트레스 수치는 나중에 추가할 예정임!!!
+        }
+        else {  // 이미 존재할 경우 update하기
+            myDBHelper.CD_updateData(stat, myDate)
+        }
+        adapter.notifyDataSetChanged()
     }
 
 }
