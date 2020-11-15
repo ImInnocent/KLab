@@ -38,6 +38,7 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
 
     val HBArray = ArrayList<Int>()
     val CDArray = ArrayList<MyCalendar>()
+    val ETArray = ArrayList<emoTrashData>()
 
     override fun onCreate(db: SQLiteDatabase?) {
         // 심박수 테이블 생성
@@ -187,6 +188,73 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
         cursor.moveToFirst()
         do {
             CDArray.add(MyCalendar(cursor.getInt(1), cursor.getInt(2), cursor.getString(3)))
+            // 실제 캘린더뷰에 갱신
+            Log.i("캘린더 데이터 목록 : ", cursor.getInt(1).toString())
+        } while(cursor.moveToNext())
+    }
+
+
+    /////// 감정 일기 관련 함수 ///////
+
+    fun ET_insertData(data: emoTrashData) :Boolean {
+        var isDeleteInt :Int = 0
+        if (data.isDelete)  // true일 때
+            isDeleteInt = 1
+        else
+            isDeleteInt = -1
+
+        val values = ContentValues()
+        values.put(ET_PTEXT, data.emoTrashContents)
+        values.put(ET_PDATE, data.date)
+        values.put(ET_PISDELETE, isDeleteInt)
+        val db=this.writableDatabase    // DB table 객체 획득
+        return if(db.insert(ET_TABLE_NAME, null, values) > 0) { // insert가 제대로 안 되었을 경우 -1 반환
+            db.close()
+            true
+        } else {
+            db.close()
+            false
+        }
+    }
+
+    fun ET_deleteData(pdate :String) :Boolean {
+        val strsql = "select * from $ET_TABLE_NAME where $ET_PDATE = '$pdate'"
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(strsql, null)
+
+        if(cursor.count != 0) { // 무언가를 가지고 옴
+            db.delete(ET_TABLE_NAME, "$ET_PDATE =? ", arrayOf(pdate))
+            cursor.close()
+            db.close()
+            return true
+        }
+        else {
+            cursor.close()
+            db.close()
+            return false
+        }
+    }
+
+    fun ET_getAllRecord() {
+        ETArray.clear()
+        val strsql = "select * from $ET_TABLE_NAME"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(strsql, null)
+        if (cursor.count != 0) { // 무언가를 가지고 옴
+            ET_getOneRecord(cursor)
+        }
+        cursor.close()
+        db.close()
+    }
+
+    private fun ET_getOneRecord(cursor :Cursor) {
+        cursor.moveToFirst()
+        do {
+            var isDeleteBool = false
+            if (cursor.getInt(3) == 1)
+                isDeleteBool = true
+            ETArray.add(emoTrashData("", cursor.getString(2), cursor.getString(1),
+                isDeleteBool))
             // 실제 캘린더뷰에 갱신
             Log.i("캘린더 데이터 목록 : ", cursor.getInt(1).toString())
         } while(cursor.moveToNext())
