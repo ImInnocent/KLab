@@ -4,18 +4,23 @@ class DataManager private constructor() {
     var isStarted: Boolean = false
     var heartBeat: Int = 100
     var heartBeats: MutableList<Int> = mutableListOf<Int>() // 심박수를 10개씩 받아오기
-    var records: MutableList<String> = mutableListOf<String>()  // 그 중 6개만 string형태로 조합
+    //var records: MutableList<String> = mutableListOf<String>()  // 그 중 6개만 string형태로 조합
+    var records: String = ""
     var lastHeartBeat: Int = 0
 
-    public fun addHeartBeat(hb: Int) {
+    public fun addHeartBeat(hb: Int) :Boolean { // true : records로 data가 넘어갔을 때
         heartBeats.add(hb)
         lastHeartBeat = hb
 
         if (heartBeats.size >= MAX_COUNT) {
             var listForRecord = heartBeats.subList(0, DIVISION_COUNT)   // 전체 저장값중 6개만 자르기
-            records.add(listForRecord.joinToString())         // 레코드에 저장
+            //records.add(listForRecord.joinToString())         // 레코드에 저장
+            records = listForRecord.joinToString()
             listForRecord.clear()       // heartBeats에서 DIVISION_COUNT개 만큼 제거
+            return true
         }
+        else
+            return false
     }
 
     companion object {
