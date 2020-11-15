@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class emoTrashAdapter(val items:ArrayList<emoTrashData>)
+class emoTrashAdapter(var items:ArrayList<emoTrashData>)
     : RecyclerView.Adapter<emoTrashAdapter.MyemoTrashViewHolder>(){
 
     interface OnItemClickListener{
@@ -20,7 +20,8 @@ class emoTrashAdapter(val items:ArrayList<emoTrashData>)
         var textDateView:TextView = itemView.findViewById(R.id.rowDate)
         init{
             itemView.setOnClickListener {
-                itemClickListener?.OnItemClick(this, it, items[adapterPosition], adapterPosition)
+                val size = items.size - 1   // 가장 최근에 추가한 순서대로 배열하기 위해 (역순)
+                itemClickListener?.OnItemClick(this, it, items[size - adapterPosition], size - adapterPosition)
             }
         }
     }
@@ -35,8 +36,9 @@ class emoTrashAdapter(val items:ArrayList<emoTrashData>)
     }
 
     override fun onBindViewHolder(holder: MyemoTrashViewHolder, position: Int) {
-        holder.textTitleView.text = items[position].title
-        holder.textDateView.text = items[position].date
+        val size = items.size - 1   // 역순(최신순) 배열
+        holder.textTitleView.text = items[size - position].title
+        holder.textDateView.text = items[size - position].date
     }
 
 

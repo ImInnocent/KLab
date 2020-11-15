@@ -28,7 +28,7 @@ class EmoTrashDeletedFragment : AppCompatDialogFragment() {
     var array = ArrayList<emoTrashData>()
     lateinit var adapter:emoTrashAdapter
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+    /*override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
 
@@ -88,10 +88,10 @@ class EmoTrashDeletedFragment : AppCompatDialogFragment() {
 
 
 
-    }
+    }*/
 
 
-    fun putData() {
+    /*fun putData() {
         val file = File(context!!.filesDir, "trashData.txt")
         if(file.exists()){
             val scan = Scanner(context?.openFileInput("trashData.txt"))
@@ -116,6 +116,6 @@ class EmoTrashDeletedFragment : AppCompatDialogFragment() {
 
         }
         scan.close()
-    }
+    }*/
 
 }

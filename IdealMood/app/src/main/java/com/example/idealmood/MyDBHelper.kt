@@ -62,7 +62,7 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
                 "$ET_PTEXT text, " +
                 "$ET_PDATE text, " +
                 "$ET_PISDELETE integer)"
-        db?.execSQL(create_CD_table)
+        db?.execSQL(create_ET_table)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -204,7 +204,7 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
             isDeleteInt = -1
 
         val values = ContentValues()
-        values.put(ET_PTEXT, data.emoTrashContents)
+        values.put(ET_PTEXT, data.title)
         values.put(ET_PDATE, data.date)
         values.put(ET_PISDELETE, isDeleteInt)
         val db=this.writableDatabase    // DB table 객체 획득
@@ -253,8 +253,7 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
             var isDeleteBool = false
             if (cursor.getInt(3) == 1)
                 isDeleteBool = true
-            ETArray.add(emoTrashData("", cursor.getString(2), cursor.getString(1),
-                isDeleteBool))
+            ETArray.add(emoTrashData( cursor.getString(1), cursor.getString(2), isDeleteBool))
             // 실제 캘린더뷰에 갱신
             Log.i("캘린더 데이터 목록 : ", cursor.getInt(1).toString())
         } while(cursor.moveToNext())

@@ -26,6 +26,7 @@ import java.util.*
 class EmoTrashEditFragment : AppCompatDialogFragment() {
 
     lateinit var myView:View
+    lateinit var myDBHelper: MyDBHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +34,7 @@ class EmoTrashEditFragment : AppCompatDialogFragment() {
     ): View? {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_emo_trash_edit, container, false)
+        myDBHelper = MyDBHelper(requireContext())
         return myView
     }
 
@@ -47,16 +49,21 @@ class EmoTrashEditFragment : AppCompatDialogFragment() {
             .setView(myView)
             .setNegativeButton("CANCEL", DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
             .setPositiveButton("SUBMIT", DialogInterface.OnClickListener { dialog, which ->
-
-                writeFile(emoTrashEdit.text.toString())
+                //writeFile(emoTrashEdit.text.toString())
+                writeFiletoDB(emoTrashEdit.text.toString())
             })
             .create()
-
-
-
     }
 
-    private fun writeFile(title:String) {
+    private fun writeFiletoDB(title: String) {
+        val sdf = SimpleDateFormat("yy.MM.dd", Locale.KOREAN)
+        val date = sdf.format(
+            Calendar.getInstance().time
+        )
+        myDBHelper.ET_insertData(emoTrashData(title, date)) // DB에 data 삽입
+    }
+
+    /*private fun writeFile(title:String) {
         val output = PrintStream(context?.openFileOutput("trashData.txt", Context.MODE_APPEND))
 
         val sdf = SimpleDateFormat("yy.MM.dd", Locale.KOREAN)
@@ -74,6 +81,6 @@ class EmoTrashEditFragment : AppCompatDialogFragment() {
         activity?.recreate()
         this.dialog?.cancel()
 
-    }
+    }*/
 
 }
