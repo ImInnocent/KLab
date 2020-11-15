@@ -20,7 +20,7 @@ class emoTrashAdapter(var items:ArrayList<emoTrashData>)
         var textDateView:TextView = itemView.findViewById(R.id.rowDate)
         init{
             itemView.setOnClickListener {
-                val size = items.size - 1   // 가장 최근에 추가한 순서대로 배열하기 위해 (역순)
+                val size = itemCount - 1   // 가장 최근에 추가한 순서대로 배열하기 위해 (역순)
                 itemClickListener?.OnItemClick(this, it, items[size - adapterPosition], size - adapterPosition)
             }
         }
@@ -36,7 +36,7 @@ class emoTrashAdapter(var items:ArrayList<emoTrashData>)
     }
 
     override fun onBindViewHolder(holder: MyemoTrashViewHolder, position: Int) {
-        val size = items.size - 1   // 역순(최신순) 배열
+        val size = itemCount - 1   // 역순(최신순) 배열
         holder.textTitleView.text = items[size - position].title
         holder.textDateView.text = items[size - position].date
     }

@@ -23,10 +23,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class EmoTrashEditFragment : AppCompatDialogFragment() {
+class EmoTrashEditFragment(val myDBHelper: MyDBHelper, val myAdapter: emoTrashAdapter) : AppCompatDialogFragment() {
 
     lateinit var myView:View
-    lateinit var myDBHelper: MyDBHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +33,6 @@ class EmoTrashEditFragment : AppCompatDialogFragment() {
     ): View? {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_emo_trash_edit, container, false)
-        myDBHelper = MyDBHelper(requireContext())
         return myView
     }
 
@@ -61,6 +59,8 @@ class EmoTrashEditFragment : AppCompatDialogFragment() {
             Calendar.getInstance().time
         )
         myDBHelper.ET_insertData(emoTrashData(title, date)) // DB에 data 삽입
+        myDBHelper.ET_getAllRecord()    // 갱신~~~!!!!!!!!!!!!!
+        myAdapter.notifyDataSetChanged()
     }
 
     /*private fun writeFile(title:String) {

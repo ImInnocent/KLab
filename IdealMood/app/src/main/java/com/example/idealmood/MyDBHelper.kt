@@ -39,6 +39,7 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
     val HBArray = ArrayList<Int>()
     val CDArray = ArrayList<MyCalendar>()
     val ETArray = ArrayList<emoTrashData>()
+    val ETArray_Del = ArrayList<emoTrashData>() // 감쓰쓰 저장 배열
 
     override fun onCreate(db: SQLiteDatabase?) {
         // 심박수 테이블 생성
@@ -217,13 +218,32 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
         }
     }
 
-    fun ET_deleteData(pdate :String) :Boolean {
-        val strsql = "select * from $ET_TABLE_NAME where $ET_PDATE = '$pdate'"
+    fun ET_deleteData(data :emoTrashData) :Boolean {
+        val strsql = "select * from $ET_TABLE_NAME where $ET_PTEXT = '${data.title}' and $ET_PDATE = '${data.date}'"
         val db = this.writableDatabase
         val cursor = db.rawQuery(strsql, null)
 
         if(cursor.count != 0) { // 무언가를 가지고 옴
-            db.delete(ET_TABLE_NAME, "$ET_PDATE =? ", arrayOf(pdate))
+            db.delete(ET_TABLE_NAME, "$ET_PTEXT=? and $ET_PDATE=?", arrayOf(data.title, data.date))
+            cursor.close()
+            db.close()
+            return true
+        }
+        else {
+            cursor.close()
+            db.close()
+            return false
+        }
+    }
+
+    fun ET_updateData(data :emoTrashData) :Boolean {  // isDelete수정 (감쓰->감쓰쓰)
+        val strsql = "select * from $ET_TABLE_NAME where $ET_PTEXT = '${data.title}' and $ET_PDATE = '${data.date}'"
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(strsql, null)
+        if(cursor.moveToFirst()) { // 무언가를 가지고 옴
+            val values = ContentValues()
+            values.put(ET_PISDELETE, 1)    // 바꾸고자 하는 내용
+            db.update(ET_TABLE_NAME, values, "$ET_PTEXT=? and $ET_PDATE=?", arrayOf(data.title, data.date))
             cursor.close()
             db.close()
             return true
@@ -237,6 +257,7 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
 
     fun ET_getAllRecord() {
         ETArray.clear()
+        ETArray_Del.clear()
         val strsql = "select * from $ET_TABLE_NAME"
         val db = this.readableDatabase
         val cursor = db.rawQuery(strsql, null)
@@ -250,12 +271,12 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
     private fun ET_getOneRecord(cursor :Cursor) {
         cursor.moveToFirst()
         do {
-            var isDeleteBool = false
-            if (cursor.getInt(3) == 1)
-                isDeleteBool = true
-            ETArray.add(emoTrashData( cursor.getString(1), cursor.getString(2), isDeleteBool))
+            if (cursor.getInt(3) == 1)    // true : 지워짐
+                ETArray_Del.add(emoTrashData(cursor.getString(1), cursor.getString(2), true))
+            else    // 안지워짐
+                ETArray.add(emoTrashData(cursor.getString(1), cursor.getString(2), false))
             // 실제 캘린더뷰에 갱신
-            Log.i("캘린더 데이터 목록 : ", cursor.getInt(1).toString())
+            Log.i("감쓰 데이터 목록 : ", cursor.getString(1))
         } while(cursor.moveToNext())
     }
 }

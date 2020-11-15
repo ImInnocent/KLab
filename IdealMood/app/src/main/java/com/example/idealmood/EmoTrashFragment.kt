@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -83,13 +84,37 @@ class EmoTrashFragment : Fragment() {
 
         view.addBtn.setOnClickListener {
             //Toast.makeText(context,"감정 일기 추가", Toast.LENGTH_SHORT).show()
-            EmoTrashEditFragment().show( fragmentManager!!, "editdialog")
+            EmoTrashEditFragment(myDBHelper, myAdapter).show( fragmentManager!!, "editdialog")
         }
 
         view.deleteBtn.setOnClickListener {
             //Toast.makeText(context, "감정 쓰레기통 삭제 화면", Toast.LENGTH_SHORT).show()
-            EmoTrashDeletedFragment().show(fragmentManager!!, "deletedialog")
+            EmoTrashDeletedFragment(myDBHelper).show(fragmentManager!!, "deletedialog")
         }
+
+        // 스와이프해서 지우기
+        val simpleCallback = object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.LEFT, ItemTouchHelper.RIGHT){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return true
+            }
+
+            override fun isLongPressDragEnabled(): Boolean {
+                return false    // 위치 이동 기능은 활성화 X
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val size = myAdapter.itemCount - 1     // 데이터의 역순으로 리사이클러 뷰에 표시되므로
+                myDBHelper.ET_updateData(myAdapter.items[size - viewHolder.adapterPosition])
+                myDBHelper.ET_getAllRecord()    // 데이터 갱신
+                myAdapter.notifyDataSetChanged()
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(simpleCallback)
+        itemTouchHelper.attachToRecyclerView(view.emoTrashRecyclerView)
     }
 
 
