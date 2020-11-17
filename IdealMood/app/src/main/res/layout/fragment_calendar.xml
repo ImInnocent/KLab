@@ -22,6 +22,7 @@
             android:src="@android:drawable/btn_star_big_on" />
 
         <TextView
+            android:id="@+id/calendarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5"

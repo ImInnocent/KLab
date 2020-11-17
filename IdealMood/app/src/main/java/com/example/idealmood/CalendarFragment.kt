@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.util.Util
+import com.google.android.material.internal.NavigationMenu
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import kotlinx.android.synthetic.main.item_day.*
 import java.text.SimpleDateFormat
@@ -41,6 +42,10 @@ class CalendarFragment : Fragment() , CalendarItemEditFragment.OnStateSelectedLi
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+
+
+        calendarTitle.text = UserInfo.get(UserInfo.NAME).toString() + resources.getString(R.string.calender_title);
 
         myDBHelper = MyDBHelper(requireContext())
         adapter = CalendarAdapter(this, myDBHelper)
