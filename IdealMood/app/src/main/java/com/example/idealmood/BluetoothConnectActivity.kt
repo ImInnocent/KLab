@@ -71,15 +71,10 @@ open class BluetoothConnectActivity : AppCompatActivity() {
 
                     val filteredMsg: String = readMessage!!.filter { it.isDigit() }
                     toast(readMessage)
-                    if (filteredMsg.isNotEmpty())
-                        if (DataManager.getInstance().addHeartBeat(filteredMsg.toInt())) {
-                            // 심박수가 COUNT이상 채워져서 records에 data가 넘어오면 DB에 저장하기
-                            val HBarray = DataManager.getInstance().records.split(", ")
-                            var HBsum = 0
-                            for (i in HBarray)
-                                HBsum += i.toInt()
-                            myDBHelper.HB_insertData(HBsum / 6) // 심박수 분당 평균 DB에 저장
-                        }
+                    if (filteredMsg.isNotEmpty()) {
+                        DataManager.getInstance().addHeartBeat(filteredMsg.toInt())
+                    }
+
                     mTvReceiveData!!.text = readMessage
                 }
             }
