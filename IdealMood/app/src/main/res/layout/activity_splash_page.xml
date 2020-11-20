@@ -11,7 +11,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:textAlignment="center"
@@ -20,17 +20,17 @@
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="248dp"
-            android:layout_height="229dp"
-            android:layout_gravity="center|center_horizontal"
-            app:srcCompat="@drawable/happy" />
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/emotion5" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="30dp"
         android:text="Ideal Mood"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"

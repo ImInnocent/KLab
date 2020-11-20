@@ -65,12 +65,12 @@ class DataManager private constructor() {
                 }
             }
 
-        private const val AUTO_DATA: Boolean = false
+        private const val AUTO_DATA: Boolean = true
 
         // 자동 심박수 정규 범위(넘을 수 잇음): MEDIAN - BOUND / 2 ~ MEDIAN + BOUND / 2
         private const val AUTO_MEDIAN: Int = 80
         private const val AUTO_BOUND: Int = 30
-        private const val AUTO_INTERVAL: Long = 10 // 초 단위
+        private const val AUTO_INTERVAL: Long = 2 // 초 단위
 
         private const val MAX_COUNT: Int = 10      // 데이터 셋을 추출하는 기준
         private const val DIVISION_COUNT: Int = 6  // 데이터 셋의 크기 (10초 * 6 = 1분)

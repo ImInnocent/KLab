@@ -88,9 +88,9 @@ class MyMusicService : Service() {
             val mBuilder =  NotificationCompat.Builder(this, "1")
             with(mBuilder) {
                 setSmallIcon(R.drawable.ic_favorite_white_28dp)
-                setContentTitle("솔루션 재생 중")
+                setContentTitle(getString(R.string.music_service_top_bar_title))
                 setContentIntent(msgPendingIntent)
-                setContentText("탭하여 앱 실행하기")
+                setContentText(getString(R.string.music_service_top_bar_contents))
             }
             mNotifyMgr.notify(1, mBuilder.build())  // id는 나중에 알림 제거할 때 사용
         }

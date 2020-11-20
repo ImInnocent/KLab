@@ -84,6 +84,9 @@
     <string name="emotrash_item_title">Emotrash Item Box</string>
     <string name="emotrash_item_contentstitle">CONTENTS</string>
     <string name="emotrash_item_datetitle">DATE</string>
+
+    <string name="music_service_top_bar_title">Playing Solution</string>
+    <string name="music_service_top_bar_contents">Tap to run the app</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.

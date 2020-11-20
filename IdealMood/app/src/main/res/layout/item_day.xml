@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:layout_marginStart="2dp"
-        android:textSize="12dp"
+        android:textSize="12sp"
         android:textColor="#676d6e"
         android:textStyle="bold"
         android:text="temp"
@@ -25,7 +25,7 @@
         <ImageView
             android:id="@+id/daystatus"
             android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_height="25dp"
             android:layout_marginLeft="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

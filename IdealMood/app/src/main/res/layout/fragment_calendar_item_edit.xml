@@ -5,7 +5,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:context=".CalendarItemEditFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -23,41 +24,51 @@
 
         <Button
             android:id="@+id/worst"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/emoji_angry"
-            android:layout_margin="10dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/emotion1"
+            android:layout_margin="5dp"
             />
 
         <Button
             android:id="@+id/bad"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/emoji_cry"
-            android:layout_margin="10dp" />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/emotion2"
+            android:layout_margin="5dp" />
 
         <Button
             android:id="@+id/soso"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/emoji_sad"
-            android:layout_margin="10dp" />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/emotion3"
+            android:layout_margin="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/good"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/emoji_good"
-            android:layout_margin="10dp" />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/emotion4"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp" />
 
         <Button
             android:id="@+id/best"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/emoji_happy"
-            android:layout_margin="10dp" />
-
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/emotion5"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp" />
     </LinearLayout>
+
 
 
 </LinearLayout>

@@ -16,11 +16,11 @@ class CalendarAdapter(val frag:CalendarFragment, val myDBHelper: MyDBHelper) : R
 
     companion object {  // 이미지 배열
         val EMOJI:Map<Int, Int> = mapOf(
-            Pair(1, R.drawable.emoji_angry),
-            Pair(2, R.drawable.emoji_cry),
-            Pair(3, R.drawable.emoji_sad),
-            Pair(4, R.drawable.emoji_good),
-            Pair(5, R.drawable.emoji_happy)
+            Pair(1, R.drawable.emotion1_face),
+            Pair(2, R.drawable.emotion2),
+            Pair(3, R.drawable.emotion3),
+            Pair(4, R.drawable.emotion4),
+            Pair(5, R.drawable.emotion5)
         )
     }
 
@@ -52,7 +52,7 @@ class CalendarAdapter(val frag:CalendarFragment, val myDBHelper: MyDBHelper) : R
 
         init{
             itemView.setOnClickListener {
-                // 해당 달 안에 속한 날들이면
+                // 해당 달 안에 속한 날들일 때만 클릭리스너 구현하기
                 if(adapterPosition >= baseCalendar.prevMonthTailOffset &&
                     adapterPosition < baseCalendar.prevMonthTailOffset + baseCalendar.currentMonthMaxDate)
                     itemClickListener?.OnItemClick(this, it, adapterPosition, baseCalendar)
