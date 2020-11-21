@@ -12,6 +12,8 @@ class DataManager private constructor() {
     var lastHeartBeat: Int = 0
     private val myDBHelper = MyDBHelper(GlobalContext.getContext())
     private val rand: Random = Random(System.currentTimeMillis())
+    var lastRage: Int = 0
+    var todayRageTime: Int = 0 // 초단위
 
     init {
         // data auto generated
@@ -35,6 +37,11 @@ class DataManager private constructor() {
 
     fun disconnect() {
         isStarted = false
+    }
+
+    // 인공 심박수 생성
+    fun generateArtificialRage(): Int {
+        return AUTO_RAGE_MEDIAN + (rand.nextGaussian() * AUTO_RAGE_BOUND).toInt() - AUTO_RAGE_BOUND / 2
     }
 
     // 인공 심박수 생성
@@ -62,6 +69,21 @@ class DataManager private constructor() {
 
             listForRecord.clear()       // heartBeats에서 DIVISION_COUNT개 만큼 제거
         }
+
+        setRage()
+    }
+
+    fun setRage() {
+        // add algorithm here
+
+        // delete this
+        val artiRage: Int  = generateArtificialRage()
+        lastRage = artiRage
+
+        if (artiRage >= RAGE_POINT) {
+            // TODO: Change interval
+            todayRageTime += AUTO_INTERVAL.toInt()
+        }
     }
 
 
@@ -83,7 +105,14 @@ class DataManager private constructor() {
         private const val AUTO_BOUND: Int = 30
         private const val AUTO_INTERVAL: Long = 2 // 초 단위
 
+        // 분노 시간: MEDIAN - BOUND / 2 ~ MEDIAN + BOUND / 2
+        private const val AUTO_RAGE_MEDIAN: Int = 80
+        private const val AUTO_RAGE_BOUND: Int = 30
+
         private const val MAX_COUNT: Int = 10      // 데이터 셋을 추출하는 기준
         private const val DIVISION_COUNT: Int = 6  // 데이터 셋의 크기 (10초 * 6 = 1분)
+
+        // 기준 분노 수치
+        private const val RAGE_POINT = 75
     }
 }

@@ -39,13 +39,35 @@ class MainActivity : AppCompatActivity() {
         // slide animation 추가
         //this.overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right)
 
-
         // 네비게이션 세팅
         navView.getHeaderView(0).findViewById<TextView>(R.id.navHeaderName).text = UserInfo.name ?: "김건국"
 
         var thread = Thread(Runnable {
             while (true) {
                 runOnUiThread {
+                    // rage point
+                    if (t12 != null) {
+                        if (DataManager.getInstance().isStarted) {
+                            var rage:Int = DataManager.getInstance().lastRage
+                            t12.text = getString(R.string.emotion_title_rage_number, rage)
+                        } else {
+                            t12.text = "----"
+                        }
+                    }
+
+                    // rage time
+                    if (t22 != null) {
+                        if (DataManager.getInstance().isStarted) {
+                            // seconds to minute
+//                            var rageTime:Int = DataManager.getInstance().todayRageTime / 60
+                            var rageTime:Int = DataManager.getInstance().todayRageTime
+                            t22.text = getString(R.string.emotion_title_rage_time_number, rageTime)
+                        } else {
+                            t22.text = "----"
+                        }
+                    }
+
+                    // heartbeat
                     if (t32 != null) {
                         if (DataManager.getInstance().isStarted) {
                             var heartBeat:Int = DataManager.getInstance().lastHeartBeat

@@ -31,9 +31,9 @@
     <string name="calender_item_title">오늘의 기분 기록</string>
 
     <string name="emotion_title_daily_text">오늘은 어제보다 편안한 하루네요~</string>
-    <string name="emotion_title_today_angry_count">금일 분노 횟수</string>
+    <string name="emotion_title_today_angry_count">기분 수치</string>
     <string name="emotion_title_today_angry_count_value">0 회</string>
-    <string name="emotion_title_compare_yesterday">전일 대비 분노 횟수</string>
+    <string name="emotion_title_compare_yesterday">오늘 분노한 시간</string>
     <string name="emotion_title_compare_yesterday_value">-3 회</string>
     <string name="emotion_title_heart_bpm">심박수</string>
     <string name="statistics_title">[분석 결과]</string>
@@ -43,6 +43,8 @@
 
     <string name="emotion_off_measure">정말 측정을 그만두시겠어요?</string>
     <string name="emotion_on_measure">측정을 다시 시작하시겠어요?</string>
+    <string name="emotion_title_rage_number">%1d</string>
+    <string name="emotion_title_rage_time_number">%1d 분</string>
     <string name="emotion_title_heart_bpm_number">%1d bpm</string>
 
     <string name="bottom_navi_solution">솔루션</string>

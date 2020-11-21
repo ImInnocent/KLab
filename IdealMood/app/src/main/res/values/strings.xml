@@ -31,9 +31,9 @@
     <string name="calender_item_title">What\'s your emotion today?</string>
 
     <string name="emotion_title_daily_text">Today\'s stress is less than yesterday~</string>
-    <string name="emotion_title_today_angry_count">Today\'s anger count</string>
+    <string name="emotion_title_today_angry_count">Emotion Rate</string>
     <string name="emotion_title_today_angry_count_value">0 time(s)</string>
-    <string name="emotion_title_compare_yesterday">Today compare with yesterday</string>
+    <string name="emotion_title_compare_yesterday">Today\'s Rage Time</string>
     <string name="emotion_title_compare_yesterday_value">-3 time(s)</string>
     <string name="emotion_title_heart_bpm">Heartbeat</string>
     <string name="statistics_title">[Analysis Report]</string>
@@ -43,6 +43,8 @@
 
     <string name="emotion_off_measure">Are you sure to stop measure?</string>
     <string name="emotion_on_measure">Are you sure to restart measure?</string>
+    <string name="emotion_title_rage_number">%1d</string>
+    <string name="emotion_title_rage_time_number">%1d min</string>
     <string name="emotion_title_heart_bpm_number">%1d bpm</string>
 
     <string name="bottom_navi_solution">Solution</string>
