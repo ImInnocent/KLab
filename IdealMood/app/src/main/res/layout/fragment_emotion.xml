@@ -33,10 +33,12 @@
         android:layout_height="300dp"
         android:layout_marginTop="30dp"
         android:src="@drawable/emotion5"
+        android:tint="#5A5A5A"
+        android:tintMode="multiply"
+        app:layout_constraintBottom_toTopOf="@id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/textView6"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView6"

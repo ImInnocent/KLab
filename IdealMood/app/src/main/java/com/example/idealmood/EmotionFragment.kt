@@ -2,6 +2,7 @@ package com.example.idealmood
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
@@ -36,7 +37,7 @@ class EmotionFragment : Fragment() {
     }
 
     private fun init() {
-        onoffSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+        /*onoffSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             if(onoffFlag) {
                 if (isChecked)
                     showOff2On()
@@ -50,7 +51,7 @@ class EmotionFragment : Fragment() {
                 onoffSwitch.isChecked = !onoffSwitch.isChecked
             }
             onoffFlag = true*/
-        }
+        }*/
 
         blueConnectBtn.setOnClickListener {
             activity?.let{
@@ -58,6 +59,28 @@ class EmotionFragment : Fragment() {
                 val intent = Intent (it, BluetoothConnectActivity::class.java)
                 it.startActivity(intent)
             }
+        }
+
+        emotionImg.setOnClickListener {
+            /* if bluetooth가 connected되었는지를 알려주는 변수가 true일 때 {  // 전원 켜져있을 때
+
+                // ****** 전원 끄는 코드 작성 *******
+
+
+                emotionImg.setColorFilter(Color.rgb(90, 90, 90),        // 블루투스 전원 off-> 회색으로 바꿈
+                                            android.graphics.PorterDuff.Mode.MULTIPLY)
+                }
+            }
+            else {
+                emotionImg.setColorFilter(Color.rgb(255, 255, 255),        // 블루투스 전원 on -> 원래색
+                                            android.graphics.PorterDuff.Mode.MULTIPLY)
+
+                // 블루투스 연결 액티비티 실행
+                activity?.let {
+                    val intent = Intent(it, BluetoothConnectActivity::class.java)
+                    it.startActivity(intent)
+                }
+            }*/
         }
     }
 
