@@ -29,12 +29,23 @@ class DataManager private constructor() {
         }
     }
 
+    fun connect() {
+        isStarted = true
+    }
+
+    fun disconnect() {
+        isStarted = false
+    }
+
     // 인공 심박수 생성
     fun generateArtificialHB(): Int {
         return AUTO_MEDIAN + (rand.nextGaussian() * AUTO_BOUND).toInt() - AUTO_BOUND / 2
     }
 
     fun addHeartBeat(hb: Int) { // true : records로 data가 넘어갔을 때
+        if (!isStarted)
+            return
+
         heartBeats.add(hb)
         lastHeartBeat = hb
 

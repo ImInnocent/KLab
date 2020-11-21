@@ -13,7 +13,6 @@ import android.widget.Switch
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_emotion.*
 import kotlinx.android.synthetic.main.fragment_emotion.view.*
-import kotlinx.android.synthetic.main.fragment_emotion.view.onoffSwitch
 
 /**
  * A simple [Fragment] subclass.
@@ -22,6 +21,11 @@ class EmotionFragment : Fragment() {
 
     var onoffFlag = true
     //var cancelFlag = true
+
+    companion object {
+        val COLOR_EMOJI_ON = Color.rgb(255, 255, 255)
+        val COLOR_EMOJI_OFF = Color.rgb(90, 90, 90)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +41,7 @@ class EmotionFragment : Fragment() {
     }
 
     private fun init() {
+        // !! warning: xml에서 제거함.
         /*onoffSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             if(onoffFlag) {
                 if (isChecked)
@@ -61,26 +66,39 @@ class EmotionFragment : Fragment() {
             }
         }
 
+        // 이미지 변경해주기
+        setEmojiImg(DataManager.getInstance().isStarted)
+
         emotionImg.setOnClickListener {
-            /* if bluetooth가 connected되었는지를 알려주는 변수가 true일 때 {  // 전원 켜져있을 때
-
+//            if bluetooth가 connected되었는지를 알려주는 변수가 true일 때  // 전원 켜져있을 때
+            if (DataManager.getInstance().isStarted) {
                 // ****** 전원 끄는 코드 작성 *******
+                DataManager.getInstance().disconnect()
 
-
-                emotionImg.setColorFilter(Color.rgb(90, 90, 90),        // 블루투스 전원 off-> 회색으로 바꿈
-                                            android.graphics.PorterDuff.Mode.MULTIPLY)
-                }
+                setEmojiImg(false)
             }
             else {
-                emotionImg.setColorFilter(Color.rgb(255, 255, 255),        // 블루투스 전원 on -> 원래색
-                                            android.graphics.PorterDuff.Mode.MULTIPLY)
+                setEmojiImg(true)
+                DataManager.getInstance().connect()
 
                 // 블루투스 연결 액티비티 실행
-                activity?.let {
-                    val intent = Intent(it, BluetoothConnectActivity::class.java)
-                    it.startActivity(intent)
-                }
-            }*/
+                // 디바이스 없으니까 이미지만
+//                activity?.let {
+//                    val intent = Intent(it, BluetoothConnectActivity::class.java)
+//                    it.startActivity(intent)
+//                }
+            }
+        }
+    }
+
+    private fun setEmojiImg(isOn: Boolean) {
+        if (isOn) {
+            // 원래색
+            emotionImg.setColorFilter(COLOR_EMOJI_ON, android.graphics.PorterDuff.Mode.MULTIPLY)
+        }
+        else {
+            // 회색으로 바꿈
+            emotionImg.setColorFilter(COLOR_EMOJI_OFF, android.graphics.PorterDuff.Mode.MULTIPLY)
         }
     }
 
@@ -96,7 +114,7 @@ class EmotionFragment : Fragment() {
         builder.setNegativeButton("CANCEL") { _, _ ->
             //cancelFlag = false
             onoffFlag = false
-            onoffSwitch.isChecked = true
+//            onoffSwitch.isChecked = true
         }
         builder.show()
     }
@@ -112,7 +130,7 @@ class EmotionFragment : Fragment() {
         }
         builder.setNegativeButton("CANCEL") { _, _ ->
             onoffFlag = false
-            onoffSwitch.isChecked = false
+//            onoffSwitch.isChecked = false
         }
 
         builder.show()
