@@ -45,8 +45,8 @@ class StatisticsFragment : Fragment() {
         lineChart.apply {
             isEnabled = false
             axisRight.isEnabled = false
-            axisLeft.axisMinimum = 60f
-            axisLeft.axisMaximum = 100f
+            axisLeft.axisMinimum = 40f
+            axisLeft.axisMaximum = 80f
 
         }
 

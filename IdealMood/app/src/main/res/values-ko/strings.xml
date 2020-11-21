@@ -59,7 +59,7 @@
     <string name="solution_firewall_title">장작 타는 소리 듣기</string>
     <string name="solution_classic_title">클래식 음악 듣기</string>
 
-    <string name="emo_trash_dialog_title">감정을 직셩하면 감정 쓰레기통으로 보내집니다.</string>
+    <string name="emo_trash_dialog_title">감정을 작성하면 감정 쓰레기통으로 보내집니다.</string>
     <string name="emo_trash_dialog_hint">내용을 입력해 주세요</string>
     <string name="emo_trash_deleted_title">감정 쓰레기통 삭제 목록</string>
     <string name="meditation_title">명상 종료</string>
