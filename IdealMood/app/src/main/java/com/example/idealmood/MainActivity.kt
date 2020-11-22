@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                             // seconds to minute
 //                            var rageTime:Int = DataManager.getInstance().todayRageTime / 60
                             var rageTime:Int = DataManager.getInstance().todayRageTime
-                            t22.text = getString(R.string.emotion_title_rage_time_number, rageTime)
+                            t22.text = getString(R.string.emotion_title_rage_time_number, (rageTime / 60).toInt())
                         } else {
                             t22.text = "----"
                         }
