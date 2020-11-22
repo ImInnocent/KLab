@@ -23,7 +23,7 @@
             android:layout_width="400dp"
             android:layout_height="400dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/emotion5" />
+            app:srcCompat="@drawable/splashimg" />
     </LinearLayout>
 
     <TextView
