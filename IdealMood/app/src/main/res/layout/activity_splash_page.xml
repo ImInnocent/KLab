@@ -20,10 +20,10 @@
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="400dp"
+            android:layout_width="380dp"
             android:layout_height="400dp"
             android:layout_gravity="center"
-            app:srcCompat="@drawable/splashimg" />
+            app:srcCompat="@drawable/splash" />
     </LinearLayout>
 
     <TextView
