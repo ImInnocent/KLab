@@ -16,11 +16,21 @@ class CalendarAdapter(val frag:CalendarFragment, val myDBHelper: MyDBHelper) : R
 
     companion object {  // 이미지 배열
         val EMOJI:Map<Int, Int> = mapOf(
-            Pair(1, R.drawable.emotion1_face),
+            /*Pair(1, R.drawable.emotion1_face),
             Pair(2, R.drawable.emotion2_face),
             Pair(3, R.drawable.emotion3_face),
             Pair(4, R.drawable.emotion4_face),
-            Pair(5, R.drawable.emotion5_face)
+            Pair(5, R.drawable.emotion5_face)*/
+            /*Pair(1, R.drawable.emotion1),
+            Pair(2, R.drawable.emotion2),
+            Pair(3, R.drawable.emotion3),
+            Pair(4, R.drawable.emotion4),
+            Pair(5, R.drawable.emotion5)*/
+            Pair(1, R.drawable.emotion1_face2),
+            Pair(2, R.drawable.emotion2_face2),
+            Pair(3, R.drawable.emotion3_face2),
+            Pair(4, R.drawable.emotion4_face2),
+            Pair(5, R.drawable.emotion5_face2)
         )
     }
 

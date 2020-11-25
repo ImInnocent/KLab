@@ -1,4 +1,4 @@
 package com.example.idealmood
 
-class MyCalendar (var emotion :Int, var stress :Int, var date :String) {
+class MyCalendar (var emotion :Int, var averagestress :Double, var ragetime :Int, var date :String) {
 }

@@ -62,7 +62,7 @@ class EmoTrashFragment : Fragment() {
 
     private fun init(view :View) {
         //val main_activity  = activity as MainActivity
-        myDBHelper = MyDBHelper(requireContext())   // DBHelpter 객체 획득
+        myDBHelper = MyDBHelper.getInstance()!!   // DBHelpter 객체 획득
 
         // 리사이클러뷰에 레이아웃 매니저 연결하고, 어댑터 선언해서 연결하고, 클릭리스너 설정하기
         view.emoTrashRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)

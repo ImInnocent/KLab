@@ -6,23 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".EmotionFragment">
 
-<!--    <Switch-->
-<!--        android:id="@+id/onoffSwitch"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginEnd="10dp"-->
-<!--        android:switchMinWidth="40dp"-->
-<!--        android:checked="true"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <Switch-->
+    <!--        android:id="@+id/onoffSwitch"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:layout_marginEnd="10dp"-->
+    <!--        android:switchMinWidth="40dp"-->
+    <!--        android:checked="true"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <ImageButton
         android:id="@+id/blueConnectBtn"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:alpha="0.2"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,21 +32,22 @@
         android:id="@+id/emotionImg"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:src="@drawable/emotion5"
         android:tint="#5A5A5A"
         android:tintMode="multiply"
         app:layout_constraintBottom_toTopOf="@id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/blueConnectBtn" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
         android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
         android:text="@string/emotion_title_daily_text"
         android:textSize="20sp"
         android:textStyle="bold"

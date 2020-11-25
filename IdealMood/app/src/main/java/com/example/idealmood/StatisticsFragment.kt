@@ -1,38 +1,61 @@
 package com.example.idealmood
 
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Half.toFloat
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SeekBar
-import android.widget.TextView
-import com.example.idealmood.R.id
-import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
-import com.github.mikephil.charting.utils.Utils.init
 import kotlinx.android.synthetic.main.fragment_statistics.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
 
 class StatisticsFragment : Fragment() {
 
+    companion object {
+        val DAY_PER_WEEK = 7
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val dataObjects:Array<Float> = Array(7, {i -> i.toFloat()})
-        var lists:MutableList<Entry> = ArrayList<Entry>();
-        for( i in dataObjects){
+
+        val myDBHelper = MyDBHelper.getInstance()!!
+        val dataObjects:Array<Float> = Array(DAY_PER_WEEK, { i -> i.toFloat()})
+        val SLlists :MutableList<Entry> = ArrayList<Entry>()
+        val HBlists = ArrayList<Entry>()
+
+        // Stress Level 값 받아오기
+        for ( i in dataObjects) {
 
             //dataObject객체를 내 타입(List타입) 객체로 변환
             //list.add(new Entry(data.getValueX(), data.getValueY())
-            lists.add(Entry(i.toFloat(), (Math.random() * 40 + 30).toFloat()))
+            SLlists.add(Entry(i.toFloat(), (Math.random() * 40 + 30).toFloat()))
 
+        }
+
+        // Heart Rate 값 받아오기
+        // 1. 지난 일주일간 값 저장하는 배열 만들기
+        val sevenDays = ArrayList<String>()
+        val current = LocalDate.now()
+        for(i in DAY_PER_WEEK - 1 downTo 0)
+            sevenDays.add(current.minusDays(i.toLong()).format(DateTimeFormatter.ofPattern("yyyy/MM/dd")))
+        // 2. 적용하여 값 가져오고, 평균 내서 list에 저장
+        for ((idx, date) in sevenDays.withIndex()) {
+            val heartbeats = myDBHelper.HB_findDataByDate(date)
+            var sum = 0
+            for (heartbeat in heartbeats)
+                sum += heartbeat
+            val size = heartbeats.size
+            Log.i("심박 기록 데이터 수", "($date) $size")
+            if(size > 0)
+                HBlists.add(Entry(idx.toFloat(), (sum / size).toFloat()))   // 소수점 없이 그냥 출력
+            else
+                HBlists.add(Entry(idx.toFloat(), 0.0f))
         }
 
 
@@ -52,10 +75,11 @@ class StatisticsFragment : Fragment() {
         }
 
 
+        // SL 수치 그래프
         //add "lists" to dataset
-        var dataSet = LineDataSet(lists, "Stress")
+        var SLdataSet = LineDataSet(SLlists, getString(R.string.statistics_legend1))
         //dataSet.setValueTextColor();
-        dataSet.apply {
+        SLdataSet.apply {
             axisDependency = YAxis.AxisDependency.LEFT //y값 데이터 왼쪽
             color = resources.getColor(R.color.CDarkGreen) //라인 색 지정
             setCircleColor(resources.getColor(R.color.CDarkGreen))
@@ -65,9 +89,21 @@ class StatisticsFragment : Fragment() {
             setDrawValues(true) //값 명시.
         }
 
-        var lineData:LineData = LineData(dataSet)
+        // 심박수 수치 그래프
+        var HBdataSet = LineDataSet(HBlists, getString(R.string.statistics_legend2))
+        //dataSet.setValueTextColor();
+        HBdataSet.apply {
+            axisDependency = YAxis.AxisDependency.LEFT //y값 데이터 왼쪽
+            color = resources.getColor(R.color.CCoral) //라인 색 지정
+            setCircleColor(resources.getColor(R.color.CCoral))
+            lineWidth = 2f
+            circleRadius = 3f
+            fillAlpha = 0
+            setDrawValues(true) //값 명시.
+        }
 
-
+        val dataSets = listOf(SLdataSet, HBdataSet)
+        var lineData:LineData = LineData(dataSets)
         lineChart.data = lineData
         lineChart.invalidate()
 
@@ -77,7 +113,7 @@ class StatisticsFragment : Fragment() {
         var analysis = ""
         analysis += "전체 스트레스 평균 : ${((Math.random() * 40 + 30).toFloat() * 1000).roundToInt() / 1000.0}\n"
         var ssum = 0.0
-        for (data in lists) {
+        for (data in SLlists) {
             ssum += data.y
         }
         analysis += "최근 일주일 간 스트레스 평균 : ${(ssum * 1000 / 7).roundToInt() / 1000.0}\n"

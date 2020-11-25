@@ -90,9 +90,11 @@
 
     <string name="music_service_top_bar_title">Playing Solution</string>
     <string name="music_service_top_bar_contents">Tap to run the app</string>
+
+    <string name="statistics_legend1">Stress level</string>
+    <string name="statistics_legend2">Average heart rate</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
-    <string name="hello_world">Hello Square World!</string>
 </resources>

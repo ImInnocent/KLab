@@ -91,4 +91,7 @@
     <string name="music_service_top_bar_title">솔루션 재생 중</string>
     <string name="music_service_top_bar_contents">탭하여 앱 실행하기</string>
 
+    <string name="statistics_legend1">스트레스 수치</string>
+    <string name="statistics_legend2">심박 평균</string>
+
 </resources>

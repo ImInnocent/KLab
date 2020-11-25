@@ -5,6 +5,9 @@ import android.os.Looper
 import android.util.Log
 import java.lang.Math.pow
 import java.lang.Math.sqrt
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.math.pow
 
@@ -14,7 +17,7 @@ class DataManager private constructor() {
     //var records: MutableList<String> = mutableListOf<String>()  // 그 중 6개만 string형태로 조합
     //var records: String = ""
     var lastHeartBeat: Int = 0
-    private val myDBHelper = MyDBHelper(GlobalContext.getContext()) // splash activity의 context를 받아온다.
+    private val myDBHelper = MyDBHelper.getInstance()!!
     private val rand: Random = Random(System.currentTimeMillis())
     var lastRage: Int = 0
     var todayRageTime: Int = 0 // 초단위
@@ -22,6 +25,7 @@ class DataManager private constructor() {
     var cnt : Int = 1
     var SL: MutableList<Int> = mutableListOf<Int>()
     var todayRageAverage:Double = 0.0
+    var pasttime = null
 
     init {
         // data auto generated
@@ -36,6 +40,29 @@ class DataManager private constructor() {
                     mainHandler.postDelayed(this, AUTO_INTERVAL * 1000)
                 }
             })
+        }
+
+        // 오늘의 분노 시간 계산 -> 이 객체 static이니까 여기다가 쓰면 한 번만 실행되겠지..?
+        val today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+        val stressValues = myDBHelper.ST_findDataByDate(today)
+
+        val format3 = SimpleDateFormat("HH:mm:ss")
+        var pastStress :MyStress? = null
+        var firstStress :MyStress? = null
+        var lastStress :MyStress? = null
+        for (value in stressValues) {
+            // (분노 시간 구하기) stress 받은 기간 동안 시간 빼서 더하기
+            if (value.stress >= SplashPageActivity.RAGE_POINT && pastStress != null && pastStress.stress < SplashPageActivity.RAGE_POINT) {
+                firstStress = value
+            }
+            else if (value.stress < SplashPageActivity.RAGE_POINT && pastStress != null && pastStress.stress >= SplashPageActivity.RAGE_POINT) {
+                lastStress = pastStress
+                val firstTime = format3.parse(firstStress!!.date.split(" ")[1])
+                val lastTime = format3.parse(lastStress.date.split(" ")[1])
+                val diff = (firstTime.time - lastTime.time).toInt()
+                todayRageTime += diff / 1000     // ms를 s로 환산
+            }
+            pastStress = value
         }
     }
 
@@ -106,13 +133,23 @@ class DataManager private constructor() {
         }
         Log.i("스트레스 수치", SL.joinToString())
 
+        // DB에 저장
+        myDBHelper.ST_insertData(lastRage)
+
         // delete this
         //val artiRage: Int  = generateArtificialRage()
         //lastRage = artiRage
 
+        // 분노 상태인지 판단, 분노 시간 측정
+
         if (lastRage >= RAGE_POINT) {
             // TODO: Change interval
-            todayRageTime += AUTO_INTERVAL.toInt()
+            if (AUTO_DATA) {    // 자동화한 경우
+                todayRageTime += AUTO_INTERVAL.toInt()
+            }
+            else {  // 자동화가 아닌 경우
+                todayRageTime += NOT_AUTO_INTERVAL.toInt()
+            }
         }
     }
 
@@ -149,6 +186,9 @@ class DataManager private constructor() {
                     instance = it
                 }
             }
+
+        // 자동으로 심박수 받아오지 않을 경우
+        private const val NOT_AUTO_INTERVAL = 2 // 초 단위
 
         private const val AUTO_DATA: Boolean = true
 

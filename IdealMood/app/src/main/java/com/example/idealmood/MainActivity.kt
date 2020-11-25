@@ -4,6 +4,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,10 +14,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.github.mikephil.charting.data.Entry
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_emotion.*
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +30,6 @@ class MainActivity : AppCompatActivity() {
             R.string.bottom_navi_solution,
             R.string.bottom_navi_emotion,
             R.string.bottom_navi_emo_trash)
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -122,9 +126,6 @@ class MainActivity : AppCompatActivity() {
             }
             false
         }
-
-
-        // 심박수 업데이트
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

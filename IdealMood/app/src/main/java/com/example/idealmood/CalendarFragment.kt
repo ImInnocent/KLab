@@ -47,7 +47,7 @@ class CalendarFragment : Fragment() , CalendarItemEditFragment.OnStateSelectedLi
 
         calendarTitle.text = UserInfo.get(UserInfo.NAME).toString() + resources.getString(R.string.calender_title);
 
-        myDBHelper = MyDBHelper(requireContext())
+        myDBHelper = MyDBHelper.getInstance()!!
         adapter = CalendarAdapter(this, myDBHelper)
         adapter.itemClickListener = object: CalendarAdapter.OnItemClickListener{
 
@@ -102,10 +102,10 @@ class CalendarFragment : Fragment() , CalendarItemEditFragment.OnStateSelectedLi
 
         // DB에 삽입
         if(myDBHelper.CD_findOneData(myDate).emotion == 0) {    // 해당 data가 없으면 insert하기
-            myDBHelper.CD_insertData(MyCalendar(stat, -1, myDate))   // 스트레스 수치는 나중에 추가할 예정임!!!
+            myDBHelper.CD_insertData(MyCalendar(stat, -1.0, -1, myDate))   // 스트레스 수치는 나중에 추가할 예정임!!!
         }
         else {  // 이미 존재할 경우 update하기
-            myDBHelper.CD_updateData(stat, myDate)
+            myDBHelper.CD_updateEmotionData(stat, myDate)
         }
         adapter.notifyDataSetChanged()
     }
