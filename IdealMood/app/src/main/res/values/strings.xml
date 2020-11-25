@@ -83,6 +83,7 @@
     <string name="theme_setting_light_sky_blue">Light Sky Blue</string>
     <string name="theme_setting_gray">Gray</string>
 
+    <string name="emotrash_tip">Swipe to delete a item</string>
     <string name="emotrash_item_title">Emotrash Item Box</string>
     <string name="emotrash_item_contentstitle">CONTENTS</string>
     <string name="emotrash_item_datetitle">DATE</string>

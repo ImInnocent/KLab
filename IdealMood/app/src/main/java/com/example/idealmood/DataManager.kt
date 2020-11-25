@@ -2,6 +2,7 @@ package com.example.idealmood
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import java.lang.Math.pow
 import java.lang.Math.sqrt
 import java.util.*
@@ -11,9 +12,9 @@ class DataManager private constructor() {
     var isStarted: Boolean = false
     var heartBeats: MutableList<Int> = mutableListOf<Int>() // 심박수를 10개씩 받아오기
     //var records: MutableList<String> = mutableListOf<String>()  // 그 중 6개만 string형태로 조합
-    var records: String = ""
+    //var records: String = ""
     var lastHeartBeat: Int = 0
-    private val myDBHelper = MyDBHelper(GlobalContext.getContext())
+    private val myDBHelper = MyDBHelper(GlobalContext.getContext()) // splash activity의 context를 받아온다.
     private val rand: Random = Random(System.currentTimeMillis())
     var lastRage: Int = 0
     var todayRageTime: Int = 0 // 초단위
@@ -46,7 +47,7 @@ class DataManager private constructor() {
         isStarted = false
     }
 
-    // 인공 심박수 생성
+    // 인공 스트레스 수치 생성
     fun generateArtificialRage(): Int {
         return AUTO_RAGE_MEDIAN + (rand.nextGaussian() * AUTO_RAGE_BOUND).toInt() - AUTO_RAGE_BOUND / 2
     }
@@ -54,10 +55,10 @@ class DataManager private constructor() {
     // 인공 심박수 생성
     fun generateArtificialHB(): Int {
         //return AUTO_MEDIAN + (rand.nextGaussian() * AUTO_BOUND).toInt() - AUTO_BOUND / 2
-        return (60..110).random()
+        return (60..70).random()
     }
 
-    fun addHeartBeat(hb: Int) { // true : records로 data가 넘어갔을 때
+    fun addHeartBeat(hb: Int) {
         if (!isStarted)
             return
 
@@ -67,7 +68,7 @@ class DataManager private constructor() {
         if (heartBeats.size >= MAX_COUNT) {
             var listForRecord = heartBeats.subList(0, DIVISION_COUNT)   // 전체 저장값중 6개만 자르기
             //records.add(listForRecord.joinToString())         // 레코드에 저장
-            records = listForRecord.joinToString()
+            //records = listForRecord.joinToString()
 
             // 심박수가 COUNT이상 채워져서 records에 data가 넘어오면 DB에 저장하기
             var HBsum = 0
@@ -89,7 +90,7 @@ class DataManager private constructor() {
             var a : Double = 60000 / heartBeats[2].toDouble()
             var b : Double = 60000 / heartBeats[1].toDouble()
             var c : Double = 60000 / heartBeats[0].toDouble()
-            rmssd = sqrt(((a - b) - (b - c)).pow(2))
+            rmssd = sqrt(((a - b) - (b - c)).pow(2) / 2)
             SL.add(calcSl(rmssd))
             lastRage = SL[0]
             ++cnt
@@ -103,7 +104,7 @@ class DataManager private constructor() {
         }else{
             lastRage = 0
         }
-
+        Log.i("스트레스 수치", SL.joinToString())
 
         // delete this
         //val artiRage: Int  = generateArtificialRage()
@@ -122,6 +123,8 @@ class DataManager private constructor() {
         var c: Double = 60000 / heartBeats[n - 3].toDouble()
         var temp: Double = ((a - b) - (b - c)).pow(2)
         var ret:Double = sqrt((prev * prev * (cnt - 1) + temp) / cnt)
+        //Log.i("temp, prev", temp.toString() +", " + prev.toString())
+        Log.i("rMSSD", ret.toString())
 
         return ret
     }
@@ -161,7 +164,7 @@ class DataManager private constructor() {
         private const val MAX_COUNT: Int = 10      // 데이터 셋을 추출하는 기준
         private const val DIVISION_COUNT: Int = 6  // 데이터 셋의 크기 (10초 * 6 = 1분)
 
-        // 기준 분노 수치
+        // 분노 판단 역치값
         private const val RAGE_POINT = 75
     }
 }

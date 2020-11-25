@@ -41,23 +41,6 @@ class EmotionFragment : Fragment() {
     }
 
     private fun init() {
-        // !! warning: xml에서 제거함.
-        /*onoffSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(onoffFlag) {
-                if (isChecked)
-                    showOff2On()
-                else
-                    showOn2Off()
-            }
-            else
-                onoffFlag = true
-            /*if(cancelFlag) { -> 디바이스 취소버튼 누를때로 버튼 상태 바뀌는 것 방지 -> 나중에 다시 해봐야할듯
-                onoffFlag = false
-                onoffSwitch.isChecked = !onoffSwitch.isChecked
-            }
-            onoffFlag = true*/
-        }*/
-
         blueConnectBtn.setOnClickListener {
             activity?.let{
 //                val intent = Intent (it, DeviceScanActivity::class.java)
@@ -102,6 +85,7 @@ class EmotionFragment : Fragment() {
         }
     }
 
+    /* 전원 on/off 하기 전 다시 물어보는 다이얼로근데 굳이 할 필요 없어보임.
     private fun showOn2Off() {
         val builder = AlertDialog.Builder(ContextThemeWrapper(this@EmotionFragment.requireContext(), R.style.Theme_AppCompat_Light_Dialog))
         builder.setTitle("Confirm")
@@ -114,7 +98,6 @@ class EmotionFragment : Fragment() {
         builder.setNegativeButton("CANCEL") { _, _ ->
             //cancelFlag = false
             onoffFlag = false
-//            onoffSwitch.isChecked = true
         }
         builder.show()
     }
@@ -130,10 +113,9 @@ class EmotionFragment : Fragment() {
         }
         builder.setNegativeButton("CANCEL") { _, _ ->
             onoffFlag = false
-//            onoffSwitch.isChecked = false
         }
 
         builder.show()
-    }
+    }*/
 
 }

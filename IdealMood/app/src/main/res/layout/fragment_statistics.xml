@@ -45,7 +45,8 @@
                     android:id="@+id/emotionAnalysis"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/statistics_analysis_report_text" />
+                    android:text="@string/statistics_analysis_report_text"
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 

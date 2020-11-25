@@ -19,6 +19,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.utils.Utils.init
 import kotlinx.android.synthetic.main.fragment_statistics.*
+import kotlin.math.roundToInt
 
 class StatisticsFragment : Fragment() {
 
@@ -30,12 +31,12 @@ class StatisticsFragment : Fragment() {
 
             //dataObject객체를 내 타입(List타입) 객체로 변환
             //list.add(new Entry(data.getValueX(), data.getValueY())
-            lists.add(Entry(i.toFloat(), (Math.random() * 40 + 60).toFloat()))
+            lists.add(Entry(i.toFloat(), (Math.random() * 40 + 30).toFloat()))
 
         }
 
 
-        val xAxis = lineChart.xAxis //lineChart의 x출
+        val xAxis = lineChart.xAxis //lineChart의 x축
         xAxis.apply{
 
             setDrawGridLines(false)
@@ -45,8 +46,8 @@ class StatisticsFragment : Fragment() {
         lineChart.apply {
             isEnabled = false
             axisRight.isEnabled = false
-            axisLeft.axisMinimum = 40f
-            axisLeft.axisMaximum = 80f
+            axisLeft.axisMinimum = 0f
+            axisLeft.axisMaximum = 100f
 
         }
 
@@ -72,6 +73,18 @@ class StatisticsFragment : Fragment() {
 
 
         //분석 텍스트박스 : id/emotionAnalysis
+        // 일단 가라로 넣음. 나중에 수정 예정
+        var analysis = ""
+        analysis += "전체 스트레스 평균 : ${((Math.random() * 40 + 30).toFloat() * 1000).roundToInt() / 1000.0}\n"
+        var ssum = 0.0
+        for (data in lists) {
+            ssum += data.y
+        }
+        analysis += "최근 일주일 간 스트레스 평균 : ${(ssum * 1000 / 7).roundToInt() / 1000.0}\n"
+        analysis += "오늘 스트레스는 상위 ${(20..50).random()}% 입니다.\n\n"
+        analysis += "추천 솔루션 :\n"
+        analysis += "클래식 음악 듣기, 명상하기\n"
+        emotionAnalysis.text = analysis
     }
 
     override fun onCreateView(
@@ -86,7 +99,7 @@ class StatisticsFragment : Fragment() {
     //[Data 표시]
     //1일 단위로 갱신되는 평균 수치를 그래프로 찍도록 함.
     //한눈에 볼 수 있는 data 갯수는 일당 평균값 일주일치(7개) 정도.
-    //따라서 가로축은 변수 value는 표시되지 않도록 하고 세로축은 60~110 정도 범위로 표시되도록 함.
+    //따라서 가로축은 변수 value는 표시되지 않도록 하고 세로축은 0~100범위로 표시
 
 
     //[분석 결과 표시]

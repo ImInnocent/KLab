@@ -54,11 +54,23 @@
         android:id="@+id/deleteBtn"
         android:layout_width="61dp"
         android:layout_height="83dp"
-        android:layout_marginBottom="66dp"
+        android:layout_marginBottom="36dp"
         android:background="@drawable/ic_delete_black_24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.894"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="@string/emotrash_tip"
+        android:textAlignment="center"
+        android:textColor="#9C9C9C"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

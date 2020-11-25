@@ -83,6 +83,7 @@
     <string name="emergency_setting_guardian">일정 심박 이상 시 보호자 연락</string>
     <string name="emergency_setting_ambulance">일정 심박 이상 시 구급차 부르기</string>
 
+    <string name="emotrash_tip">항목을 지우려면 오른쪽으로 스와이프하세요.</string>
     <string name="emotrash_item_title">감정쓰레기통 아이템 상자</string>
     <string name="emotrash_item_contentstitle">내용</string>
     <string name="emotrash_item_datetitle">작성일자</string>
