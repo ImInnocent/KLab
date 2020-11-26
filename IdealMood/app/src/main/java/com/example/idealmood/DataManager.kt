@@ -135,6 +135,7 @@ class DataManager private constructor() {
 
         // DB에 저장
         myDBHelper.ST_insertData(lastRage)
+        Log.i("마지막 스트레스", lastRage.toString())
 
         // delete this
         //val artiRage: Int  = generateArtificialRage()
@@ -188,7 +189,7 @@ class DataManager private constructor() {
             }
 
         // 자동으로 심박수 받아오지 않을 경우
-        private const val NOT_AUTO_INTERVAL = 2 // 초 단위
+        private const val NOT_AUTO_INTERVAL = 10 // 초 단위
 
         private const val AUTO_DATA: Boolean = true
 

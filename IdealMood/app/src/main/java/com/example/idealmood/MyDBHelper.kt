@@ -52,6 +52,7 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
     }
 
     val HBArray = ArrayList<Int>()
+    val STArray = ArrayList<Double>()
     val CDArray = ArrayList<MyCalendar>()
     val ETArray = ArrayList<emoTrashData>()
     val ETArray_Del = ArrayList<emoTrashData>() // 감쓰쓰 저장 배열
@@ -221,6 +222,25 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
             db.close()
         }
         return stressLevels
+    }
+
+    fun ST_getAllRecord() {
+        STArray.clear()
+        val strsql = "select * from $ST_TABLE_NAME"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(strsql, null)
+        if (cursor.count != 0) { // 무언가를 가지고 옴
+            ST_getOneRecord(cursor)
+        }
+        cursor.close()
+        db.close()
+    }
+
+    private fun ST_getOneRecord(cursor :Cursor) {
+        cursor.moveToFirst()
+        do {
+            STArray.add(cursor.getDouble(1))
+        } while(cursor.moveToNext())
     }
 
 

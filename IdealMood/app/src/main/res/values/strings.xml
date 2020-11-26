@@ -93,6 +93,13 @@
 
     <string name="statistics_legend1">Stress level</string>
     <string name="statistics_legend2">Average heart rate</string>
+    <string name="statistics_total_stress_average">Total Average Stress Value : </string>
+    <string name="statistics_7days_stress_average">Average Stress Value last 7 days : </string>
+    <string name="statistics_today_stress_rank_first">Today\'s stress is in the Top </string>
+    <string name="statistics_today_stress_rank_last">%.</string>
+
+    <string name="statistics_recommended_solution_title">Recommended Solution :</string>
+    <string name="statistics_recommended_solution_contents">Listening classical music, Meditation</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.

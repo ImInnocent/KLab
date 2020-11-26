@@ -93,5 +93,12 @@
 
     <string name="statistics_legend1">스트레스 수치</string>
     <string name="statistics_legend2">심박 평균</string>
+    <string name="statistics_total_stress_average">전체 스트레스 평균 : </string>
+    <string name="statistics_7days_stress_average">최근 일주일 간 스트레스 평균 : </string>
+    <string name="statistics_today_stress_rank_first">오늘 스트레스는 상위 </string>
+    <string name="statistics_today_stress_rank_last">% 입니다.</string>
+    <string name="statistics_recommended_solution_title">추천 솔루션 :</string>
+    <string name="statistics_recommended_solution_contents">클래식 음악 듣기, 명상 하기</string>
+
 
 </resources>

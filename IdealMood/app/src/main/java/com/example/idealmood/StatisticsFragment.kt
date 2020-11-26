@@ -13,9 +13,16 @@ import com.github.mikephil.charting.data.LineDataSet
 import kotlinx.android.synthetic.main.fragment_statistics.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 class StatisticsFragment : Fragment() {
+
+    val myDBHelper = MyDBHelper.getInstance()!!
+    //val dataObjects:Array<Float> = Array(DAY_PER_WEEK, { i -> i.toFloat()})
+    val SLlists :MutableList<Entry> = ArrayList<Entry>()
+    val HBlists = ArrayList<Entry>()
 
     companion object {
         val DAY_PER_WEEK = 7
@@ -24,24 +31,57 @@ class StatisticsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val myDBHelper = MyDBHelper.getInstance()!!
-        val dataObjects:Array<Float> = Array(DAY_PER_WEEK, { i -> i.toFloat()})
-        val SLlists :MutableList<Entry> = ArrayList<Entry>()
-        val HBlists = ArrayList<Entry>()
+        init()
+    }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+
+        return inflater.inflate(R.layout.fragment_statistics, container, false)
+    }
+
+
+    private fun init() {
         // Stress Level 값 받아오기
-        for ( i in dataObjects) {
-
-            //dataObject객체를 내 타입(List타입) 객체로 변환
-            //list.add(new Entry(data.getValueX(), data.getValueY())
-            SLlists.add(Entry(i.toFloat(), (Math.random() * 40 + 30).toFloat()))
-
+        // 지난 6일간 스트레스 평균 받아와서 list에 저장
+        val sixDays = ArrayList<String>()     // 지난 6일간 값 저장하는 배열
+        val current = LocalDate.now()
+        for(i in DAY_PER_WEEK - 1 downTo 1)
+            sixDays.add(current.minusDays(i.toLong()).format(DateTimeFormatter.ofPattern("yyyy MM d")))
+        for ((idx, date) in sixDays.withIndex()) {
+            val averageStress = myDBHelper.CD_findOneData(date).averagestress.toFloat()
+            if (averageStress != -1.0f)    // 검색이 된 경우
+                SLlists.add(Entry(idx.toFloat(), myDBHelper.CD_findOneData(date).averagestress.toFloat()))
+            else {  // 검색이 안된 경우
+                SLlists.add(Entry(idx.toFloat(), 0.0f))
+            }
         }
+
+        // 오늘 스트레스 평균 받아와서 list에 저장
+        val today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
+        val stressValues = myDBHelper.ST_findDataByDate(today)
+        var todayStressSum = 0.0
+
+        for (value in stressValues) {
+            todayStressSum += value.stress
+        }
+        val stressSize = stressValues.size
+        val todayAverageStress = when {
+            stressSize > 0 -> todayStressSum / stressSize
+            else -> 0.0
+        }
+        SLlists.add(Entry((DAY_PER_WEEK - 1).toFloat(), todayAverageStress.toFloat()))
+        //dataObject객체를 내 타입(List타입) 객체로 변환
+        //list.add(new Entry(data.getValueX(), data.getValueY())
+        //SLlists.add(Entry(i.toFloat(), (Math.random() * 40 + 30).toFloat()))
+
 
         // Heart Rate 값 받아오기
         // 1. 지난 일주일간 값 저장하는 배열 만들기
         val sevenDays = ArrayList<String>()
-        val current = LocalDate.now()
         for(i in DAY_PER_WEEK - 1 downTo 0)
             sevenDays.add(current.minusDays(i.toLong()).format(DateTimeFormatter.ofPattern("yyyy/MM/dd")))
         // 2. 적용하여 값 가져오고, 평균 내서 list에 저장
@@ -109,27 +149,42 @@ class StatisticsFragment : Fragment() {
 
 
         //분석 텍스트박스 : id/emotionAnalysis
-        // 일단 가라로 넣음. 나중에 수정 예정
+        // 이번엔 가라 아니고 진짜임^^
+        // 전체 스트레스 평균 구하기
+        myDBHelper.CD_getAllRecord()    // 전체 값 받아오기
+        var totalStressSum = 0.0
+        val stressArray = ArrayList<Double>()   // 나중에 상위 stress 수치룰 구할, 스트레스 저장 해별
+
+        for (calendar in myDBHelper.CDArray.dropLast(1)) {  // 오늘 제외하교 평균 다 더하기
+            totalStressSum += calendar.averagestress
+            stressArray.add(calendar.averagestress)
+        }
+        totalStressSum += todayAverageStress   // 오늘 값 더하기
+        stressArray.add(todayAverageStress)
+
+        val totalAverageStress = totalStressSum / (myDBHelper.CDArray.size)
+
+        // 말 넣기
         var analysis = ""
-        analysis += "전체 스트레스 평균 : ${((Math.random() * 40 + 30).toFloat() * 1000).roundToInt() / 1000.0}\n"
+        // 전체 스트레스 평균
+        analysis += getString(R.string.statistics_total_stress_average) + " " + totalAverageStress + "\n"
+        // 최근 일주일 간 스트레스 평균
         var ssum = 0.0
         for (data in SLlists) {
             ssum += data.y
         }
-        analysis += "최근 일주일 간 스트레스 평균 : ${(ssum * 1000 / 7).roundToInt() / 1000.0}\n"
-        analysis += "오늘 스트레스는 상위 ${(20..50).random()}% 입니다.\n\n"
-        analysis += "추천 솔루션 :\n"
-        analysis += "클래식 음악 듣기, 명상하기\n"
+        analysis += getString(R.string.statistics_7days_stress_average) + " " + (ssum / DAY_PER_WEEK) + "\n"
+
+        // 스트레스 상위 몇퍼인지 구하기
+        stressArray.sort()   // 오름차순 정렬
+        val rank = stressArray.indexOf(todayAverageStress)  // 등수 구하기
+
+        analysis += getString(R.string.statistics_today_stress_rank_first) + " " +
+                (rank.toFloat() / stressArray.size * 100.0f) +
+                getString(R.string.statistics_today_stress_rank_last) + "\n\n"
+        analysis += getString(R.string.statistics_recommended_solution_title) + "\n"
+        analysis += getString(R.string.statistics_recommended_solution_contents) + "\n"
         emotionAnalysis.text = analysis
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-
-        return inflater.inflate(R.layout.fragment_statistics, container, false)
     }
 
     //[Data 표시]
