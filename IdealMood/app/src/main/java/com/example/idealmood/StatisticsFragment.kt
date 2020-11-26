@@ -93,7 +93,7 @@ class StatisticsFragment : Fragment() {
             val size = heartbeats.size
             Log.i("심박 기록 데이터 수", "($date) $size")
             if(size > 0)
-                HBlists.add(Entry(idx.toFloat(), (sum / size).toFloat()))   // 소수점 없이 그냥 출력
+                HBlists.add(Entry(idx.toFloat(), (sum.toFloat() / size)))
             else
                 HBlists.add(Entry(idx.toFloat(), 0.0f))
         }

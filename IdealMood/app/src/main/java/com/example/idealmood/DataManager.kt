@@ -191,7 +191,7 @@ class DataManager private constructor() {
         // 자동으로 심박수 받아오지 않을 경우
         private const val NOT_AUTO_INTERVAL = 10 // 초 단위
 
-        private const val AUTO_DATA: Boolean = true
+        private const val AUTO_DATA: Boolean = false
 
         // 자동 심박수 정규 범위(넘을 수 잇음): MEDIAN - BOUND / 2 ~ MEDIAN + BOUND / 2
         private const val AUTO_MEDIAN: Int = 80

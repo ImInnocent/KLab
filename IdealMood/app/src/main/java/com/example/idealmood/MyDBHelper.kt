@@ -193,7 +193,7 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
         val nowDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"))
         val values = ContentValues()
         values.put(ST_PSTRESS, stress)
-        values.put(ST_PSTRESS, nowDate)
+        values.put(ST_PDATE, nowDate)
         val db=this.writableDatabase    // DB table 객체 획득
         return if(db.insert(ST_TABLE_NAME, null, values) > 0) {
             db.close()
