@@ -207,7 +207,13 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
     fun ST_findDataByDate(pdate: String) :ArrayList<MyStress> {    // pdate : 시간 제외 날짜만. 날짜에 해당하는 모든 S.L
         val strsql = "select * from $ST_TABLE_NAME where $ST_PDATE like '$pdate%'"
         val db = this.readableDatabase
-        val cursor = db.rawQuery(strsql, null)
+        lateinit var cursor:Cursor
+        try{
+            cursor = db.rawQuery(strsql, null)
+        }catch (e:Exception){
+            onCreate(db)
+            cursor = db.rawQuery(strsql, null)
+        }
         val stressLevels = ArrayList<MyStress>()
         if(cursor.count != 0) { // 무언가를 가지고 옴
             cursor.moveToFirst()
@@ -324,8 +330,8 @@ class MyDBHelper(val context: Context?) : SQLiteOpenHelper(context, DB_NAME, nul
         val cursor = db.rawQuery(strsql, null)
         if(cursor.count != 0) { // 무언가를 가지고 옴
             cursor.moveToFirst()
-            val data = MyCalendar(cursor.getInt(1), cursor.getDouble(2),
-                                    cursor.getInt(3), cursor.getString(4))
+           val data = MyCalendar(cursor.getInt(1), cursor.getDouble(2),
+                cursor.getInt(3), cursor.getString(4))
             cursor.close()
             db.close()
             return data
