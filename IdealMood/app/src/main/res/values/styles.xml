@@ -8,8 +8,9 @@
         <!-- Customize your theme here. -->
         <!--현재 앱 바 색상이 안이뻐서 임시로 이렇게 지정. 추후에 바꿀 것임-->
         <item name="colorPrimary">#FF7AD1B3</item>
-        <item name="colorPrimaryDark">#328166</item>
+        <item name="colorPrimaryDark">#000000</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
 
 </resources>
