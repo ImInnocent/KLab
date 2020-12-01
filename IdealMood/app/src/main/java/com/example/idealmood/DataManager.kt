@@ -1,8 +1,20 @@
 package com.example.idealmood
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.Context.NOTIFICATION_SERVICE
+import android.content.ContextWrapper
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat.getSystemServiceName
 import java.lang.Math.pow
 import java.lang.Math.sqrt
 import java.text.SimpleDateFormat
@@ -26,6 +38,7 @@ class DataManager private constructor() {
     var SL: MutableList<Int> = mutableListOf<Int>()
     var todayRageAverage:Double = 0.0
     var pasttime = null
+    var isHigh:Boolean = false
 
     init {
         // data auto generated
@@ -147,12 +160,18 @@ class DataManager private constructor() {
             // TODO: Change interval
             if (AUTO_DATA) {    // 자동화한 경우
                 todayRageTime += AUTO_INTERVAL.toInt()
+                isHigh = true
+
             }
             else {  // 자동화가 아닌 경우
                 todayRageTime += NOT_AUTO_INTERVAL.toInt()
             }
+        }else{
+            isHigh = false
         }
     }
+
+
 
     fun calcRmssd(prev : Double): Double{
         var n:Int = heartBeats.size
