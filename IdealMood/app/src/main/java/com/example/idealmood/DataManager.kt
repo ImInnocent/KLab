@@ -38,7 +38,9 @@ class DataManager private constructor() {
     var SL: MutableList<Int> = mutableListOf<Int>()
     var todayRageAverage:Double = 0.0
     var pasttime = null
-    var isHigh:Boolean = false
+    var isHigh :Boolean = false
+    var previousHigh :Boolean = false
+    var isNotify = false
 
     init {
         // data auto generated
@@ -95,7 +97,7 @@ class DataManager private constructor() {
     // 인공 심박수 생성
     fun generateArtificialHB(): Int {
         //return AUTO_MEDIAN + (rand.nextGaussian() * AUTO_BOUND).toInt() - AUTO_BOUND / 2
-        return (80..85).random()
+        return (75..80).random()
     }
 
     fun addHeartBeat(hb: Int) {
@@ -160,15 +162,23 @@ class DataManager private constructor() {
             // TODO: Change interval
             if (AUTO_DATA) {    // 자동화한 경우
                 todayRageTime += AUTO_INTERVAL.toInt()
-                isHigh = true
 
             }
             else {  // 자동화가 아닌 경우
                 todayRageTime += NOT_AUTO_INTERVAL.toInt()
             }
-        }else{
-            isHigh = false
         }
+
+        // 분노 푸시 알림을 띠울건지 판단
+        if (lastRage >= RAGE_POINT && !previousHigh) {  // 분노 시작
+            isHigh = true
+            isNotify = true
+        }
+        else if (isHigh && previousHigh)    // 분노 중
+            isNotify = false
+        else if (lastRage < RAGE_POINT && previousHigh) // 분노 끝
+            isHigh = false
+        previousHigh = isHigh
     }
 
 
@@ -196,6 +206,7 @@ class DataManager private constructor() {
     fun calcAverage(){
 
     }
+
 
     companion object {
         @Volatile private var instance: DataManager? = null

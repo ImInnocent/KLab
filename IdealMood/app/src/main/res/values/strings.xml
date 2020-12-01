@@ -18,6 +18,9 @@
     <string name="device_address">Device Address</string>
     <string name="device_name">Device Name</string>
 
+    <string name="stress_notification_title">Stress level is high</string>
+    <string name="stress_notification_contents">Run app and access solution contents!</string>
+
     <string name="calender_title">\'s Emotion calender</string>
     <string name="calender_sunday">SUN</string>
     <string name="calender_monday">MON</string>
@@ -36,6 +39,13 @@
     <string name="emotion_title_compare_yesterday">Today\'s Rage Time</string>
     <string name="emotion_title_compare_yesterday_value">- min</string>
     <string name="emotion_title_heart_bpm">Heartbeat</string>
+    <string name="emotion_1_text">I want to tell you "Good Job." *There There*</string>
+    <string name="emotion_2_text">Life cannot always be happy. Cheer up!</string>
+    <string name="emotion_3_text">Tomrrow will be better than today.</string>
+    <string name="emotion_4_text">Today is a happy day!</string>
+    <string name="emotion_5_text">Wow, You feel extremely happy today!</string>
+    <string name="emotion_no_text">Please type your emotion~</string>
+
     <string name="statistics_title">[Analysis Report]</string>
     <string name="statistics_analysis_report_text">Analysis results.</string>
     <string name="deep_breath_title">Breath Deep</string>

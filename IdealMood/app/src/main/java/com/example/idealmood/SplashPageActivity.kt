@@ -49,9 +49,15 @@ class SplashPageActivity : AppCompatActivity() {
         for(i in StatisticsFragment.DAY_PER_WEEK - 1 downTo 2)
             sixDays.add(current.minusDays(i.toLong()).format(DateTimeFormatter.ofPattern("yyyy MM d")))
         for ((idx, date) in sixDays.withIndex()) {
-            if(myDBHelper.CD_findOneData(date).averagestress == -1.0)
-                myDBHelper.CD_insertData(MyCalendar((1..5).random(), (500..700).random() / 10.0,
-                                            (0..2).random(), date))
+            val calendar = myDBHelper.CD_findOneData(date)
+            if(calendar.averagestress == -1.0) {
+                if(calendar.emotion == 0)   // 캘린더에 기분 아직 안 입력한 경우
+                    myDBHelper.CD_insertData(MyCalendar((1..5).random(), (500..700).random() / 10.0,
+                        (0..2).random(), date))
+                else    // 그렇지 않은 경우
+                    myDBHelper.CD_updateStressData((500..700).random() / 10.0, (0..2).random(), date)
+            }
+
         }
     }
 

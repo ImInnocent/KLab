@@ -3,6 +3,7 @@ package com.example.idealmood
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
@@ -13,6 +14,8 @@ import android.widget.Switch
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_emotion.*
 import kotlinx.android.synthetic.main.fragment_emotion.view.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 /**
  * A simple [Fragment] subclass.
@@ -20,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_emotion.view.*
 class EmotionFragment : Fragment() {
 
     var onoffFlag = true
+    lateinit var myDBHelper: MyDBHelper
     //var cancelFlag = true
 
     companion object {
@@ -75,13 +79,45 @@ class EmotionFragment : Fragment() {
     }
 
     private fun setEmojiImg(isOn: Boolean) {
+        // 기분에 따라 이미지 바꾸기
+        myDBHelper = MyDBHelper.getInstance()!!
+        val today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy MM d"))
+        val emotion = myDBHelper.CD_findOneData(today).emotion
+        when (emotion) {
+            1 -> {
+                emotionImg.setImageResource(R.drawable.emotion1)
+                textView6.text = getText(R.string.emotion_1_text)
+            }
+            2 -> {
+                emotionImg.setImageResource(R.drawable.emotion2)
+                textView6.text = getText(R.string.emotion_2_text)
+            }
+            3 -> {
+                emotionImg.setImageResource(R.drawable.emotion3)
+                textView6.text = getText(R.string.emotion_3_text)
+            }
+            4 -> {
+                emotionImg.setImageResource(R.drawable.emotion4)
+                textView6.text = getText(R.string.emotion_4_text)
+            }
+            5 -> {
+                emotionImg.setImageResource(R.drawable.emotion5)
+                textView6.text = getText(R.string.emotion_2_text)
+            }
+            else -> {
+                emotionImg.setImageResource(R.drawable.emotion5)
+                textView6.text = getText(R.string.emotion_no_text)
+            }
+        }
+
+
         if (isOn) {
             // 원래색
-            emotionImg.setColorFilter(COLOR_EMOJI_ON, android.graphics.PorterDuff.Mode.MULTIPLY)
+            emotionImg.setColorFilter(COLOR_EMOJI_ON, PorterDuff.Mode.MULTIPLY)
         }
         else {
             // 회색으로 바꿈
-            emotionImg.setColorFilter(COLOR_EMOJI_OFF, android.graphics.PorterDuff.Mode.MULTIPLY)
+            emotionImg.setColorFilter(COLOR_EMOJI_OFF, PorterDuff.Mode.MULTIPLY)
         }
     }
 

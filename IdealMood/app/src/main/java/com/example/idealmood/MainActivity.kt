@@ -3,7 +3,9 @@ package com.example.idealmood
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.ColorDrawable
@@ -73,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 //                            var rageTime:Int = DataManager.getInstance().todayRageTime / 60
                             var rageTime:Int = DataManager.getInstance().todayRageTime
                             t22.text = getString(R.string.emotion_title_rage_time_number, (rageTime / 60).toInt())
-                            if(DataManager.getInstance().isHigh)
+                            if(DataManager.getInstance().isNotify)
                                 createNotification()
 
                         } else {
@@ -101,30 +103,37 @@ class MainActivity : AppCompatActivity() {
 
     fun createNotification(){
         //알람 콘텐츠 설정
-        /*val channelID = "channel_01"
+        val channelID = "channel_01"
         val channelName = "stresshigh"
         //알림 관리 관리자 객체소환
-        val notificationManager: NotificationManager = ContextCompat.getSystemService(Context!!.NOTIFICATION_SERVICE) as NotificationManager
-        //builder객체
-        val builder: NotificationCompat.Builder
+        val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         //알림 객체 만들기
-        val channel: NotificationChannel = NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_DEFAULT)
+        val channel: NotificationChannel = NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_HIGH)
+
+        // 푸시 알림 클릭하면 해당 앱으로 이동
+        val rageIntent = Intent(this, MainActivity::class.java)
+        val ragePendingIntent = PendingIntent.getActivity(
+            this, 2, rageIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+
 
         //알림 매니저에게 채널 객체 생성요청
         notificationManager.createNotificationChannel(channel)
         //builder 객체 생성
-        builder = NotificationCompat.Builder(Context!!, channelID)
-        //builder.setSmallIcon(android.R.drawable.)
-        builder.setContentTitle("Stress Level high")
-        builder.setContentText("Run app and access solution contents!")
-        val bm: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.emotion2_face2)
-        builder.setLargeIcon(bm)
+        val builder = NotificationCompat.Builder(this, channelID)
+        with (builder) {
+            setSmallIcon(R.drawable.ic_favorite_white_28dp)
+            setContentTitle(getString(R.string.stress_notification_title))
+            setContentText(getString(R.string.stress_notification_contents))
+            setContentIntent(ragePendingIntent)
+            //val bm: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.emotion2_face2)
+            //setLargeIcon(bm)
+        }
 
         val notification: Notification = builder.build()
-        notificationManager.notify(1, notification)
+        notificationManager.notify(2, notification)
 
-        //notification.cancel(1)
-*/
+        //notification.cancel(2)
+
     }
 
     private fun init() {
