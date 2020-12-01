@@ -52,8 +52,8 @@ class StatisticsFragment : Fragment() {
         for(i in DAY_PER_WEEK - 1 downTo 1)
             sixDays.add(current.minusDays(i.toLong()).format(DateTimeFormatter.ofPattern("yyyy MM d")))
         for ((idx, date) in sixDays.withIndex()) {
-            val averageStress = myDBHelper.CD_findOneData(date).averagestress.toFloat()
-            if (averageStress != -1.0f)    // 검색이 된 경우
+            val averageStress = myDBHelper.CD_findOneData(date).averagestress
+            if (averageStress != -1.0)    // 검색이 된 경우
                 SLlists.add(Entry(idx.toFloat(), myDBHelper.CD_findOneData(date).averagestress.toFloat()))
             else {  // 검색이 안된 경우
                 SLlists.add(Entry(idx.toFloat(), 0.0f))
@@ -150,14 +150,16 @@ class StatisticsFragment : Fragment() {
 
         //분석 텍스트박스 : id/emotionAnalysis
         // 이번엔 가라 아니고 진짜임^^
-        // 전체 스트레스 평균 구하기
+        // 전체 스트레스 평균 구하기 (+ 총 분노 시간도 구하기)
         myDBHelper.CD_getAllRecord()    // 전체 값 받아오기
         var totalStressSum = 0.0
-        val stressArray = ArrayList<Double>()   // 나중에 상위 stress 수치룰 구할, 스트레스 저장 해별
+        var totalRageTime = 0.0
+        val stressArray = ArrayList<Double>()   // 나중에 상위 stress 수치룰 구할, 스트레스 저장 배열
 
         for (calendar in myDBHelper.CDArray.dropLast(1)) {  // 오늘 제외하교 평균 다 더하기
             totalStressSum += calendar.averagestress
             stressArray.add(calendar.averagestress)
+            totalRageTime += calendar.ragetime
         }
         totalStressSum += todayAverageStress   // 오늘 값 더하기
         stressArray.add(todayAverageStress)
@@ -178,10 +180,15 @@ class StatisticsFragment : Fragment() {
         // 스트레스 상위 몇퍼인지 구하기
         stressArray.sort()   // 오름차순 정렬
         val rank = stressArray.indexOf(todayAverageStress)  // 등수 구하기
-
         analysis += getString(R.string.statistics_today_stress_rank_first) + " " +
                 (rank.toFloat() / stressArray.size * 100.0f) +
                 getString(R.string.statistics_today_stress_rank_last) + "\n\n"
+
+        // 지난 6일간 총 분노 시간 구하기
+        analysis += getString(R.string.statistics_total_rage_time) + " " + totalRageTime / 60 + " "+
+                getString(R.string.statistics_min) + "\n"
+
+        // 추천 솔루션
         analysis += getString(R.string.statistics_recommended_solution_title) + "\n"
         analysis += getString(R.string.statistics_recommended_solution_contents) + "\n"
         emotionAnalysis.text = analysis

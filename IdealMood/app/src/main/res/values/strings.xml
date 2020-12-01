@@ -32,9 +32,9 @@
 
     <string name="emotion_title_daily_text">Today\'s stress is less than yesterday~</string>
     <string name="emotion_title_today_angry_count">Emotion Rate</string>
-    <string name="emotion_title_today_angry_count_value">0 time(s)</string>
+    <string name="emotion_title_today_angry_count_value">-</string>
     <string name="emotion_title_compare_yesterday">Today\'s Rage Time</string>
-    <string name="emotion_title_compare_yesterday_value">-3 time(s)</string>
+    <string name="emotion_title_compare_yesterday_value">- min</string>
     <string name="emotion_title_heart_bpm">Heartbeat</string>
     <string name="statistics_title">[Analysis Report]</string>
     <string name="statistics_analysis_report_text">Analysis results.</string>
@@ -97,7 +97,8 @@
     <string name="statistics_7days_stress_average">Average Stress Value last 7 days : </string>
     <string name="statistics_today_stress_rank_first">Today\'s stress is in the Top </string>
     <string name="statistics_today_stress_rank_last">%.</string>
-
+    <string name="statistics_total_rage_time">Total rage time last 6 days : </string>
+    <string name="statistics_min">min</string>
     <string name="statistics_recommended_solution_title">Recommended Solution :</string>
     <string name="statistics_recommended_solution_contents">Listening classical music, Meditation</string>
     <!--

@@ -59,7 +59,7 @@ class DataManager private constructor() {
                 lastStress = pastStress
                 val firstTime = format3.parse(firstStress!!.date.split(" ")[1])
                 val lastTime = format3.parse(lastStress.date.split(" ")[1])
-                val diff = (firstTime.time - lastTime.time).toInt()
+                val diff = (lastTime.time - firstTime.time).toInt()
                 todayRageTime += diff / 1000     // ms를 s로 환산
             }
             pastStress = value
@@ -82,7 +82,7 @@ class DataManager private constructor() {
     // 인공 심박수 생성
     fun generateArtificialHB(): Int {
         //return AUTO_MEDIAN + (rand.nextGaussian() * AUTO_BOUND).toInt() - AUTO_BOUND / 2
-        return (60..70).random()
+        return (80..85).random()
     }
 
     fun addHeartBeat(hb: Int) {
@@ -191,7 +191,7 @@ class DataManager private constructor() {
         // 자동으로 심박수 받아오지 않을 경우
         private const val NOT_AUTO_INTERVAL = 10 // 초 단위
 
-        private const val AUTO_DATA: Boolean = false
+        private const val AUTO_DATA: Boolean = true
 
         // 자동 심박수 정규 범위(넘을 수 잇음): MEDIAN - BOUND / 2 ~ MEDIAN + BOUND / 2
         private const val AUTO_MEDIAN: Int = 80

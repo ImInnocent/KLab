@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import com.github.mikephil.charting.data.Entry
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -27,6 +28,7 @@ class SplashPageActivity : AppCompatActivity() {
         GlobalContext.setContext(this)
 
         setData()
+        // setFalseData()  // 최근 일주일 간 가라 데이터 넣는 함수
 
         Handler().postDelayed({
             val intent: Intent = if (UserInfo.has(UserInfo.NAME_PASSED) && UserInfo.get(UserInfo.NAME_PASSED) == true) {
@@ -37,6 +39,20 @@ class SplashPageActivity : AppCompatActivity() {
 
             startActivity(intent)
         }, 2000)
+    }
+
+    private fun setFalseData() {    // DB에 가라데이터 넣는 함수, 그날 최초로 한번만 써줘야 함!!!!!
+        // myDBHelper가 객체를 받아왔다구 가정, 아닐 경우 밑에 코드 써주기
+        // myDBHelper = MyDBHelper.getInstance()!!
+        val sixDays = ArrayList<String>()     // 지난 6일간 값 저장하는 배열
+        val current = LocalDate.now()
+        for(i in StatisticsFragment.DAY_PER_WEEK - 1 downTo 2)
+            sixDays.add(current.minusDays(i.toLong()).format(DateTimeFormatter.ofPattern("yyyy MM d")))
+        for ((idx, date) in sixDays.withIndex()) {
+            if(myDBHelper.CD_findOneData(date).averagestress == -1.0)
+                myDBHelper.CD_insertData(MyCalendar((1..5).random(), (500..700).random() / 10.0,
+                                            (0..2).random(), date))
+        }
     }
 
     private fun setData() {
@@ -68,7 +84,7 @@ class SplashPageActivity : AppCompatActivity() {
                     lastStress = pastStress
                     val firstTime = format3.parse(firstStress!!.date.split(" ")[1])
                     val lastTime = format3.parse(lastStress.date.split(" ")[1])
-                    val diff = (firstTime.time - lastTime.time).toInt()
+                    val diff = (lastTime.time - firstTime.time).toInt()
                     rageTime += diff / 1000     // ms를 s로 환산
                 }
                 pastStress = value
